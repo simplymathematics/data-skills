@@ -21,9 +21,12 @@ raw.data <- readLines("https://www.bls.gov/oes/current/oes151111.htm")
 Since we're only interested in the first table, we'll cut everything else out.
 ```{r}
 # Regex for all text between two table
-"(?<=<table)(.*\n?)(?=</table>)"
+first <- which(grepl("<table border=\"1\"", raw.data))[1]
+last <- which(grepl("</table>", raw.data))[1]
+truncated.data <- raw.data[first:last]
 ```
 
 ```{r}
 html.data <- readHTMLTable(truncated.data)
+html.data
 ```
