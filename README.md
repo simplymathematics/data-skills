@@ -2,17 +2,21 @@
 CUNY SPS MS Data Science data-skills group project
 
 
+## Characteristics
+
+The characteristics folder is from EP data.
+
 ## Skills
 
 The skills folder is for skill scraping data.
 
 ## Salary
 
-The salary folder is for salary data from the OES
+The salary folder is for salary data from the OES.
 
-## Characteristics
+## Outlook
 
-The characteristics folder is from data the EP
+The outlook folder is for outlook data from ONET.
 
 ## ONET
 
