@@ -48,3 +48,11 @@ For now, we'll start with one job.
 ```{r}
 actuary
 ```
+
+I am trying to pull the skills data for each occupation. For some reason, I can not get R to recognize "Skills" or "Technical Skills". You can see in the summary below that the readHTMLtable and the htmltreeparse are only picking out 4 of the many tables listed on the website. I will keep on this to find a way to pull out the neccessary data. - jm
+
+```{r}
+typeof(actuary)
+length(actuary)
+str(actuary)
+```
