@@ -11,6 +11,7 @@ output: html_document
 require(XML) #for reading xml, html
 require(stringr) #for regex
 require(curl) #for downloading file
+require(rvest) #for extracting text from a webpage
 ```
 
 # Downloading
