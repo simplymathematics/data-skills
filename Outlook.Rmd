@@ -1,0 +1,16 @@
+```{r}
+library(rvest)
+
+webpage <- read_html("https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm")
+
+tbls <- html_nodes(webpage, "table")
+head(tbls)
+
+tbls_ls <- webpage %>%
+  html_nodes("table") %>%
+  .[2] %>%
+  html_table(fill = TRUE)
+
+str(tbls_ls)
+```
+
