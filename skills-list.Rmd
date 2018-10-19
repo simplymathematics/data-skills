@@ -1,0 +1,50 @@
+---
+title: "Onet"
+author: "simplymathematics"
+date: "October 19, 2018"
+output: html_document
+---
+
+# Dependencies
+
+```{r}
+require(XML) #for reading xml, html
+require(stringr) #for regex
+require(curl)
+require(tidyr)
+```
+
+# Downloading
+We will use the onet database to generate our list of skills.
+
+```{r}
+curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Skills.txt", "Skills.txt")
+```
+# Reading File
+The code below reads the data and discards all of the non mathematics fields.
+```{r}
+df<- read.table("Skills.txt", sep = '\t', header = TRUE)
+df <- df[grep("15-", df$O.NET.SOC.Code),]
+```
+# Cleaning Data
+```{r}
+df$O.NET.SOC.Code <- substr(x = df$O.NET.SOC.Code, 1, 7) #drops sub occupation data
+df <- df[grep("IM", df$Scale.ID),] # only cares about importance data
+unique(df$Element.Name)
+df
+```
+```{r}
+skills <- unique(df$Element.Name)
+names <- unique(df$O.NET.SOC.Code)
+
+## TO DO MATch skills with list
+small.data <- matrix(c(df$O.NET.SOC.Code, df$Element.Name), ncol=2)
+small.data <- data.frame(small.data)
+small.data#test <- spread(small.data, key = "Code", value = "Skill")
+#test
+```
+
+
+
+
+```

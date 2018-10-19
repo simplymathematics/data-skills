@@ -1,0 +1,49 @@
+---
+title: "Onet"
+author: "simplymathematics"
+date: "October 19, 2018"
+output: html_document
+---
+
+# Dependencies
+
+```{r}
+require(XML) #for reading xml, html
+require(stringr) #for regex
+```
+
+# Downloading
+We used the Onet data to cross references our findings from before. In particular, we looked at the [bright outlook occpations](https://www.onetonline.org/find/bright?b=0&g=Go) that had a math prefix. There were six, stored here are -urls.- We also saved the files as onet[1-6].html. 
+
+```{r}
+urls <- c(
+  "https://www.onetonline.org/link/summary/15-2011.00",
+  "https://www.onetonline.org/link/summary/15-2041.01",
+  "https://www.onetonline.org/link/summary/15-2041.02",
+  "https://www.onetonline.org/link/summary/15-1111.00",
+  "https://www.onetonline.org/link/summary/15-1151.00",
+  "https://www.onetonline.org/link/summary/15-1141.00"
+)
+i <- 1 #initialize a counter
+for (url in urls){
+  file = paste(c("onet",i,".html"),collapse = "")
+  i <- i + 1
+  curl_download(url, file)
+}
+
+numbers.list <- c(2011, 2041, 1111, 1151, 1141)
+```
+Below, we're importing each of these files into a dataframe with a human friendly name. The final vector, -jobs,-are the occupations we'll focus on.
+```{r}
+actuary <- htmlTreeParse("onet1.html")
+biostatitician <- readHTMLTable("onet2.html")
+clinical.data.manager <- readHTMLTable("onet3.html")
+computer.research.scientist <- readHTMLTable("onet4.html")
+user.support.specialist <- readHTMLTable("onet5.html")
+database.administrator <- readHTMLTable("onet6.html")
+jobs <- c(actuary, biostatitician, clinical.data.manager, computer.research.scientist, user.support.specialist, database.administrator)
+```
+For now, we'll start with one job.
+```{r}
+actuary
+```

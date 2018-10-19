@@ -1,8 +1,8 @@
-# data-skills
+# Project Data
 CUNY SPS MS Data Science data-skills group project
 
 
-## SKILLS
+## Skills
 
 The skills folder is for skill scraping data.
 
@@ -14,6 +14,12 @@ The salary folder is for salary data from the OES
 
 The outlook folder is for outlook data from OOH
 
+## ONET
+
+This is the folder for justifying the skills list
+
+
+#Extra Data
 ## Spreadsheets
 
 The spreadsheets folder has various data from the BLS.
@@ -25,3 +31,5 @@ The CSV folder contains csv output for relational database.
 ## Maps
 
 Has a map of Computer and Research Scientists employment by state.
+
+
