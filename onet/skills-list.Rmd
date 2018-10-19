@@ -10,6 +10,7 @@ output: html_document
 ```{r}
 require(XML) #for reading xml, html
 require(stringr) #for regex
+require(curl) #for downloading file
 ```
 
 # Downloading
