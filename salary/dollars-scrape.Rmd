@@ -18,6 +18,26 @@ raw.data <- curl_download("https://www.bls.gov/oes/current/oes151111.htm", "OES_
 raw.data <- readLines("https://www.bls.gov/oes/current/oes151111.htm")
 ```
 
+https://www.bls.gov/oes/current/oes_stru.htm#15-0000
+##  List of URLS
+TODO the numbers list is not automated
+
+```{r}
+list.url <- curl_download("https://www.bls.gov/oes/current/oes_stru.htm#15-0000", "list.html")
+#list.data <- readLines()
+#first <- which(grepl("15-0000  Computer and Mathematical Occupations", list.data))
+#last <-  which(grepl("15-2099  Mathematical Science Occupations, All Other ", list.data))
+
+numbers.list <- c(1111,1121,1122,1131,1132,1133,1134,1141,1142,1143,1151,1152,1199,2011,2031,2041)
+urls <- c()
+i = 1
+for (number in numbers.list){
+  url = paste(c("https://www.bls.gov/oes/current/oes15",number,".htm"),collapse = "")
+  urls[i] <- url
+  i = i + 1
+}
+urls
+```
 Since we're only interested in the first table, we'll cut everything else out.
 ```{r}
 # Regex for all text between two table
@@ -35,16 +55,24 @@ html.data
 Below is an attempt to automate the above process to work with a list of URLs. It doesn't work yet. 
 ```{r}
 oes_scrape <- function(URLs){
-  big.data <- data.frame(c("No. of Employees", "RSE", "Mean Hourly Wage", "Mean Annual Wage", "Wage RSE"))
-  for url in length(URLS){
+  big.data <- data.frame()
+  for (url in URLs){
     raw.data <- readLines(url)
     first <- which(grepl("<table border=\"1\"", raw.data))[1]
     last <- which(grepl("</table>", raw.data))[1]
     truncated.data <- raw.data[first:last]
     html.data <- data.frame(readHTMLTable(truncated.data))
-    colnames(html.data) <- c("No. of Employees", "RSE", "Mean Hourly Wage", "Mean Annual Wage", "Wage RSE")
-    merge(big.data, html.data)
+    colnames(html.data) <- c("No.Employees", "RSE", "Mean.Hourly.Wage", "Mean.Annual.Wage", "Wage.RSE")
+    big.data <- rbind(big.data, html.data)
   }
+  return(big.data)
 }
+big.data <- oes_scrape(urls)
+big.data
+```
 
+```{r}
+require(ggplot2)
+ggplot(big.data, aes(x = "No.Employees", y = "Mean.Annual.Wage" ), )+ geom_point()+
+coord_cartesian(ylim = c(50000, 200000), xlim = c(15000,700000)) 
 ```
