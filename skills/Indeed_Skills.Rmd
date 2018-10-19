@@ -6,13 +6,13 @@ output: html_document
 ---
 ```{r, include=FALSE}
 # load libraries
-library(rvest)
-library(stringr)
-library(dplyr)
-library(wordcloud)
-library(dplyr)
-library(RColorBrewer)
-library(ggplot2)
+require(rvest)
+require(stringr)
+require(dplyr)
+require(wordcloud)
+require(dplyr)
+require(RColorBrewer)
+require(ggplot2)
 ```
 
 ```{r}
