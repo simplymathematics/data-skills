@@ -28,23 +28,40 @@ df <- df[grep("15-", df$O.NET.SOC.Code),]
 ```
 # Cleaning Data
 ```{r}
-df$O.NET.SOC.Code <- substr(x = df$O.NET.SOC.Code, 1, 7) #drops sub occupation data
+df$O.NET.SOC.Code <- substr(x = df$O.NET.SOC.Code, 4, 7) #drops sub occupation data
 df <- df[grep("IM", df$Scale.ID),] # only cares about importance data
 unique(df$Element.Name)
 df
+
 ```
 ```{r}
 skills <- unique(df$Element.Name)
 names <- unique(df$O.NET.SOC.Code)
-
+df$Element.Name
 ## TO DO MATch skills with list
 small.data <- matrix(c(df$O.NET.SOC.Code, df$Element.Name), ncol=2)
 small.data <- data.frame(small.data)
-small.data#test <- spread(small.data, key = "Code", value = "Skill")
+colnames(small.data) <- c("Code", "Skill")
+small.data
+#test <- spread(small.data, key = "Code", value = "Skill")
 #test
 ```
 
 
+```{r}
+new.frame = data.frame()
+for (name in names){
+  for (skill in skills){
+    if #name and skill {
+      new.frame[skill][name] = TRUE
+    }
+    else{
+        new.frame[skill][name] = FALSE
+    }
+  }
+}
+```
 
+```{r}
 
 ```
