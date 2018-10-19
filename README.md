@@ -18,6 +18,10 @@ The outlook folder is for outlook data from OOH
 
 The spreadsheets folder has various data from the BLS.
 
+## CSV
+
+The CSV folder contains csv output for relational database. 
+
 ## Maps
 
 Has a map of Computer and Research Scientists employment by state.
