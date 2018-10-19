@@ -12,7 +12,7 @@ The salary folder is for salary data from the OES
 
 ## Outlook
 
-The outlook folder is for outlook data from ORS
+The outlook folder is for outlook data from OOH
 
 ## Spreadsheets
 
