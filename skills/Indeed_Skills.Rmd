@@ -141,3 +141,11 @@ pal2 <- brewer.pal(8,"Dark2")
 job_listings_keywords1 <- count(job_listings_keywords, Data_Scientist_Skills)
 wordcloud(words = job_listings_keywords1$Data_Scientist_Skills, freq = job_listings_keywords1$n, min.freq = 1, colors = pal2)
 ```
+
+```{r tech skills output, echo=FALSE}
+colnames(job_listings_keywords) <- c("Tech.Skill")
+write.csv(job_listings_keywords, file = "TechSkills.csv") 
+
+colnames(job_listings_keyword_count) <- c("Tech.Skill", "Count")
+write.csv(job_listings_keyword_count, file = "TechSkillsSummary.csv")  
+```
