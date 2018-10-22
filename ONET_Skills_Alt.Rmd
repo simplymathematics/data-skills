@@ -1,0 +1,91 @@
+---
+
+title: "Onet"
+
+author: "simplymathematics & jemceachern"
+
+date: "October 19, 2018"
+
+output: html_document
+
+---
+
+
+
+# Dependencies
+
+
+
+```{r}
+
+require(XML) #for reading xml, html
+
+require(stringr) #for regex
+
+require(curl)
+
+require(tidyr)
+
+require(dplyr)
+
+require(ggplot2)
+
+```
+
+
+
+# Downloading
+
+We will use the onet database to generate our list of skills.
+
+
+
+```{r}
+
+curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Skills.txt", "Skills.txt")
+
+```
+
+# Reading File
+
+The code below reads the data and discards all of the non mathematics fields.
+
+```{r}
+
+df<- read.table("Skills.txt", sep = '\t', header = TRUE)
+
+df <- df[grep("15-", df$O.NET.SOC.Code),]
+
+```
+
+# Cleaning Data
+
+```{r}
+
+df <- df[grep(".00$", df$O.NET.SOC.Code),] # limit SOC Code to major groups only
+
+df <- df[grep("IM", df$Scale.ID),] # only cares about importance data
+
+df <- df[grep("N", df$Recommend.Suppress),] # only cares about unsuppressed data
+
+skillsdf <- data.frame(df$O.NET.SOC.Code, df$Element.Name, df$Data.Value) 
+
+head(df)
+head(skillsdf)
+```
+
+
+```{r}
+
+wideskills <- skillsdf %>% 
+  rename(SOC = df.O.NET.SOC.Code, Element = df.Element.Name, Value = df.Data.Value) %>%
+  group_by(SOC) %>%
+  arrange(SOC, desc(Value)) %>% 
+  top_n(5, Value) %>% #include more than n rows if there are ties. 
+  spread(Element, Value, fill = NA)
+
+wideskills
+
+
+
+```
