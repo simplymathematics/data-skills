@@ -1,0 +1,2040 @@
+---
+title: "TechnologySkillsBiostatAcuries"
+author: "Hui Gracie Han"
+date: "October 21, 2018"
+output: html_documentd
+---
+
+set working environment
+```{r}
+require(rvest)
+require(dplyr)
+require(stringr)
+require(tidyr)
+require(dplyr)
+require(ggplot2)
+```
+```{r}
+skillsJunPan <- read.csv("C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/3rd version of skill.csv")
+```
+skillsJunPan combined Ravi's skill list and ONET Skill lists for Data Scientist, 46 skills are included
+```{r}
+head(skillsJunPan)
+```
+modify skillsJunPan dateframe fit into relational database manipulation
+```{r}
+#add new column with increasing numbers
+# Example
+skillsJunPan$generated_uid <- 1:nrow(skillsJunPan)
+```
+`
+
+```{r}
+# add a row counter i to make it a 
+skillsJunPan <-skillsJunPan %>% mutate(i = row_number()) 
+print (skillsJunPan)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.biostatistician <- read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_15-2041-01.csv')
+Bstat1 <- techskills.biostatistician
+```
+
+```{r}
+ print (Bstat1)
+```
+```{r}
+# to add a column called job, statitisican, with its name
+Bstat1$job <- 'Biostatisticians'
+Bstat1$jobcode <- '15-2041.01'
+Bstat1
+```
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj1<- left_join(skillsJunPan2, Bstat1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj1)
+tail(df_lj1)
+print (df_lj1)
+```
+
+```{r}
+df_lj1$jobNoNA <- 'Biostatisticians'
+df_lj1$jobcodeNoNA <- '15-2041.01'
+head(df_lj1)
+df1<-df_lj1
+
+
+# to add new column of sill indicator 1/0
+df1$SkillIndicator<- 0
+df1$SkillIndicator [df1$job == "Biostatisticians"] <-1
+dfBStat<-df1
+str(dfBStat)
+print(dfBStat)
+head(dfBStat)
+tail(dfBStat)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_BStat <-dfBStat %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+```
+
+```{r}
+df_BStat
+```
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.Acturies <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_15-2011-00.csv')
+
+Acur1 <- techskills.Acturies
+Acur1$job <- 'Acturies'
+Acur1$jobcode <- '15-2011.00'
+
+```
+
+```{r}
+print (Acur1)
+```
+
+(skillsJunPan)
+
+
+
+```{r}
+#add new column with increasing numbers
+# Example
+skillsJunPan$generated_uid <- 1:nrow(skillsJunPan)
+```
+`
+
+```{r}
+# add a row counter i to make it a 
+skillsJunPan2 <-skillsJunPan %>% mutate(i = row_number()) 
+print (skillsJunPan2)
+
+```
+
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, before ACUTUARIES, IT WORKED)
+df_lj<- left_join(skillsJunPan2, Acur1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj)
+tail(df_lj)
+print (df_lj)
+```
+
+
+```{r}
+df_lj$jobNoNA <- 'Acturies'
+df_lj$jobcodeNoNA <- '15-2011.00'
+head(df_lj)
+df<-df_lj
+
+
+# to add new column of sill indicator 1/0
+df$SkillIndicator<- 0
+df$SkillIndicator [df$job == "Acturies"] <-1
+dfAct<-df
+str(dfAct)
+print(dfAct)
+head(dfAct)
+tail(dfAct)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_Act <- dfAct %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+```
+
+```{r}
+df_Act
+```
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.CIRS <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_15-1111-00.csv')
+
+CIRS1 <- techskills.CIRS
+CIRS1$job <- 'Computer and Information Research Scientists'
+CIRS1$jobcode <- '15-1111.00'
+print (CIRS1)
+```
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj2<- left_join(skillsJunPan2,CIRS1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj2)
+tail(df_lj2)
+print (df_lj2)
+```
+
+```{r}
+df_lj2$jobNoNA <- 'Computer and Information Research Scientists'
+df_lj2$jobcodeNoNA <- '15-1111.00'
+head(df_lj2)
+df2<-df_lj2
+```
+
+
+```{r}
+# to add new column of sill indicator 1/0
+df2$SkillIndicator<- 0
+df2$SkillIndicator [df2$job == "Computer and Information Research Scientists"] <-1
+dfCIRS<-df2
+str(dfCIRS)
+print(dfCIRS)
+head(dfCIRS)
+tail(dfCIRS)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_CRIS <- dfCIRS %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+```
+
+```{r}
+df_CRIS
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.DA <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_15-1141-00.csv')
+
+DA1 <- techskills.DA
+DA1$job <- 'Data Administrator'
+DA1$jobcode <- '15-1141.00'
+print (DA1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj3<- left_join(skillsJunPan2,DA1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj3)
+tail(df_lj3)
+print (df_lj3)
+```
+
+```{r}
+df_lj3$jobNoNA <- 'Data Administrator'
+df_lj3$jobcodeNoNA <- '15-1141.00'
+head(df_lj3)
+df3<-df_lj3
+```
+
+
+```{r}
+# to add new column of sill indicator 1/0
+df3$SkillIndicator<- 0
+df3$SkillIndicator [df3$job == "Data Administrator"] <-1
+dfDA<-df3
+str(dfDA)
+print(dfDA)
+head(dfDA)
+tail(dfDA)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_DA <- dfDA %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+```
+
+```{r}
+df_DA
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.CDM <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_15-2041-02.csv')
+
+CDM1 <- techskills.CDM
+CDM1$job <- 'Clinical Data Manager'
+CDM1$jobcode <- '15-2041.02'
+print (CDM1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj4<- left_join(skillsJunPan2,CDM1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj4)
+tail(df_lj4)
+print (df_lj4)
+```
+
+```{r}
+df_lj4$jobNoNA <- 'Clinical Data Manager'
+df_lj4$jobcodeNoNA <- '15-2041.02'
+head(df_lj4)
+df4<-df_lj4
+```
+
+
+```{r}
+# to add new column of sill indicator 1/0
+df4$SkillIndicator<- 0
+df4$SkillIndicator [df4$job == "Clinical Data Manager"] <-1
+dfCDM<-df4
+str(dfCDM)
+print(dfCDM)
+head(dfCDM)
+tail(dfCDM)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_CDM <- dfCDM %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+```
+
+
+```{r}
+df_CDM
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.CUSS <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_15-1151-00.csv')
+
+CUSS1 <- techskills.CUSS
+CUSS1$job <- 'Computer User Support Specialists'
+CUSS1$jobcode <- '15-1151.00'
+print (CUSS1)
+```
+
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj5<- left_join(skillsJunPan2,CUSS1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj5)
+tail(df_lj5)
+print (df_lj5)
+```
+
+```{r}
+df_lj5$jobNoNA <- 'Computer User Support Specialists'
+df_lj5$jobcodeNoNA <- '15-1151.00'
+head(df_lj5)
+df5<-df_lj5
+```
+
+
+```{r}
+# to add new column of sill indicator 1/0
+df5$SkillIndicator<- 0
+df5$SkillIndicator [df5$job == "Computer User Support Specialists"] <-1
+dfCUSS<-df5
+str(dfCUSS)
+print(dfCUSS)
+head(dfCUSS)
+tail(dfCUSS)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_CUSS <- dfCUSS %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_CUSS
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.CBM <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_11-3111-00.csv')
+CBM1 <- techskills.CBM
+CBM1$job <- 'Compensation and Benefits managers'
+CBM1$jobcode <- '11-3111.00'
+print (CBM1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj6<- left_join(skillsJunPan2,CBM1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj6)
+tail(df_lj6)
+print (df_lj6)
+```
+
+```{r}
+df_lj6$jobNoNA <- 'Compensation and Benefits managers'
+df_lj6$jobcodeNoNA <- '11-3111.00'
+head(df_lj6)
+df6<-df_lj6
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df6$SkillIndicator<- 0
+df6$SkillIndicator [df6$job == "Compensation and Benefits managers"] <-1
+dfCBM<-df6
+str(dfCBM)
+print(dfCBM)
+head(dfCBM)
+tail(dfCBM)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_CBM <- dfCBM %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_CBM
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.MRAMS <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_13-1161-00.csv')
+MRAMS1 <- techskills.MRAMS
+MRAMS1$job <- 'Market Research Analysts and Marketing Specialists'
+MRAMS1$jobcode <- '13-1161.00'
+print (MRAMS1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj7<- left_join(skillsJunPan2,MRAMS1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj7)
+tail(df_lj7)
+print (df_lj7)
+```
+
+```{r}
+df_lj7$jobNoNA <- 'Market Research Analysts and Marketing Specialists'
+df_lj7$jobcodeNoNA <- '13-1161.00'
+head(df_lj7)
+df7<-df_lj7
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df7$SkillIndicator<- 0
+df7$SkillIndicator [df7$job == "Market Research Analysts and Marketing Specialists"] <-1
+dfMRAMS<-df7
+str(dfMRAMS)
+print(dfMRAMS)
+head(dfMRAMS)
+tail(dfMRAMS)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_MRAMS <- dfMRAMS %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_MRAMS
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.Auditors <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_13-2011-02.csv')
+Auditors1 <- techskills.Auditors
+Auditors1$job <- 'Auditors'
+Auditors1$jobcode <- '13-2011.02'
+print (Auditors1)
+```
+
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj8<- left_join(skillsJunPan2,Auditors1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj8)
+tail(df_lj8)
+print (df_lj8)
+```
+
+```{r}
+df_lj8$jobNoNA <- 'Auditors'
+df_lj8$jobcodeNoNA <- '13-2011.02'
+head(df_lj8)
+df8<-df_lj8
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df8$SkillIndicator<- 0
+df8$SkillIndicator [df8$job == "Auditors"] <-1
+dfAuditors<-df8
+str(dfAuditors)
+print(dfAuditors)
+head(dfAuditors)
+tail(dfAuditors)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_Auditors <- dfAuditors %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_Auditors
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.FA <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_13-2051-00.csv')
+FA1 <- techskills.FA
+FA1$job <- 'Financial Analysts'
+FA1$jobcode <- '13-2051.00'
+print (FA1)
+```
+
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj9<- left_join(skillsJunPan2,FA1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj9)
+tail(df_lj9)
+print (df_lj9)
+```
+
+```{r}
+df_lj9$jobNoNA <- 'Financial Analysts'
+df_lj9$jobcodeNoNA <- '13-2051.00'
+head(df_lj9)
+df9<-df_lj9
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df9$SkillIndicator<- 0
+df9$SkillIndicator [df9$job == "Financial Analysts"] <-1
+dfFA<-df9
+str(dfFA)
+print(dfFA)
+head(dfFA)
+tail(dfFA)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_FA <- dfFA %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_FA
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.RMS <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_13-2099-02.csv')
+RMS1 <- techskills.RMS
+RMS1$job <- 'Risk Management Specialists'
+RMS1$jobcode <- '13-2099.02'
+print (RMS1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj10<- left_join(skillsJunPan2,RMS1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj10)
+tail(df_lj10)
+print (df_lj10)
+```
+
+```{r}
+df_lj10$jobNoNA <- 'Risk Management Specialists'
+df_lj10$jobcodeNoNA <- '13-2099.02'
+head(df_lj10)
+df10<-df_lj10
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df10$SkillIndicator<- 0
+df10$SkillIndicator [df10$job == "Risk Management Specialists"] <-1
+dfRMS<-df10
+str(dfRMS)
+print(dfRMS)
+head(dfRMS)
+tail(dfRMS)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_RMS <- dfRMS %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_RMS
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.Math <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_15-2021-00.csv')
+Math1 <- techskills.Math
+Math1$job <- 'Mathematicians'
+Math1$jobcode <- '15-2021.00'
+print (Math1)
+```
+
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj11<- left_join(skillsJunPan2,Math1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj11)
+tail(df_lj11)
+print (df_lj11)
+```
+
+```{r}
+df_lj11$jobNoNA <- 'Mathematicians'
+df_lj11$jobcodeNoNA <- '15-2021.00'
+head(df_lj11)
+df11<-df_lj11
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df11$SkillIndicator<- 0
+df11$SkillIndicator [df11$job == "Mathematicians"] <-1
+dfMath<-df11
+str(dfMath)
+print(dfMath)
+head(dfMath)
+tail(dfMath)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_Math <- dfMath %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_Math
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.ORA <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_15-2031-00.csv')
+ORA1 <- techskills.ORA
+ORA1$job <- 'Operations Research Analysts'
+ORA1$jobcode <- '15-2031.00'
+print (ORA1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj12<- left_join(skillsJunPan2,ORA1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj12)
+tail(df_lj12)
+print (df_lj12)
+```
+
+```{r}
+df_lj12$jobNoNA <- 'Operations Research Analysts'
+df_lj12$jobcodeNoNA <- '15-2031.00'
+head(df_lj12)
+df12<-df_lj12
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df12$SkillIndicator<- 0
+df12$SkillIndicator [df12$job == "Operations Research Analysts"] <-1
+dfORA<-df12
+str(dfORA)
+print(dfORA)
+head(dfORA)
+tail(dfORA)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_ORA <- dfORA %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_ORA
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.Stat <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_15-2041-00.csv')
+Stat1 <- techskills.Stat
+Stat1$job <- 'Statistician'
+Stat1$jobcode <- '15-2041.00'
+print (Stat1)
+```
+
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj13<- left_join(skillsJunPan2,Stat1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj13)
+tail(df_lj13)
+print (df_lj13)
+```
+
+```{r}
+df_lj13$jobNoNA <- 'Statistician'
+df_lj13$jobcodeNoNA <- '15-2041.00'
+head(df_lj13)
+df13<-df_lj13
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df13$SkillIndicator<- 0
+df13$SkillIndicator [df13$job == "Statistician"] <-1
+dfStat<-df13
+str(dfStat)
+print(dfStat)
+head(dfStat)
+tail(dfStat)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_Stat <- dfStat %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_Stat
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.Econ <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_19-3011-00.csv')
+Econ1 <- techskills.Econ
+Econ1$job <- 'Economists'
+Econ1$jobcode <- '19-3011.00'
+print (Econ1)
+```
+
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj14<- left_join(skillsJunPan2,Econ1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj14)
+tail(df_lj14)
+print (df_lj14)
+```
+
+```{r}
+df_lj14$jobNoNA <- 'Economists'
+df_lj14$jobcodeNoNA <- '19-3011.00'
+head(df_lj14)
+df14<-df_lj14
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df14$SkillIndicator<- 0
+df14$SkillIndicator [df14$job == "Economists"] <-1
+dfEcon<-df14
+str(dfEcon)
+print(dfEcon)
+head(dfEcon)
+tail(dfEcon)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_Econ <- dfEcon %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator)
+df_Econ
+```
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.SR <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_19-3022-00.csv')
+SR1 <- techskills.SR
+SR1$job <- 'Survery Rsearchers'
+SR1$jobcode <- '19-3022.00'
+print (SR1)
+```
+
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj15<- left_join(skillsJunPan2,SR1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj15)
+tail(df_lj15)
+print (df_lj15)
+```
+
+```{r}
+df_lj15$jobNoNA <- 'Survery Rsearchers'
+df_lj15$jobcodeNoNA <- '19-3022.00'
+head(df_lj15)
+df15<-df_lj15
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df15$SkillIndicator<- 0
+df15$SkillIndicator [df15$job == "Survery Rsearchers"] <-1
+dfSR<-df15
+str(dfSR)
+print(dfSR)
+head(dfSR)
+tail(dfSR)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_SR <- dfSR %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator)
+df_SR
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.RAS <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_13-1041-07.csv')
+RAS1 <- techskills.RAS
+RAS1$job <- 'Regulatory Affairs Speacialists'
+RAS1$jobcode <- '13-1041.07'
+print (RAS1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj16<- left_join(skillsJunPan2,RAS1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj16)
+tail(df_lj16)
+print (df_lj16)
+```
+
+```{r}
+df_lj16$jobNoNA <- 'Regulatory Affairs Speacialists'
+df_lj16$jobcodeNoNA <- '13-1041.07'
+head(df_lj16)
+df16<-df_lj16
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df16$SkillIndicator<- 0
+df16$SkillIndicator [df16$job == "Regulatory Affairs Speacialists"] <-1
+dfRAS<-df16
+str(dfRAS)
+print(dfRAS)
+head(dfRAS)
+tail(dfRAS)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_RAS <- dfRAS %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_RAS
+```
+
+
+
+
+
+
+
+
+```{r}
+techskills.CBJAS <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_13-1141-00.csv')
+CBJAS1 <- techskills.CBJAS
+CBJAS1$job <- 'Compensation, Benefits and Job Analysis Specialists'
+CBJAS1$jobcode <- '13-1141.00'
+print (CBJAS1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj17<- left_join(skillsJunPan2, CBJAS1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj17)
+tail(df_lj17)
+print (df_lj17)
+```
+
+```{r}
+df_lj17$jobNoNA <- 'Compensation, Benefits and Job Analysis Specialists'
+df_lj17$jobcodeNoNA <- '13-1141.00'
+head(df_lj17)
+df17<-df_lj17
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df17$SkillIndicator<- 0
+df17$SkillIndicator [df17$job == "Compensation, Benefits and Job Analysis Specialists"] <-1
+dfCBJAS<-df17
+str(dfCBJAS)
+print(dfCBJAS)
+head(dfCBJAS)
+tail(dfCBJAS)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_CBJAS <- dfCBJAS %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_CBJAS
+```
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.CA <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_13-2041-00.csv')
+CA1 <- techskills.CA
+CA1$job <- 'Credit Analysts'
+CA1$jobcode <- '13-2041.00'
+print (CA1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj18<- left_join(skillsJunPan2, CA1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj18)
+tail(df_lj18)
+print (df_lj18)
+```
+
+```{r}
+df_lj18$jobNoNA <- 'Credit Analysts'
+df_lj18$jobcodeNoNA <- '13-2041.00'
+head(df_lj18)
+df18<-df_lj18
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df18$SkillIndicator<- 0
+df18$SkillIndicator [df18$job == "Credit Analysts"] <-1
+dfCA<-df18
+str(dfCA)
+print(dfCA)
+head(dfCA)
+tail(dfCA)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_CA <- dfCA %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_CA
+```
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.IU <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_13-2053-00.csv')
+IU1 <- techskills.IU
+IU1$job <- 'Insurance Underwriters'
+IU1$jobcode <- '13-2053.00'
+print (IU1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj19<- left_join(skillsJunPan2, IU1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj19)
+tail(df_lj19)
+print (df_lj19)
+```
+
+```{r}
+df_lj19$jobNoNA <- 'Insurance Underwriters'
+df_lj19$jobcodeNoNA <- '13-2053.00'
+head(df_lj19)
+df19<-df_lj19
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df19$SkillIndicator<- 0
+df19$SkillIndicator [df19$job == "Insurance Underwriters"] <-1
+dfIU<-df19
+str(dfIU)
+print(dfIU)
+head(dfIU)
+tail(dfIU)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_IU <- dfIU %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator)
+df_IU
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.SSRA <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_19-4061-00.csv')
+SSRA1 <- techskills.SSRA
+SSRA1$job <- 'Social Science Research Assistant'
+SSRA1$jobcode <- '19-4061.00'
+print (SSRA1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj20<- left_join(skillsJunPan2, SSRA1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj20)
+tail(df_lj20)
+print (df_lj20)
+```
+
+```{r}
+df_lj20$jobNoNA <- 'Social Science Research Assistant'
+df_lj20$jobcodeNoNA <- '13-2053.00'
+head(df_lj20)
+df20<-df_lj20
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df20$SkillIndicator<- 0
+df20$SkillIndicator [df20$job == "Social Science Research Assistant"] <-1
+dfSSRA<-df20
+str(dfSSRA)
+print(dfSSRA)
+head(dfSSRA)
+tail(dfSSRA)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_SSRA <- dfSSRA %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_SSRA
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.CSA <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_15-1121-00.csv')
+CSA1 <- techskills.CSA
+CSA1$job <- 'Computer System Analysts'
+CSA1$jobcode <- '15-1121.00'
+print (CSA1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj21<- left_join(skillsJunPan2, CSA1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj21)
+tail(df_lj21)
+print (df_lj21)
+```
+
+```{r}
+df_lj21$jobNoNA <- 'Computer System Analysts'
+df_lj21$jobcodeNoNA <- '15-1121.00'
+head(df_lj21)
+df21<-df_lj21
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df21$SkillIndicator<- 0
+df21$SkillIndicator [df21$job == "Computer System Analysts"] <-1
+dfCSA<-df21
+str(dfCSA)
+print(dfCSA)
+head(dfCSA)
+tail(dfCSA)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_CSA <- dfCSA %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_CSA
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.SD <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_15-1133-00.csv')
+SD1 <- techskills.SD
+SD1$job <- 'Software Developers'
+SD1$jobcode <- '15-1133.00'
+print (SD1)
+```
+
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj22<- left_join(skillsJunPan2, SD1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj22)
+tail(df_lj22)
+print (df_lj22)
+```
+
+```{r}
+df_lj22$jobNoNA <- 'Software Developers'
+df_lj22$jobcodeNoNA <- '15-1133.00'
+head(df_lj22)
+df22<-df_lj22
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df22$SkillIndicator<- 0
+df22$SkillIndicator [df22$job == "Software Developers"] <-1
+dfSD<-df22
+str(dfSD)
+print(dfSD)
+head(dfSD)
+tail(dfSD)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_SD <- dfSD %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_SD
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.CSEA <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_15-1199-02.csv')
+CSEA1 <- techskills.CSEA
+CSEA1$job <- 'Computer Systems Engineers Archtects'
+CSEA1$jobcode <- '15-1199.02'
+print (CSEA1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj23<- left_join(skillsJunPan2, CSEA1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj23)
+tail(df_lj23)
+print (df_lj23)
+```
+
+```{r}
+df_lj23$jobNoNA <- 'Computer Systems Engineers Archtects'
+df_lj23$jobcodeNoNA <- '15-1199.02'
+head(df_lj23)
+df23<-df_lj23
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df23$SkillIndicator<- 0
+df23$SkillIndicator [df23$job == "Computer Systems Engineers Archtects"] <-1
+dfCSEA<-df23
+str(dfCSEA)
+print(dfCSEA)
+head(dfCSEA)
+tail(dfCSEA)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_CSEA <- dfCSEA %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_CSEA
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.RSST <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_19-2099-01.csv')
+RSST1 <- techskills.RSST
+RSST1$job <- 'Remote Sensing Scientists and Technologists'
+RSST1$jobcode <- '19-2099.01'
+print (RSST1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj25<- left_join(skillsJunPan2, RSST1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj25)
+tail(df_lj25)
+print (df_lj25)
+```
+
+```{r}
+df_lj25$jobNoNA <- 'Remote Sensing Scientists and Technologists'
+df_lj25$jobcodeNoNA <- '19-2099.01'
+head(df_lj25)
+df25<-df_lj25
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df25$SkillIndicator<- 0
+df25$SkillIndicator [df25$job == "Remote Sensing Scientists and Technologists"] <-1
+dfRSST<-df25
+str(dfRSST)
+print(dfRSST)
+head(dfRSST)
+tail(dfRSST)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_RSST <- dfRSST %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator)
+df_RSST
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.CSTP <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_25-1021-00.csv')
+CSTP1 <- techskills.CSTP
+CSTP1$job <- 'Computer Science Teachers, Postsecondary'
+CSTP1$jobcode <- '25-1021.00'
+print (CSTP1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj26<- left_join(skillsJunPan2, CSTP1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj26)
+tail(df_lj26)
+print (df_lj26)
+```
+
+```{r}
+df_lj26$jobNoNA <- 'Computer Science Teachers, Postsecondary'
+df_lj26$jobcodeNoNA <- '25-1021.00'
+head(df_lj26)
+df26<-df_lj26
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df26$SkillIndicator<- 0
+df26$SkillIndicator [df26$job == "Computer Science Teachers, Postsecondary"] <-1
+dfCSTP<-df26
+str(dfCSTP)
+print(dfCSTP)
+head(dfCSTP)
+tail(dfCSTP)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_CSTP <- dfCSTP %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_CSTP
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.AVMCS <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_25-9011-00.csv')
+AVMCS1 <- techskills.AVMCS
+AVMCS1$job <- 'Audio_Visual and Multimedia Collections Specialists'
+AVMCS1$jobcode <- '25-9011.00'
+print (AVMCS1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj27<- left_join(skillsJunPan2, AVMCS1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj27)
+tail(df_lj27)
+print (df_lj27)
+```
+
+```{r}
+df_lj27$jobNoNA <- 'Audio_Visual and Multimedia Collections Specialists'
+df_lj27$jobcodeNoNA <- '25-9011.00'
+head(df_lj27)
+df27<-df_lj27
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df27$SkillIndicator<- 0
+df27$SkillIndicator [df27$job == "Audio_Visual and Multimedia Collections Specialists"] <-1
+dfAVMCS<-df27
+str(dfAVMCS)
+print(dfAVMCS)
+head(dfAVMCS)
+tail(dfAVMCS)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_AVMCS <- dfAVMCS %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator)
+df_AVMCS
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.AVET <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_27-4011-00.csv')
+AVET1 <- techskills.AVET
+AVET1$job <- 'Adudio and Video Equipment Technicians'
+AVET1$jobcode <- '27-4011.00'
+print (AVET1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj28<- left_join(skillsJunPan2, AVET1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj28)
+tail(df_lj28)
+print (df_lj28)
+```
+
+```{r}
+df_lj28$jobNoNA <- 'Adudio and Video Equipment Technicians'
+df_lj28$jobcodeNoNA <- '27-4011.00'
+head(df_lj28)
+df28<-df_lj28
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df28$SkillIndicator<- 0
+df28$SkillIndicator [df28$job == "Adudio and Video Equipment Technicians"] <-1
+dfAVET<-df28
+str(dfAVET)
+print(dfAVET)
+head(dfAVET)
+tail(dfAVET)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_AVET <- dfAVET %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_AVET
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.BT <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_27-4012-00.csv')
+BT1 <- techskills.BT
+BT1$job <- 'Broadcast Technicians'
+BT1$jobcode <- '27-4012.00'
+print (BT1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj29<- left_join(skillsJunPan2, BT1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj29)
+tail(df_lj29)
+print (df_lj29)
+```
+
+```{r}
+df_lj29$jobNoNA <- 'Broadcast Technicians'
+df_lj29$jobcodeNoNA <- '27-4012.00'
+head(df_lj29)
+df29<-df_lj29
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df29$SkillIndicator<- 0
+df29$SkillIndicator [df29$job == "Broadcast Technicians"] <-1
+dfBT<-df29
+str(dfBT)
+print(dfBT)
+head(dfBT)
+tail(dfBT)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_BT <- dfBT %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator) 
+df_BT
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.CO <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_43-9011-00.csv')
+CO1 <- techskills.CO
+CO1$job <- 'Computer Operators'
+CO1$jobcode <- '43-9011.00'
+print (CO1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj30<- left_join(skillsJunPan2, CO1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj30)
+tail(df_lj30)
+print (df_lj30)
+```
+
+```{r}
+df_lj30$jobNoNA <- 'Computer Operators'
+df_lj30$jobcodeNoNA <- '43-9011.00'
+head(df_lj30)
+df30<-df_lj30
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df30$SkillIndicator<- 0
+df30$SkillIndicator [df30$job == "Computer Operators"] <-1
+dfCO<-df30
+str(dfCO)
+print(dfCO)
+head(dfCO)
+tail(dfCO)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_CO <- dfCO %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator)
+df_CO
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.CATO <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_49-2011-00.csv')
+CATO1 <- techskills.CO
+CATO1$job <- 'Computer, Automated Teller'
+CATO1$jobcode <- '49-2011.00'
+print (CATO1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj31<- left_join(skillsJunPan2, CATO1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj31)
+tail(df_lj31)
+print (df_lj31)
+```
+
+```{r}
+df_lj31$jobNoNA <- 'Computer, Automated Teller'
+df_lj31$jobcodeNoNA <- '49-2011.00'
+head(df_lj31)
+df31<-df_lj31
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df31$SkillIndicator<- 0
+df31$SkillIndicator [df31$job == "Computer, Automated Teller"] <-1
+dfCATO<-df31
+str(dfCATO)
+print(dfCATO)
+head(dfCATO)
+tail(dfCATO)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_CATO <- dfCATO %>%  
+  select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+  group_by(jobNoNA) %>% 
+   spread(Skills,SkillIndicator)
+df_CATO
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.CP <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_15-1131-00.csv')
+CP1 <- techskills.CP
+CP1$job <- 'Computer Programmer'
+CP1$jobcode <- '15-1131.00'
+print (CP1)
+```
+
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj32<- left_join(skillsJunPan2, CP1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj32)
+tail(df_lj32)
+print (df_lj32)
+```
+
+```{r}
+df_lj32$jobNoNA <- 'Computer Programmer'
+df_lj32$jobcodeNoNA <- '15-1131.00'
+head(df_lj32)
+df32<-df_lj32
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df32$SkillIndicator<- 0
+df32$SkillIndicator [df32$job == "Computer Programmer"] <-1
+dfCP<-df32
+str(dfCP)
+print(dfCP)
+head(dfCP)
+tail(dfCP)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_CP <- dfCP %>%  
+               select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+                group_by(jobNoNA) %>% 
+                 spread(Skills,SkillIndicator) 
+```
+
+
+```{r}
+df_CP
+```
+
+
+
+
+
+
+
+
+
+
+```{r}
+techskills.WD <-  read.csv ('C:/Users/tbao/Desktop/CUNY MSDS notes/607/Project 3/csv file of skills/technology_skills_15-1134-00.csv')
+WD1 <- techskills.WD
+WD1$job <- 'Web Developers'
+WD1$jobcode <- '15-1134.00'
+print (WD1)
+```
+
+```{r}
+# Use outer join, rather than inner join (close, up one more level, IT WORKED)
+df_lj33<- left_join(skillsJunPan2, WD1, by= c('Skills'='Example')) # Example is the orignal skill name before we rename it
+head(df_lj33)
+tail(df_lj33)
+print (df_lj33)
+```
+
+```{r}
+df_lj33$jobNoNA <- 'Web Developers'
+df_lj33$jobcodeNoNA <- '15-1134.00'
+head(df_lj33)
+df33<-df_lj33
+```
+
+```{r}
+# to add new column of sill indicator 1/0
+df33$SkillIndicator<- 0
+df33$SkillIndicator [df33$job == "Web Developers"] <-1
+dfWD<-df33
+str(dfWD)
+print(dfWD)
+head(dfWD)
+tail(dfWD)
+```
+
+```{r}
+# before spread, to drop unnecessary columns
+df_WD <- dfWD %>%  
+               select ( jobNoNA, jobcodeNoNA, Skills, SkillIndicator) %>%
+                group_by(jobNoNA) %>% 
+               spread(Skills,SkillIndicator) 
+```
+```{r}
+df_WD
+```
+
+```{r}
+skills_sum <- bind_rows(df_BStat, df_Act, df_CRIS, df_DA, df_CDM, df_CUSS, df_CBM, df_MRAMS, df_Auditors, df_FA, df_RMS, df_Math, df_ORA, df_Stat, df_Econ, df_SR, df_RAS, df_CBJAS, df_CA, df_IU, df_SSRA, df_CSA, df_SD,df_CSEA, df_RSST, df_CSTP, df_AVMCS, df_AVET, df_BT, df_CO, df_CATO, df_CP, df_WD)
+```
+
+```{r}
+skills_sum
+```
+
+```{r}
+write.csv(skills_sum, file = "skills_sum.csv")
+```
+
