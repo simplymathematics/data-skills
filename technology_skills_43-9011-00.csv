@@ -1,0 +1,48 @@
+Section,Category,Example
+Technology,Access software,Citrix
+Technology,Application server software,Microsoft Windows Server
+Technology,Backup or archival software,Data3 ENGUARD
+Technology,Backup or archival software,EMC NetWorker
+Technology,Backup or archival software,Veritas NetBackup
+Technology,Data base management system software,Oracle DBMS
+Technology,Data base reporting software,SAP BusinessObjects Crystal Reports
+Technology,Data base user interface and query software,IBM DB2
+Technology,Data base user interface and query software,Microsoft Access
+Technology,Data base user interface and query software,Structured query language SQL
+Technology,Data base user interface and query software,Teradata Enterprise Data Warehouse
+Technology,Development environment software,Common business oriented language COBOL
+Technology,Electronic mail software,Email software
+Technology,Electronic mail software,IBM Notes
+Technology,Electronic mail software,Microsoft Exchange Server
+Technology,Electronic mail software,Microsoft Outlook
+Technology,Enterprise application integration software,BMC Software Control-M
+Technology,Enterprise application integration software,IBM WebSphere
+Technology,Enterprise resource planning ERP software,SAP
+Technology,Enterprise system management software,IBM Power Systems software
+Technology,Filesystem software,IBM Tivoli NetView Distribution Manager
+Technology,Graphics or photo imaging software,Microsoft Visio
+Technology,Helpdesk or call center software,BMC Software Remedy IT Service Management Suite
+Technology,Helpdesk or call center software,Hewlett-Packard HP OpenView Service Center
+Technology,Internet browser software,Web browser software
+Technology,Internet protocol IP multimedia subsystem software,File transfer protocol FTP software
+Technology,LAN software,Local area network LAN software
+Technology,Network monitoring software,IBM Tivoli OMEGAMON XE for CICS on z/OS
+Technology,Network monitoring software,Ipswitch WhatsUp Gold
+Technology,Network monitoring software,Micro Focus OpenView
+Technology,Network monitoring software,Novell NetWare
+Technology,Object or component oriented development software,Practical extraction and reporting language Perl
+Technology,Object or component oriented development software,Python
+Technology,Object or component oriented development software,Tandem advanced command language TACL
+Technology,Office suite software,Microsoft Office
+Technology,Operating system software,Hewlett Packard HP-UX
+Technology,Operating system software,Job control language JCL
+Technology,Operating system software,Linux
+Technology,Operating system software,UNIX
+Technology,Presentation software,Microsoft PowerPoint
+Technology,Project management software,Microsoft SharePoint
+Technology,Spreadsheet software,Microsoft Excel
+Technology,Storage networking software,EMC AlphaStor
+Technology,Storage networking software,Storage area network SAN software
+Technology,Transaction server software,Customer information control system CICS
+Technology,WAN switching software and firmware,Wide area network WAN software
+Technology,Word processing software,Microsoft Word

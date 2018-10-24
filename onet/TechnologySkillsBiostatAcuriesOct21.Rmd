@@ -1,0 +1,161 @@
+---
+title: "TechnologySkillsBiostatAcuries"
+author: "Hui Gracie Han"
+date: "October 21, 2018"
+output: html_document
+---
+
+
+```{r}
+require(rvest)
+require(dplyr)
+require(stringr)
+require(tidyr)
+require(dplyr)
+require(ggplot2)
+```
+
+```{r}
+techskills.biostatistician <- read.csv ('E:/8-607 Proj3 Week8 607 GH TO Do Scraping WebPage/GH-Technology Skills Downloaded/technology_skills_15-2041-01.csv')
+stat1 <- techskills.biostatistician
+```
+
+```{r}
+ print (stat1)
+class (stat1)
+```
+```{r}
+# to add a column called job, statitisican, with its name
+stat1$job <- 'Biostatisticians'
+stat1$jobcode <- '15-2041.01'
+
+stat1
+class (stat1)
+class (stat1$jobcode)
+
+```
+```{r}
+techskills.Acturies <-  read.csv ('E:/8-607 Proj3 Week8 607 GH TO Do Scraping WebPage/GH-Technology Skills Downloaded/technology_skills_15-2011-00.csv')
+
+Acur1 <- techskills.Acturies
+Acur1$job <- 'Acturies'
+Acur1$jobcode <- '15-2011.00'
+
+```
+
+```{r}
+print (Acur1)
+```
+```{r}
+df.stat.acur <- rbind (stat1, Acur1)
+```
+
+```{r}
+df.stat.acur
+```
+
+```{r}
+# to RENAME COL 3 (Example to )
+colnames(df.stat.acur) <- c("skillSection", "categrory", 'Skills', 'job', 'jobcode')
+df.stat.acur
+
+df<-df.stat.acur
+
+```
+
+```{r}
+# to extrapolate the words, using the vectors that ravi produced (Skills)
+
+# get unique skills list
+# esample
+skillnameUnique <- unique(df$Skills)
+# there are 49 unique names of skills from these two job titles, from 58 rows
+```
+
+
+```{r}
+class (skillnameUnique)
+# its is a factor
+```
+
+```{r}
+skillnameUniqueCharac<-as.character(skillnameUnique)
+```
+
+
+```{r}
+class (skillnameUniqueCharac)
+print (skillnameUniqueCharac)
+```
+```{r}
+# follow the exisint vector of skills that Ravi has used(note, I think we should edit it later and expand it, this list is not very complete)
+Skills <- c("AWS", "Python", "AI", "SQL", "R", "SAS", "Tableau", "AZURE", "SparkML", "Shiny", "Spark", "Hadoop", "Machine Learning", "Probability", "Statistics")
+```
+
+```{r}
+# DID NOT WORK,this section
+# loop through the skills from ONET website, to find the skills that matches the SKILLS vector above
+
+# for (i in  1:length (Skills) {
+#   ONETskills <- str_match (skillnameUniqueCharac, Skills[i])
+#   print (skillnameUniqueCharac)
+#   print (i)
+}
+
+```
+```{r}
+# below from Ravi's codes, it works 
+
+ for(i1 in 1:length(Skills)){# there are 15 skills that were defined before (see line#)
+      job_posting_skills1 <- str_match(skillnameUniqueCharac, Skills[i1]) # only this is changed
+      job_posting_skills2 <- data.frame(job_posting_skills1)
+      job_posting_skills <- rbind(job_posting_skills2, job_posting_skills)
+  }
+```
+
+```{r}
+print (job_posting_skills)
+# lot of NA, 735 rows
+class (job_posting_skills1)
+# matrix
+class (job_posting_skills2)
+# data frame, 735*1
+```
+```{r}
+# below is the exact syntax from Ravi's file, for reference only
+ # for(i1 in 1:length(Skills)){# there are 6 skills that were defined before (see line#)
+ #      job_posting_skills1 <- str_match(job_post_data, Skills[i1])
+ #      job_posting_skills2 <- data.frame(job_posting_skills1)
+ #      job_posting_skills <- rbind(job_posting_skills2, job_posting_skills)
+    }
+```
+
+```{r}
+na.omit (job_posting_skills)
+# now 10 rows in total (not unique , only 5 unique stills), which is the skills that are in the ONET site, but also from Ravi's skills vector
+
+#Job_skills_NoNA <- na.omit (job_posting_skills)
+# error above
+```
+
+```{r}
+# error
+class (Job_skills_NoNA)
+print (Job_skills_NoNA)
+```
+```{r}
+class (job_posting_skills)
+# data frame, 735* 1
+
+print (job_posting_skills)
+```
+```{r}
+unique(job_posting_skills$job_posting_skills1)
+# 5 unique + 1 NA
+```
+
+<!-- ```{r} -->
+<!-- # to make the row to column, using dplyr -->
+
+<!-- ``` -->
+
