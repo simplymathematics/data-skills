@@ -8,12 +8,12 @@ require(XML)
 # Downloading Data
 
 #This section downloads a single page. However, it can be modified to work across similar pages. Notice how that would only require changing the code  in the URL. TODO get a list of pertinent OES codes. 
-
-raw.data <- curl_download("https://www.bls.gov/oes/current/oes151111.htm", "salary/OES_dollars.txt")
+try(setwd("salary"))
+raw.data <- curl_download("https://www.bls.gov/oes/current/oes151111.htm", "OES_dollars.txt")
 raw.data <- readLines("https://www.bls.gov/oes/current/oes151111.htm")
 
 
-https://www.bls.gov/oes/current/oes_stru.htm#15-0000
+# From: https://www.bls.gov/oes/current/oes_stru.htm#15-0000
 ##  List of URLS
 
 numbers.list <- c(1111,1121,1122,1131,1132,1133,1134,1141,1142,1143,1151,1152,1199,2011,2031,2041)
@@ -56,11 +56,7 @@ oes_scrape <- function(URLs){
   return(big.data)
 }
 salary.frame <- oes_scrape(urls)
-salary.frame
+SOC <- numbers.list
+salary.frame <- cbind(SOC, salary.frame)
 
-
-
-require(ggplot2)
-ggplot(salary.frame, aes(x = "No.Employees", y = "Mean.Annual.Wage" )) +  geom_point() + 
-  
-summary(salary.frame$No.Employees)
+setwd("..")

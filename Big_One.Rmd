@@ -4,14 +4,97 @@ author: "simplymathematics"
 date: "October 27, 2018"
 output: html_docume
 ---
-##TO DO LOAD FILES PROPERLY. Right now, I'm just running each file manually.
+#
+## Setup
+We decided to break this problem into pieces, each of which has it's own R file, data source, and folder in this repository. We're going to start off by loading all of the files so that we can look at the data. Go ahead an grab a cup of coffee--this will take a minute.
 
 ```{r}
 source("outlook/outlook.R")
+source("onet/skills.R")
+suppressWarnings(source("salary/dollars-scrape.R"))
 ```
 
+Good, now that's that is done, let's look at each data source. 
+
+## Overview of Data
+
+TODO: Explain BLS, SOC code, which data sets we used and why
+
+
+
+## Outlook
+
+First, we consulted with the Bureau of Labor Statistics about the occupational outlook. After scraping and cleaning the data (as seen in the .r file in the corresponding folder), we were able to look at some long-term job characteristics across the mathematical and computational sectors. For now, suffice it to say that the vast majority of these jobs are entry level as shown by the graph below
 
 ```{r}
-outlook.frame
 outlook.graphic
+```
+Additionally, we saw that the vast majority of these jobs require at least some kind of four-year degree, with considerably opportunities for those with higher educations.
+```{r}
+outlook.graphic2
+```
+We will come back to this data set later, but for now, we'll take a look at some numbers.
+
+## Salary
+We took the same list of mathematical occupations and found the salary data for each. We had to drop the dollar signs and commas from the numbers to do this analysis.
+```{r}
+salary.frame
+
+tmp <- substr(salary.frame$Mean.Annual.Wage, 2, 15)
+tmp <- gsub(x = tmp, pattern = ",", replacement ="")
+salary.frame$Mean.Annual.Wage <- tmp
+salary.frame
+```
+The mean and standard deviation are given below. As we can see, the average mathematician makes $92,400/year, but there is significant deviation amongst occupations.
+```{r}
+mean(as.numeric(salary.frame$Mean.Annual.Wage))
+sd(as.numeric(salary.frame$Mean.Annual.Wage))
+```
+Additionally, there is considerable room for advancement as Computer and Research Scientists make $120,000 a year on average!
+
+```{r}
+best_pay <-  max(as.numeric(salary.frame$Mean.Annual.Wage))
+best_pay
+```
+Naturally, our next question was centered on which skills we would need to get those top-paying positions.
+
+## Skills
+For this, we used the BLS skills dataset. After some scraping and cleaning, the data can be seen below.
+```{r}
+skills.frame
+```
+Then, we found the tops skills across occupations by taking the average of each column. Below are the top 5 skills for mathematical and computational occupations
+```{r}
+skills.top
+```
+Finally, we wanted to see a couple more things. In particular, we want to see what skills are required for the highest paying data science jobs.
+## Putting it Together
+
+TODO: do skills vs salary analysis
+TODO: do skills vs outlook analysis
+
+### Merging
+
+```{r}
+outlook_table <- select(outlook.frame, SOC, `2026EmplChange2016-26`)
+outlook_table
+salary_table <- select(salary.frame, SOC, Mean.Annual.Wage)
+salary_table
+
+```
+
+## Skills List
+We turned these categorical skills into specific, technical ones using data from...
+
+TODO: JUN and Gracie's Section
+
+## Indeed.com
+Finally, we scraped Indeed with the above list of skills to see how often each came up for positions called "Data Scientist." Then, we compared New York to California. We chose these two states to get a wide swath of the industry without relying on scraping even more Indeed pages.
+
+# TODO: Turn these into SQL databases
+```{r}
+skills.frame
+outlook.frame
+salary.frame
+#indeed.frame
 ```
