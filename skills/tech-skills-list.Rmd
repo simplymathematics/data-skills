@@ -23,10 +23,10 @@ curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Tools%2
 # Reading File
 The code below reads the data and discards all of the non mathematics fields.
 ```{r}
-df<- read.table("TechSkills.txt", sep = '\t', header = TRUE)
+df<- read.csv("TechSkills.txt", sep = '\t', header = TRUE, quote = "")
 
 df <- df[grep("15-", df$O.NET.SOC.Code),]
-
+df
 ```
 # Cleaning Data
 ```{r}
