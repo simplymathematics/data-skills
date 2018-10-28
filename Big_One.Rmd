@@ -127,6 +127,29 @@ The biggest issues was the steep learning curve associated with git. Version con
 
 For your own further analysis, we've exported each dataset as it's own table using SQL. 
 
+```{r}
+library(RMySQL)
+library(DBI)
+
+localuserpassword <- "root"
+
+con <- dbConnect(MySQL(), 
+
+                 user='root', password=localuserpassword, 
+
+                 dbname='data607_proj3', 
+
+                 host='localhost')
+
+dbReadTable(con, "characteristics")
+dbReadTable(con, "indeed_keyword_count_ca")
+dbReadTable(con, "indeed_keyword_count_ny")
+dbReadTable(con, "salary")
+dbReadTable(con, "techskills")
+dbDisconnect(con)
+```
+
+
 TODO: SQL dbs
 
 # TODO: Turn these into SQL databases
