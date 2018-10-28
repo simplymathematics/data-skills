@@ -14,7 +14,7 @@ TODO: Gather dependencies here so that uninstalled libraries don't break the aut
 
 
 ```{r}
-suppressWarnings(source("outlook/outlook.R"))
+suppressWarnings(source("characteristics/characteristics"))
 suppressWarnings(source("onet/skills.R"))
 suppressWarnings(source("skills/tech-skills-list.R"))
 suppressWarnings(source("salary/dollars-scrape.R"))
@@ -40,11 +40,11 @@ Lastly, we wanted to examine which skills are currently being sought after in to
 First, we consulted with the BLS Employment Projections to obtain data related to the 2016-26 [Occupational Projections and Worker Characteristics](https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm). After scraping and cleaning the data (as seen in the .r file in the corresponding folder), we were able to look at some long-term job characteristics across the mathematical and computational sectors. For now, suffice it to say that the vast majority of these jobs appear to be entry level as shown by the graph below. @simplymathematics and @jemceachern did this section.
 
 ```{r}
-outlook.graphic
+characteristics.graphic
 ```  
 Additionally, we saw that the vast majority of these jobs require at least some kind of four-year degree, with considerably opportunities for those with higher educations.
 ```{r}
-outlook.graphic2
+characteristics.graphic2
 ```  
 We will come back to this data set later, but for now, we'll take a look at some numbers.
 
