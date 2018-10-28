@@ -401,6 +401,7 @@ for (var attr in aex){am.setAttribute(attr, aex[attr]);}h.appendChild(am);g[fsr]
     <ul>
         <li class="heading"><a href="http://beta.bls.gov/dataQuery/" aria-label="Data Finder 1.0">Data Finder &#187;</a></li>
 		<li class="heading"><a href="http://beta.bls.gov/maps/cew/us" aria-label="Quarterly Census of Employment and Wages State and Country Map">State and County Map &#187;</a></li>
+		<li class="heading"><a href="http://beta.bls.gov/comparison-matrix/home.htm" aria-label="Comparison Matrix of BLS compensation data sources">Comparing Pay Measures &#187;</a></li>
     </ul>
 </div>
 <!-- ***********************************************End BETA LIST ******************************************** --> 

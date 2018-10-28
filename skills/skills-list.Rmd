@@ -37,26 +37,37 @@ df
 ```{r}
 skills <- unique(df$Element.Name)
 names <- unique(df$O.NET.SOC.Code)
+print("************")
 df$Element.Name
 ## TO DO MATch skills with list
-small.data <- matrix(c(df$O.NET.SOC.Code, df$Element.Name), ncol=2)
+small.data <- data.frame(c(df$O.NET.SOC.Code, df$Element.Name), ncol=2)
 small.data <- data.frame(small.data)
 colnames(small.data) <- c("Code", "Skill")
 small.data
 #test <- spread(small.data, key = "Code", value = "Skill")
 #test
 ```
-
+```{r}
+ncols <- length(skills) +1
+nrows <- length(names)
+ncols
+nrows
+```
 
 ```{r}
-new.frame = data.frame()
-for (name in names){
-  for (skill in skills){
-    if #name and skill {
-      new.frame[skill][name] = TRUE
+new.frame <- data.frame(matrix(ncol=ncols, nrow=nrows))
+skills
+col.names <- c("Jobs", c(skills))
+colnames(new.frame) <- col.names
+new.frame
+
+for (row in nrows){
+  for (col in ncols){
+    if (df[df$O.Net.SOC.Code == name & df$Element.Name == skill]){
+      new.frame[col][row] = TRUE
     }
     else{
-        new.frame[skill][name] = FALSE
+        new.frame[col][row] = FALSE
     }
   }
 }

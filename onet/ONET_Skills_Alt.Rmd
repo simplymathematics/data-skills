@@ -46,18 +46,8 @@ df <- df[grep("15-", df$O.NET.SOC.Code),]
 df <- df[grep(".00$", df$O.NET.SOC.Code),] # limit SOC Code to major groups only
 df <- df[grep("IM", df$Scale.ID),] # only cares about importance data
 df <- df[grep("N", df$Recommend.Suppress),] # only cares about unsuppressed data
-
-head(df)
-
 skillsdf <- data.frame(df$O.NET.SOC.Code, df$Element.Name, df$Data.Value) #subsets fields for analysis
-
-head(skillsdf)
-
 ```
-
-
-
-
 
 ```{r}
 
@@ -69,19 +59,12 @@ wideskills <- skillsdf %>% # Create dataframe
   arrange(SOC, desc(Value)) %>% # Sort elements by Value
   top_n(5, Value) %>% # Includes more than n rows if there are ties
   spread(Element, Value, fill = F) # Create wide dataset and sets NA values to 0
-
-
-
 # Knitr Table to view output
-
 w <- knitr::kable(wideskills, caption = 'Wide Skills Output', format = "html") %>%
   kable_styling(bootstrap_options = c("condensed"), full_width = F, position = "left") %>%
   row_spec(row = 0:0, background = "#D4E0F7") %>%
   column_spec(column = 1, bold = T) 
 w
-
-
-
 # This may actually be a better version of the wideskill df, but also requires assistance. 
 
 df.Skills <- skillsdf %>%  # Create dataframe

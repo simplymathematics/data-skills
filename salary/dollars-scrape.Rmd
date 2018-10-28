@@ -20,8 +20,6 @@ raw.data <- readLines("https://www.bls.gov/oes/current/oes151111.htm")
 
 https://www.bls.gov/oes/current/oes_stru.htm#15-0000
 ##  List of URLS
-TODO the numbers list is not automated
-
 ```{r}
 list.url <- curl_download("https://www.bls.gov/oes/current/oes_stru.htm#15-0000", "list.html")
 #list.data <- readLines()

@@ -2,9 +2,9 @@
 CUNY SPS MS Data Science data-skills group project
 
 
-## Characteristics
+## Indeed
 
-The characteristics folder is from EP data.
+The Indeed folder is from EP data.
 
 ## Skills
 
@@ -22,15 +22,6 @@ The outlook folder is for outlook data from ONET.
 
 This is the folder for justifying the skills list
 
+## Big_One.Rmd
 
-# Extra Data
-
-## Spreadsheets
-
-The spreadsheets folder has various data from the BLS.
-
-## Maps
-
-Has a map of Computer and Research Scientists employment by state.
-
-
+Is the file you want to run
