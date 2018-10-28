@@ -36,7 +36,7 @@ vignettes/*.pdf
 rsconnect/
 
 #Presentation default directory
-/Presentation-figure/
+Presentation-figure/*
 
 #Rendered Presentation Markdown
 *Presentation.md

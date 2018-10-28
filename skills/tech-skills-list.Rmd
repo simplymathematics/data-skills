@@ -31,8 +31,6 @@ df
 # Cleaning Data
 ```{r}
 df$O.NET.SOC.Code <- substr(x = df$O.NET.SOC.Code, 4, 7) #drops sub occupation data
-df <- df[grep("IM", df$Scale.ID),] # only cares about importance data
-unique(df$Element.Name)
 df
 
 ```
