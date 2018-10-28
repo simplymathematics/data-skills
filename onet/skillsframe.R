@@ -1,14 +1,5 @@
----
-title: "Onet"
-author: "simplymathematics & jemceachern"
-date: "October 27, 2018"
-output: html_document
-
----
-
 # Dependencies
 
-```{r}
 require(XML) #for reading xml, html
 require(stringr) #for regex
 require(curl) #for downloading url file
@@ -17,39 +8,24 @@ require(dplyr) #for data manipulation
 require(ggplot2) #for graphs
 require(knitr) #for table design
 require(kableExtra) #for table design
-```
 
 # Downloading
 
-We will use the onet database to generate our list of skills.
-
-```{r}
+# We will use the onet database to generate our list of skills.
 
 curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Skills.txt", "Skills.txt")
 
-```
-# Reading File
-
-The code below reads the data and discards all of the non mathematics fields.
-
-```{r}
+# Reading File: The code below reads the data and discards all of the non mathematics fields.
 
 df<- read.table("Skills.txt", sep = '\t', header = TRUE)
-
 df <- df[grep("15-", df$O.NET.SOC.Code),]
-
-```
 
 # Cleaning Data
 
-```{r}
 df <- df[grep(".00$", df$O.NET.SOC.Code),] # limit SOC Code to major groups only
 df <- df[grep("IM", df$Scale.ID),] # only cares about importance data
 df <- df[grep("N", df$Recommend.Suppress),] # only cares about unsuppressed data
 skillsdf <- data.frame(df$O.NET.SOC.Code, df$Element.Name, df$Data.Value) #subsets fields for analysis
-```
-
-```{r}
 
 # Need help turning this into T/F output
 
@@ -59,12 +35,14 @@ wideskills <- skillsdf %>% # Create dataframe
   arrange(SOC, desc(Value)) %>% # Sort elements by Value
   top_n(5, Value) %>% # Includes more than n rows if there are ties
   spread(Element, Value, fill = F) # Create wide dataset and sets NA values to 0
+
 # Knitr Table to view output
 w <- knitr::kable(wideskills, caption = 'Wide Skills Output', format = "html") %>%
   kable_styling(bootstrap_options = c("condensed"), full_width = F, position = "left") %>%
   row_spec(row = 0:0, background = "#D4E0F7") %>%
   column_spec(column = 1, bold = T) 
 w
+
 # This may actually be a better version of the wideskill df, but also requires assistance. 
 
 df.Skills <- skillsdf %>%  # Create dataframe
@@ -82,12 +60,8 @@ df.Skills <- skillsdf %>%  # Create dataframe
   top_n(5, avgvalue)  # select top 5 avg value skills 
 df.Skills
 
-
-
 t <- knitr::kable(df.Skills, caption = 'Output', format = "html") %>%
   kable_styling(bootstrap_options = c("condensed"), full_width = F, position = "left") %>%
   row_spec(row = 0:0, background = "#D4E0F7") %>%
   column_spec(column = 1, bold = T) 
 t
-
-```
