@@ -13,7 +13,7 @@ try(setwd("salary"))
 # From: https://www.bls.gov/oes/current/oes_stru.htm#15-0000
 ##  List of URLS
 # IT was fastest to type these by hand
-
+raw.data <- readLines("https://www.bls.gov/oes/current/oes151111.htm")
 numbers.list <- c(1133, 1134, 1141, 1142, 1143, 1151, 1152, 1199,  2011, 2021, 2031, 2041, 2090)
 urls <- c()
 i = 1

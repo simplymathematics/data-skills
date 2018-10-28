@@ -16,6 +16,7 @@ TODO: Gather dependencies here so that uninstalled libraries don't break the aut
 ```{r}
 suppressWarnings(source("outlook/outlook.R"))
 suppressWarnings(source("onet/skills.R"))
+suppressWarnings(source("skills/tech-skills-list.R"))
 suppressWarnings(source("salary/dollars-scrape.R"))
 suppressWarnings(source("indeed/Indeed_Skills.R"))
 ```
@@ -36,7 +37,7 @@ Lastly, we wanted to examine which skills are currently being sought after in to
 
 ## Worker Characteristics  
 
-First, we consulted with the BLS Employment Projections to obtain data related to the 2016-26 [Occupational Projections and Worker Characteristics](https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm). After scraping and cleaning the data (as seen in the .r file in the corresponding folder), we were able to look at some long-term job characteristics across the mathematical and computational sectors. For now, suffice it to say that the vast majority of these jobs appear to be entry level as shown by the graph below
+First, we consulted with the BLS Employment Projections to obtain data related to the 2016-26 [Occupational Projections and Worker Characteristics](https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm). After scraping and cleaning the data (as seen in the .r file in the corresponding folder), we were able to look at some long-term job characteristics across the mathematical and computational sectors. For now, suffice it to say that the vast majority of these jobs appear to be entry level as shown by the graph below. @simplymathematics and @jemceachern did this section.
 
 ```{r}
 outlook.graphic
@@ -49,9 +50,7 @@ We will come back to this data set later, but for now, we'll take a look at some
 
 ## Salary  
 
-We took the same list of mathematical occupations and used [Occupational Employment Statistics](https://www.bls.gov/oes/current/oes150000.htm) data to find the salary data for each.  
-
-We had to drop the dollar signs and commas from the numbers to do this analysis.
+We took the same list of mathematical occupations and used [Occupational Employment Statistics](https://www.bls.gov/oes/current/oes150000.htm) data to find the salary data for each.  We had to drop the dollar signs and commas from the numbers to do this analysis after selecting the 15- occupations. @simplymathematics and @jemceachern did this section.
 
 ```{r}
 head(salary.frame, 5)
@@ -72,8 +71,7 @@ Naturally, our next question was centered on which skills we would need to get t
 
 ## Skills  
 
-For this, we used the [O*NET Database](https://www.onetcenter.org/database.html?p=3) to examine the skills required by the Computer and Mathematical Occupations. The data is scaled on on a level 0-7, and marks the importance of each skillset. After some scraping and cleaning, the data can be seen below.
-
+For this, we used the [O*NET Database](https://www.onetcenter.org/database.html?p=3) to examine the skills required by the Computer and Mathematical Occupations. The data is scaled on on a level 0-7, and marks the importance of each skillset. After some scraping and cleaning, the data can be seen below. @simplymathematics and @jemceachern did this section.
 ```{r}
 head(skills.frame,5)
 ```
@@ -94,16 +92,18 @@ jobs <- as.numeric(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`)
 df <- data.frame(cbind(dollars,jobs))
 ggplot(df, aes(x=dollars, y=jobs)) + geom_point() 
 ```  
-What's interesting about this graph is that is shows a weak correlation between salary and job sector growth.
+What's interesting about this graph is that is shows a weak correlation between salary and job sector growth. @simplymathematics and @jemceachern did this section.
 
 
 ## Skills List
-We turned these categorical skills into specific, technical ones using data from...
+We turned these categorical skills into specific, technical ones using data from ONET. We downloaded a text file from ONET, cleaned it up, grabbed the relevant data, and stored it the skills folder. Further documentation can be found there. @ghh2001 and @johnpannyc did this section.
 
-TODO: JUN and Gracie's Section
+```{r}
+tech.top
+```
 
 ## Indeed.com
-Finally, we scraped Indeed with the above list of skills to see how often each came up for positions called "Data Scientist." The job postings webpage data from the two states were gathered and cleaned using regex for certain keywords. Here we added the Company name, date, state and the URL associated with each keyword result before filtering out any rows with incomplete data. Then, we compared New York to California. We chose these two states to get a wide swath of the industry without relying on scraping even more Indeed pages. A national survey would have been far too time-intensive. Below are the top job skills for California.
+Finally, we scraped Indeed with the above list of skills to see how often each came up for positions called "Data Scientist." The job postings webpage data from the two states were gathered and cleaned using regex for certain keywords. Here we added the Company name, date, state and the URL associated with each keyword result before filtering out any rows with incomplete data. Then, we compared New York to California. We chose these two states to get a wide swath of the industry without relying on scraping even more Indeed pages. A national survey would have been far too time-intensive. Below are the top job skills for California. @ritwar01 did this section.
 
 ```{r}
 head(job_listings_keyword_count_ca,5)
@@ -114,6 +114,9 @@ We have the same data here for New York
 head(job_listings_keyword_count_ny,5)
 bplotNY
 ```
+## Conclusion
+
+TODO: Conclusion Section
 
 # TODO: Turn these into SQL databases
  + skills.frame
