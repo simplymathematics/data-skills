@@ -19,7 +19,7 @@ library(randomForest)
 
 
 ```{r}
-source("outlook/outlook.R")
+suppressWarnings(source("outlook/outlook.R"))
 suppressWarnings(source("onet/skills.R"))
 suppressWarnings(source("salary/dollars-scrape.R"))
 suppressWarnings(source("indeed/Indeed_Skills.R"))
@@ -72,30 +72,8 @@ Then, we found the tops skills across occupations by taking the average of each 
 skills.top
 ```
 Finally, we wanted to see a couple more things. In particular, we want to see what skills are required for the highest paying data science jobs.
-## Putting it Together
 
-TODO: do skills vs salary analysis
-TODO: do skills vs outlook analysis
-
-### Merging
-
-```{r}
-salary.frame <- select(salary.frame, SOC, Mean.Annual.Wage )
-outlook.frame <- select(outlook.frame, SOC, '2016-26_AvgAnnual_OccOpenings')
-skills.vs.salary <- na.omit(merge(skills.frame, salary.frame, by = 'SOC', all = TRUE))
-skills.vs.outlook <- na.omit(merge(skills.frame, outlook.frame, by = 'SOC', all = TRUE))
-
-```
-#### Skills vs. Salary
-This should follow the analysis of above.
-```{r}
-head(skills.vs.salary,5)
-```
-#### Skills vs. Job Growth Outlook
-This should follow the analysis of above.
-```{r}
-head(skills.vs.outlook,5)
-```
+## Salary vs. Outlook
 
 Now, we'll look at  a scatter plot of salarys and outlooks. 
 ```{r}
