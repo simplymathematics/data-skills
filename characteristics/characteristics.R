@@ -10,9 +10,10 @@ suppressWarnings(library(dplyr, quietly =TRUE))
 suppressWarnings(library(ggplot2, quietly =TRUE))
 suppressWarnings(library(curl, quietly =TRUE))
 
-try(setwd("outlook/"))
+try(setwd("characteristics/"))
 ############################################
 # Uncomment the below to download again
+
 #curl_download("https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm", "outlook.html")
 BLS_EP_URL <- read_html("outlook.html")
 
@@ -35,10 +36,9 @@ OccProjTbl <- dplyr::tbl_df(OccProj[[1]])
 outlook.frame <- subset(OccProjTbl, (str_detect(OccProjTbl$SOC, '15-')))
 outlook.frame$SOC <- substr(outlook.frame$SOC, 4, 7)
 
-#outlook.frame$SOC <- substr(outlook.frame$SOC, 4, 7)
-
 Series15 <- dplyr::filter(OccProjTbl, grepl('15-', SOC)) %>%
   filter(grepl('Line item', OccupationType))
+Series15$SOC <- substr(Series15$SOC, 4, 7)
 
 outlook.graphic2 <- ggplot(Series15, aes(x = TypicalEntryLvlEduc, y = frequency(SOC), fill=TypicalEntryLvlEduc)) + 
   guides(fill=FALSE, color=FALSE)+
