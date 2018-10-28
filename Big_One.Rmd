@@ -7,7 +7,7 @@ output: html_document
 
 # Project 2
 ## Setup
-We decided to break this problem into pieces, each of which has it's own R file, data source, and folder in this repository. We're going to start off by loading all of the files so that we can look at the data. 
+We decided to break this problem into pieces, each of which has it's own R file, data source, and folder in this repository. We're going to start off by loading all of the files so that we can look at the data. Additionally, we decided to use github because of the built-in version controlling system and issue tracking. We also used a slack room we made for this project for real time coordination.
 
 ### Dependencies
 TODO: Gather dependencies here so that uninstalled libraries don't break the automation.
@@ -121,7 +121,13 @@ TODO: Conclusion Section
 
 ## Further
 
-TODO: Further considerations
+The biggest issues was the steep learning curve associated with git. Version control and coordination were issues due to this underlying deficiency. Additionally, the BLS and ONET databases are very broad and do little to highlight specific requirements for people in the field. They do, however, offer a picture of my qualifications relative to the general population or even other people who work with computers. However, to get the most from these datasets, we would need to do further regression analysis that maps the skill or technology data to occupational growth or occupational salary. That is unfortunately outside the scope of this analysis. Another big constraint was the limitations we faced in interacting with Indeed. Because of call limits and time-constraints we were limited to only mining two states. A stand-alone daemon that manages api calls would fix this, but is also outside the scope of this project.
+
+### Databases
+
+For your own further analysis, we've exported each dataset as it's own table using SQL. 
+
+TODO: SQL dbs
 
 # TODO: Turn these into SQL databases
  + skills.frame
