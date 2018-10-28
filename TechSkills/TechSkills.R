@@ -10,11 +10,15 @@ suppressWarnings(library(ggplot2, quietly =TRUE)) #for graphs
 suppressWarnings(library(knitr, quietly =TRUE)) #for table design
 suppressWarnings(library(kableExtra, quietly =TRUE)) #for table design
 
-try(setwd('TechSkills'))
 # Downloading
 
 #We will use the onet database to generate our list of skills.
 ############################################
+
+try(setwd('TechSkills'))
+# Downloading
+
+#We will use the onet database to generate our list of skills.
 
 curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Tools%20and%20Technology.txt", "TechSkills.txt")
 
@@ -22,14 +26,8 @@ curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Tools%2
 
 # The code below reads the data and discards all of the non mathematics fields.
 
-
 df<- read.table("TechSkills.txt", sep = '\t', header = TRUE)
 
 df <- df[grep("15-", df$O.NET.SOC.Code),]
 
-
-# Cleaning Data
-df <- df[grep(".00$", df$O.NET.SOC.Code),] # limit SOC Code to major groups only
-df <- df[grep("IM", df$Scale.ID),] # only cares about importance data
-df <- df[grep("N", df$Recommend.Suppress),] # only cares about unsuppressed data
 
