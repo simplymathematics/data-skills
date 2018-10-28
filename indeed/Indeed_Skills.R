@@ -68,3 +68,7 @@ bplotCA
 
 setwd("..")
 
+write.csv(job_listings_keyword_count_ny,'job_listings_keyword_count_ny.csv')
+write.csv(job_listings_keyword_count_ca,'job_listings_keyword_count_ca.csv')
+
+
