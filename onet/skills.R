@@ -17,7 +17,7 @@ try(setwd('onet'))
 ############################################
 # Uncomment the below to download the file
 
-curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Skills.txt", "Skills.txt")
+# curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Skills.txt", "Skills.txt")
 
 # Reading File
 
@@ -79,3 +79,5 @@ skills.frame$SOC <- substr(skills.frame$SOC, 4, 7)
 
 skills.top <- df.Skills
 setwd('..')
+
+write.csv(skills.frame,'skills.csv')
