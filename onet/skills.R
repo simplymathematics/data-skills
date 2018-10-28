@@ -81,3 +81,5 @@ skills.top <- df.Skills
 setwd('..')
 
 write.csv(skills.frame,'skills.csv')
+
+setwd('..')

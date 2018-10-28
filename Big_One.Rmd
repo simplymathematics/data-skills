@@ -14,7 +14,7 @@ TODO: Gather dependencies here so that uninstalled libraries don't break the aut
 
 
 ```{r}
-suppressWarnings(source("characteristics/characteristics"))
+suppressWarnings(source("characteristics/characteristics.R"))
 suppressWarnings(source("onet/skills.R"))
 suppressWarnings(source("tech-skills/tech-skills-list.R"))
 suppressWarnings(source("salary/dollars-scrape.R"))
