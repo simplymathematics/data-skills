@@ -65,7 +65,7 @@ Naturally, our next question was centered on which skills we would need to get t
 ## Skills
 For this, we used the BLS skills dataset. After some scraping and cleaning, the data can be seen below.
 ```{r}
-skills.frame
+head(skills.frame,5)
 ```
 Then, we found the tops skills across occupations by taking the average of each column. Below are the top 5 skills for mathematical and computational occupations
 ```{r}
@@ -84,27 +84,17 @@ salary.frame <- select(salary.frame, SOC, Mean.Annual.Wage )
 outlook.frame <- select(outlook.frame, SOC, '2016-26_AvgAnnual_OccOpenings')
 skills.vs.salary <- na.omit(merge(skills.frame, salary.frame, by = 'SOC', all = TRUE))
 skills.vs.outlook <- na.omit(merge(skills.frame, outlook.frame, by = 'SOC', all = TRUE))
-skills.vs.salary
 
 ```
-
-I don't know what this says.
-# Skills vs salary
+#### Skills vs. Salary
+This should follow the analysis of above.
 ```{r}
-skills.vs.salary$SOC <- NULL
-skills.vs.salary <- data.frame(skills.vs.salary)
-covariance.mtx <- cov(skills.vs.salary)
-covariance.mtx <- round(correlation.mtx, 2)
-
-
-df.rf <- randomForest(Mean.Annual.Wage ~ ., data = skills.vs.salary, ntree = 1000, keep.forest = FALSE, importance =TRUE)
-importance(df.rf)
-
+head(skills.vs.salary,5)
 ```
 #### Skills vs. Job Growth Outlook
 This should follow the analysis of above.
 ```{r}
-skills.vs.outlook
+head(skills.vs.outlook,5)
 ```
 
 Now, we'll look at  a scatter plot of salarys and outlooks. 
