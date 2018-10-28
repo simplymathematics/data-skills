@@ -1,0 +1,33 @@
+Data Skills
+========================================================
+author: simplymathematics
+date: 10/28/2018
+autosize: true
+
+Question: Which skills are required to be a data scientist?  
+========================================================
+**Sources**  
+- [Bureau of Labor Statistics](https://www.bls.gov/oes/current/oes150000.htm#nat)  
+- [Indeed](Indeed.com) 
+- [ONET](https://www.onetonline.org/)
+
+**Datasets**
+- OES Skills data, Occupational Characteristics data
+- ONET Salary data, Skills data
+- Indeed.com Crawl
+
+
+
+Slide With Code
+========================================================
+
+```{r}
+summary(cars)
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+```

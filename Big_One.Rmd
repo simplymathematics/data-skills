@@ -24,7 +24,6 @@ Good, now that's that is done, let's look at each data source.
 
 ## Overview of Data
 
-**TODO: RAVI - Add description of what you did on indeed**
 
 For our project, we choose to analyze data from the U.S. Department of Labor (DOL), Bureau of Labor Statistics (BLS). We used the BLS Occupational Employment Survey (OES) to obtain 2017 wage data and the 2016 Employment Projection (EP) to obtain worker characteristics of Computer and Mathematical Occupations. 
   
@@ -32,7 +31,7 @@ Federal statistical agencies, like the BLS, rely on the [STANDARD OCCUPATIONAL C
 
 Additionally, we used a DOL sponsered progrm, Occupational Information Network (O`*`NET), to obtain occupational skills data from the online repository known as the [O*NET Resource Center](https://www.onetcenter.org/). The data relies on the same SOC code, which we later used to create a relational database of our data.
 
-Lastly, we wanted to examine which skills are currently being sought after in today's labor Market. 
+Lastly, we wanted to examine which skills are currently being sought after in today's labor market using Indeed.com. Indeed has some great tools to help you narrow down the job postings you are interested in. This came in very handy for this project since we wanted to get a list of job postings that are related to data science and query them for certain keywords like "Python" and "R". These are typical skill sets you'll normally find a Data Scientists to have. Once the keyword data is gathered, it will get processed, stored and analyzed for further review and in this case help us answer a question like, "What are some of the most popular skill sets employers are requesting in their job postings"?
 
 
 ## Worker Characteristics  
@@ -41,11 +40,11 @@ First, we consulted with the BLS Employment Projections to obtain data related t
 
 ```{r}
 outlook.graphic
-```
+```  
 Additionally, we saw that the vast majority of these jobs require at least some kind of four-year degree, with considerably opportunities for those with higher educations.
 ```{r}
 outlook.graphic2
-```
+```  
 We will come back to this data set later, but for now, we'll take a look at some numbers.
 
 ## Salary  
@@ -94,7 +93,7 @@ dollars <- as.numeric(salary.vs.outlook$Mean.Annual.Wage)
 jobs <- as.numeric(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`)
 df <- data.frame(cbind(dollars,jobs))
 ggplot(df, aes(x=dollars, y=jobs)) + geom_point() 
-```
+```  
 What's interesting about this graph is that is shows a weak correlation between salary and job sector growth.
 
 
@@ -104,7 +103,7 @@ We turned these categorical skills into specific, technical ones using data from
 TODO: JUN and Gracie's Section
 
 ## Indeed.com
-Finally, we scraped Indeed with the above list of skills to see how often each came up for positions called "Data Scientist." Then, we compared New York to California. We chose these two states to get a wide swath of the industry without relying on scraping even more Indeed pages. Below are the top job skills for California.
+Finally, we scraped Indeed with the above list of skills to see how often each came up for positions called "Data Scientist." The job postings webpage data from the two states were gathered and cleaned using regex for certain keywords. Here we added the Company name, date, state and the URL associated with each keyword result before filtering out any rows with incomplete data. Then, we compared New York to California. We chose these two states to get a wide swath of the industry without relying on scraping even more Indeed pages. A national survey would have been far too time-intensive. Below are the top job skills for California.
 
 ```{r}
 head(job_listings_keyword_count_ca,5)
