@@ -12,9 +12,9 @@ We decided to break this problem into pieces, each of which has it's own R file,
 ### Dependencies
 TODO: Gather dependencies here so that uninstalled libraries don't break the automation.
 ```{r}
-library(corrplot)
-library(Hmisc)
-library(randomForest)
+library(corrplot, quietly = TRUE)
+library(Hmisc, quietly= TRUE)
+library(randomForest, quietly = TRUE)
 ```
 
 
@@ -78,7 +78,6 @@ Finally, we wanted to see a couple more things. In particular, we want to see wh
 Now, we'll look at  a scatter plot of salarys and outlooks. 
 ```{r}
 salary.vs.outlook <- na.omit(merge(salary.frame, outlook.frame, by = 'SOC', all = TRUE))
-salary.vs.outlook
 dollars <- as.numeric(salary.vs.outlook$Mean.Annual.Wage)
 jobs <- as.numeric(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`)
 df <- data.frame(cbind(dollars,jobs))
@@ -86,12 +85,6 @@ ggplot(df, aes(x=dollars, y=jobs)) + geom_point()
 ```
 What's interesting about this graph is that is shows a weak correlation between salary and job sector growth.
 
-```{r}
-
-salary.frame$SOC
-outlook.frame$SOC
-merge(outlook.frame, salary.frame, by = 'SOC', all = 'TRUE' )
-```
 
 ## Skills List
 We turned these categorical skills into specific, technical ones using data from...
