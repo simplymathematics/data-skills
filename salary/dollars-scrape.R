@@ -1,9 +1,9 @@
 
 # Dependencies
 
-require(curl)
-require(stringr)
-require(XML)
+suppressWarnings(library(curl, quietly =TRUE))
+suppressWarnings(library(stringr, quietly =TRUE))
+suppressWarnings(library(XML, quietly =TRUE))
 
 # Downloading Data
 

@@ -7,7 +7,7 @@ output: html_document
 
 # Project 2
 ## Setup
-We decided to break this problem into pieces, each of which has it's own R file, data source, and folder in this repository. We're going to start off by loading all of the files so that we can look at the data. Go ahead an grab a cup of coffee--this will take a minute.
+We decided to break this problem into pieces, each of which has it's own R file, data source, and folder in this repository. We're going to start off by loading all of the files so that we can look at the data. 
 
 ### Dependencies
 TODO: Gather dependencies here so that uninstalled libraries don't break the automation.

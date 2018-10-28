@@ -133,14 +133,11 @@ $(document).ready(function () {
 <h1>Project 2</h1>
 <div id="setup" class="section level2">
 <h2>Setup</h2>
-<p>We decided to break this problem into pieces, each of which has it’s own R file, data source, and folder in this repository. We’re going to start off by loading all of the files so that we can look at the data. Go ahead an grab a cup of coffee–this will take a minute.</p>
+<p>We decided to break this problem into pieces, each of which has it’s own R file, data source, and folder in this repository. We’re going to start off by loading all of the files so that we can look at the data.</p>
 <div id="dependencies" class="section level3">
 <h3>Dependencies</h3>
 <p>TODO: Gather dependencies here so that uninstalled libraries don’t break the automation.</p>
 <pre class="r"><code>suppressWarnings(source(&quot;outlook/outlook.R&quot;))</code></pre>
-<pre><code>## Loading required package: rvest</code></pre>
-<pre><code>## Loading required package: xml2</code></pre>
-<pre><code>## Loading required package: dplyr</code></pre>
 <pre><code>## 
 ## Attaching package: 'dplyr'</code></pre>
 <pre><code>## The following objects are masked from 'package:stats':
@@ -149,27 +146,14 @@ $(document).ready(function () {
 <pre><code>## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<pre><code>## Loading required package: stringr</code></pre>
-<pre><code>## Loading required package: tidyr</code></pre>
-<pre><code>## Loading required package: ggplot2</code></pre>
-<pre><code>## Loading required package: curl</code></pre>
 <pre class="r"><code>suppressWarnings(source(&quot;onet/skills.R&quot;))</code></pre>
-<pre><code>## Loading required package: XML</code></pre>
 <pre><code>## 
 ## Attaching package: 'XML'</code></pre>
 <pre><code>## The following object is masked from 'package:rvest':
 ## 
 ##     xml</code></pre>
-<pre><code>## Loading required package: knitr</code></pre>
-<pre><code>## Loading required package: kableExtra</code></pre>
 <pre class="r"><code>suppressWarnings(source(&quot;salary/dollars-scrape.R&quot;))
 suppressWarnings(source(&quot;indeed/Indeed_Skills.R&quot;))</code></pre>
-<pre><code>## Loading required package: wordcloud</code></pre>
-<pre><code>## Loading required package: RColorBrewer</code></pre>
-<pre><code>## Loading required package: sqldf</code></pre>
-<pre><code>## Loading required package: gsubfn</code></pre>
-<pre><code>## Loading required package: proto</code></pre>
-<pre><code>## Loading required package: RSQLite</code></pre>
 <p>Good, now that’s that is done, let’s look at each data source.</p>
 </div>
 </div>

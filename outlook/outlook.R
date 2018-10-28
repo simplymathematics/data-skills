@@ -2,13 +2,13 @@
 # 2016-20126 Occupational projections and worker characteristics of 15-000 Computer and Mathematical Occupations Serires. 
 
 
-require(rvest)
-require(dplyr)
-require(stringr)
-require(tidyr)
-require(dplyr)
-require(ggplot2)
-require(curl)
+suppressWarnings(library(rvest, quietly =TRUE))
+suppressWarnings(library(dplyr, quietly =TRUE))
+suppressWarnings(library(stringr, quietly =TRUE))
+suppressWarnings(library(tidyr, quietly =TRUE))
+suppressWarnings(library(dplyr, quietly =TRUE))
+suppressWarnings(library(ggplot2, quietly =TRUE))
+suppressWarnings(library(curl, quietly =TRUE))
 
 try(setwd("outlook/"))
 ############################################

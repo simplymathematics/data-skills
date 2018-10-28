@@ -1,14 +1,14 @@
 
 # Dependencies
 
-require(XML) #for reading xml, html
-require(stringr) #for regex
-require(curl) #for downloading url file
-require(tidyr) #for data manipulation
-require(dplyr) #for data manipulation
-require(ggplot2) #for graphs
-require(knitr) #for table design
-require(kableExtra) #for table design
+suppressWarnings(library(XML, quietly =TRUE)) #for reading xml, html
+suppressWarnings(library(stringr, quietly =TRUE)) #for regex
+suppressWarnings(library(curl, quietly =TRUE)) #for downloading url file
+suppressWarnings(library(tidyr, quietly =TRUE)) #for data manipulation
+suppressWarnings(library(dplyr, quietly =TRUE)) #for data manipulation
+suppressWarnings(library(ggplot2, quietly =TRUE)) #for graphs
+suppressWarnings(library(knitr, quietly =TRUE)) #for table design
+suppressWarnings(library(kableExtra, quietly =TRUE)) #for table design
 
 try(setwd('onet'))
 # Downloading

@@ -1,12 +1,12 @@
 
 # load libraries
-require(rvest)
-require(stringr)
-require(dplyr)
-require(wordcloud)
-require(RColorBrewer)
-require(ggplot2)
-require(sqldf)
+suppressWarnings(library(rvest, quietly =TRUE))
+suppressWarnings(library(stringr, quietly =TRUE))
+suppressWarnings(library(dplyr, quietly =TRUE))
+suppressWarnings(library(wordcloud, quietly =TRUE))
+suppressWarnings(library(RColorBrewer, quietly =TRUE))
+suppressWarnings(library(ggplot2, quietly =TRUE))
+suppressWarnings(library(sqldf, quietly =TRUE))
 
 
 # For detailed documentation, consult the Rmd file of the same name. For run-time optimizatiions, we will read from a previously-generated csv.
