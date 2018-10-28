@@ -259,3 +259,9 @@ bplotCA<-ggplot(relational_data_ca, aes(x=factor(Keyword, levels=names(sort(tabl
   ggtitle("Senior Data Scientist Skills search from Indeed CA")
 bplotCA
 ```
+
+```{r}
+write.csv(job_listings_keyword_count_ca,'job_listing_ca.csv')
+write.csv(job_listings_keyword_count_ny,'job_listing_ny.csv')
+```
+

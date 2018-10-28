@@ -1,0 +1,172 @@
+Section,Category,Example
+Technology,Access software,Citrix
+Technology,Access software,Mac HelpMate
+Technology,Accounting software,Sage 50 Accounting
+Technology,Accounting software,Tax software
+Technology,Administration software,Element management software
+Technology,Administration software,SolarWinds
+Technology,Analytical or scientific software,StataCorp Stata
+Technology,Application server software,Oracle WebLogic Server
+Technology,Application server software,Red Hat WildFly
+Technology,Authentication server software,Password management software
+Technology,Backup or archival software,Disaster recovery software
+Technology,Backup or archival software,Microsoft Volume Shadow Copy Service
+Technology,Backup or archival software,Symantec LiveState
+Technology,Backup or archival software,Veritas NetBackup
+Technology,Business intelligence and data analysis software,IBM Cognos Impromptu
+Technology,Business intelligence and data analysis software,MicroStrategy
+Technology,Business intelligence and data analysis software,Oracle Business Intelligence Enterprise Edition
+Technology,Business intelligence and data analysis software,Qlik Tech QlikView
+Technology,Business intelligence and data analysis software,Tableau
+Technology,Calendar and scheduling software,
+Technology,Communications server software,IBM Domino
+Technology,Computer aided design CAD software,Autodesk AutoCAD
+Technology,Computer aided design CAD software,Bentley MicroStation
+Technology,Configuration management software,Automated installation software
+Technology,Configuration management software,Chef
+Technology,Configuration management software,Deployment software
+Technology,Configuration management software,Patch management software
+Technology,Configuration management software,Perforce Helix software
+Technology,Configuration management software,Puppet
+Technology,Content workflow software,Atlassian JIRA
+Technology,Customer relationship management CRM software,Salesforce software
+Technology,Data base management system software,Oracle PL/SQL
+Technology,Data base management system software,Relational database management software
+Technology,Data base management system software,Sybase
+Technology,Data base management system software,Teradata Database
+Technology,Data base reporting software,Microsoft SQL Server Reporting Services
+Technology,Data base reporting software,SAP Crystal Reports
+Technology,Data base user interface and query software,Blackboard
+Technology,Data base user interface and query software,Data entry software
+Technology,Data base user interface and query software,FileMaker Pro
+Technology,Data base user interface and query software,iPro
+Technology,Data base user interface and query software,Lucid IQ
+Technology,Data base user interface and query software,Microsoft Access
+Technology,Data base user interface and query software,Microsoft SQL Server
+Technology,Data base user interface and query software,MySQL
+Technology,Data base user interface and query software,Oracle JDBC
+Technology,Data base user interface and query software,Software asset management SAM software
+Technology,Data base user interface and query software,Structured query language SQL
+Technology,Data base user interface and query software,Transact-SQL
+Technology,Data base user interface and query software,Yardi
+Technology,Desktop communications software,CrossTec NetOp Remote Control
+Technology,Desktop communications software,Remote control software
+Technology,Desktop communications software,Stac Software ReachOut
+Technology,Desktop communications software,Symantec pcAnywhere
+Technology,Desktop publishing software,Adobe Systems Adobe Distiller
+Technology,Desktop publishing software,Adobe Systems Adobe InDesign
+Technology,Desktop publishing software,Microsoft Publisher
+Technology,Development environment software,Adobe Systems Adobe ActionScript
+Technology,Development environment software,Apache Maven
+Technology,Development environment software,C
+Technology,Development environment software,Common business oriented language COBOL
+Technology,Development environment software,Eclipse IDE
+Technology,Development environment software,Integrated development environment IDE software
+Technology,Development environment software,Microsoft .NET Framework
+Technology,Development environment software,Microsoft PowerShell
+Technology,Development environment software,Microsoft Visual Basic
+Technology,Development environment software,Microsoft Visual Basic Scripting Edition VBScript
+Technology,Development environment software,Microsoft Visual Studio
+Technology,Development environment software,Ruby
+Technology,Document management software,Adobe Systems Adobe Acrobat
+Technology,Electronic mail software,IBM Notes
+Technology,Electronic mail software,Microsoft Exchange Server
+Technology,Electronic mail software,Microsoft Outlook
+Technology,Enterprise application integration software,Extensible markup language XML
+Technology,Enterprise application integration software,IBM WebSphere
+Technology,Enterprise resource planning ERP software,Microsoft Dynamics
+Technology,Enterprise resource planning ERP software,Microsoft Dynamics GP
+Technology,Enterprise resource planning ERP software,NetSuite ERP
+Technology,Enterprise resource planning ERP software,Oracle Fusion Applications
+Technology,Enterprise resource planning ERP software,Oracle JD Edwards EnterpriseOne
+Technology,Enterprise resource planning ERP software,Oracle PeopleSoft
+Technology,Enterprise resource planning ERP software,SAP
+Technology,Enterprise resource planning ERP software,SAP Business Objects
+Technology,Enterprise system management software,IBM Power Systems software
+Technology,Enterprise system management software,Splunk Enterprise
+Technology,Filesystem software,Desktop partitioning software
+Technology,Filesystem software,Symantec Norton Utilities
+Technology,Financial analysis software,Oracle E-Business Suite Financials
+Technology,Graphics or photo imaging software,Adobe Systems Adobe Creative Cloud
+Technology,Graphics or photo imaging software,Adobe Systems Adobe Fireworks
+Technology,Graphics or photo imaging software,Adobe Systems Adobe Flash
+Technology,Graphics or photo imaging software,Adobe Systems Adobe Illustrator
+Technology,Graphics or photo imaging software,Adobe Systems Adobe Photoshop
+Technology,Graphics or photo imaging software,Microsoft Visio
+Technology,Graphics or photo imaging software,Trimble SketchUp Pro
+Technology,Helpdesk or call center software,Call center software
+Technology,Helpdesk or call center software,Help desk software
+Technology,Human resources software,Human resource management software HRMS
+Technology,Information retrieval or search software,Information systems integration software
+Technology,Information retrieval or search software,LexisNexis
+Technology,Internet browser software,
+Technology,Internet directory services software,Active directory software
+Technology,Internet directory services software,Domain name system DNS
+Technology,Internet directory services software,Network directory services software
+Technology,License management software,
+Technology,Map creation software,ESRI ArcGIS software
+Technology,Medical software,Epic Systems
+Technology,Medical software,MEDITECH software
+Technology,Network monitoring software,Dartware InterMapper
+Technology,Network monitoring software,Nagios
+Technology,Network monitoring software,Wireshark
+Technology,Network operation system software,Remote install server software
+Technology,Network security or virtual private network VPN management software,Virtual private networking VPN software
+Technology,Object or component oriented development software,Advanced business application programming ABAP
+Technology,Object or component oriented development software,C#
+Technology,Object or component oriented development software,C++
+Technology,Object or component oriented development software,Microsoft ActiveX
+Technology,Object or component oriented development software,Oracle Java
+Technology,Object or component oriented development software,Practical extraction and reporting language Perl
+Technology,Object or component oriented development software,Python
+Technology,Object or component oriented development software,Swift
+Technology,Object oriented data base management software,Hibernate ORM
+Technology,Object oriented data base management software,PostgreSQL
+Technology,Office suite software,Microsoft Office
+Technology,Operating system software,Bash
+Technology,Operating system software,Cisco Systems IOS
+Technology,Operating system software,Event log monitor software
+Technology,Operating system software,Hewlett Packard HP-UX
+Technology,Operating system software,Job control language JCL
+Technology,Operating system software,KornShell
+Technology,Operating system software,Linux
+Technology,Operating system software,Microsoft Windows
+Technology,Operating system software,Microsoft Windows Pre-installation Environment
+Technology,Operating system software,Operating system monitoring software
+Technology,Operating system software,Oracle Solaris
+Technology,Operating system software,Red Hat Enterprise Linux
+Technology,Operating system software,Ubuntu
+Technology,Operating system software,UNIX
+Technology,Platform interconnectivity software,Migration software
+Technology,Portal server software,Apache HTTP Server
+Technology,Presentation software,Microsoft PowerPoint
+Technology,Program testing software,Defect tracking software
+Technology,Program testing software,Hewlett Packard LoadRunner
+Technology,Program testing software,Personal computer diagnostic software
+Technology,Project management software,Microsoft Project
+Technology,Project management software,Microsoft SharePoint
+Technology,Sales and marketing software,Marketo Marketing Automation
+Technology,Spreadsheet software,Microsoft Excel
+Technology,Storage networking software,Media storage management software
+Technology,Transaction security and virus protection software,Encryption software
+Technology,Transaction security and virus protection software,McAfee
+Technology,Transaction security and virus protection software,Symantec
+Technology,Transaction security and virus protection software,Virus scanning software
+Technology,Transaction server software,Customer information control system CICS
+Technology,Video creation and editing software,Apple Final Cut Pro
+Technology,Web page creation and editing software,Adobe Systems Adobe Dreamweaver
+Technology,Web platform development software,AJAX
+Technology,Web platform development software,Apache Struts
+Technology,Web platform development software,Apache Tomcat
+Technology,Web platform development software,Drupal
+Technology,Web platform development software,Dynamic hypertext markup language DHTML
+Technology,Web platform development software,Enterprise JavaBeans
+Technology,Web platform development software,Ext JS
+Technology,Web platform development software,Extensible HyperText Markup Language XHTML
+Technology,Web platform development software,Hypertext markup language HTML
+Technology,Web platform development software,JavaScript
+Technology,Web platform development software,LAMP Stack
+Technology,Web platform development software,Microsoft ASP.NET
+Technology,Web platform development software,Oracle JavaServer Pages JSP
+Technology,Web platform development software,PHP: Hypertext Preprocessor
+Technology,Word processing software,Microsoft Word
