@@ -119,6 +119,10 @@ bplotNY
 
 TODO: Conclusion Section
 
+## Further
+
+TODO: Further considerations
+
 # TODO: Turn these into SQL databases
  + skills.frame
  + outlook.frame
