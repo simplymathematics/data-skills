@@ -55,3 +55,5 @@ techtype <- data.frame(df$O.NET.SOC.Code, df$Commodity.Title) %>% #subsets field
 tech.frame <- techtype
 tech.top <- head(tech.frame, 5)
 setwd('..')
+
+write.csv(techtype,'TechSkills.csv')
