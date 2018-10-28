@@ -4,14 +4,19 @@ author: "simplymathematics"
 date: "October 27, 2018"
 output: html_docume
 ---
-#
+
+# Project 2
 ## Setup
 We decided to break this problem into pieces, each of which has it's own R file, data source, and folder in this repository. We're going to start off by loading all of the files so that we can look at the data. Go ahead an grab a cup of coffee--this will take a minute.
+
+### Dependencies
+TODO: Gather dependencies here so that uninstalled libraries don't break the automation.
 
 ```{r}
 source("outlook/outlook.R")
 source("onet/skills.R")
 suppressWarnings(source("salary/dollars-scrape.R"))
+suppressWarnings(source("indeed/Indeed_Skills.R"))
 ```
 
 Good, now that's that is done, let's look at each data source. 
@@ -72,15 +77,15 @@ Finally, we wanted to see a couple more things. In particular, we want to see wh
 
 TODO: do skills vs salary analysis
 TODO: do skills vs outlook analysis
+TODO: do salary vs outlook analysis
 
 ### Merging
 
 ```{r}
 outlook_table <- select(outlook.frame, SOC, `2026EmplChange2016-26`)
-outlook_table
 salary_table <- select(salary.frame, SOC, Mean.Annual.Wage)
 salary_table
-
+outlook_table
 ```
 
 ## Skills List
@@ -91,10 +96,18 @@ TODO: JUN and Gracie's Section
 ## Indeed.com
 Finally, we scraped Indeed with the above list of skills to see how often each came up for positions called "Data Scientist." Then, we compared New York to California. We chose these two states to get a wide swath of the industry without relying on scraping even more Indeed pages.
 
+```{r}
+indeed.ca.frame
+indeed.ny.frame
+job_listings_keyword_count_ca
+job_listings_keyword_count_ny
+```
+
 # TODO: Turn these into SQL databases
 ```{r}
 skills.frame
 outlook.frame
 salary.frame
-#indeed.frame
+indeed.ca.frame
+indeed.ny.frame
 ```

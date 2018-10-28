@@ -4,7 +4,7 @@ author: "ritwaru"
 date: "October 16, 2018"
 output: html_document
 ---
-```{r, include=FALSE}
+```{r}
 # load libraries
 library(rvest)
 library(stringr)
