@@ -42,5 +42,5 @@ outlook.graphic <- ggplot(Series15, aes(x = PreEmplExperience, y = frequency(Cod
   scale_fill_brewer(palette="Set1")+
   labs(title = "Work experience in a related occupation for 15-000 Computer Occupation", x = "Experience", y = "Frequency") 
 outlook.graphic
-```
+
 

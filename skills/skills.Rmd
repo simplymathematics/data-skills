@@ -1,6 +1,6 @@
 ---
 title: "TechnologySkillsBiostatAcuries"
-author: "Hui Gracie Han"
+author: "Hui Gracie Han" 
 date: "October 21, 2018"
 output: html_documentd
 ---
