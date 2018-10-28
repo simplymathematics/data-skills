@@ -57,3 +57,6 @@ outlook.graphic
 outlook.frame
 setwd('..')
 
+write.csv(Series15,'characteristics.csv')
+
+
