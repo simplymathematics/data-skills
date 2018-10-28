@@ -40,13 +40,13 @@ Series15 <- dplyr::filter(OccProjTbl, grepl('15-', SOC)) %>%
   filter(grepl('Line item', OccupationType))
 Series15$SOC <- substr(Series15$SOC, 4, 7)
 
-outlook.graphic2 <- ggplot(Series15, aes(x = TypicalEntryLvlEduc, y = frequency(SOC), fill=TypicalEntryLvlEduc)) + 
+characteristics.graphic2 <- ggplot(Series15, aes(x = TypicalEntryLvlEduc, y = frequency(SOC), fill=TypicalEntryLvlEduc)) + 
   guides(fill=FALSE, color=FALSE)+
   geom_bar(stat="identity") +
   scale_fill_brewer(palette="Set1")+
   labs(title = "Typical education needed for entry for 15-000 Computer Occupation", x = "Education", y = "Frequency") 
 
-outlook.graphic <- ggplot(Series15, aes(x = PreEmplExperience, y = frequency(SOC), fill=PreEmplExperience)) + 
+characteristics.graphic <- ggplot(Series15, aes(x = PreEmplExperience, y = frequency(SOC), fill=PreEmplExperience)) + 
   guides(fill=FALSE, color=FALSE)+
   geom_bar(stat="identity") +
   scale_fill_brewer(palette="Set1")+
@@ -55,7 +55,7 @@ outlook.graphic
 
 
 outlook.frame
-write.csv(Series15,'characteristics.csv')
+write.csv(Series15,'../csvs/characteristics.csv')
 setwd('..')
 
 

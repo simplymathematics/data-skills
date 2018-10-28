@@ -79,7 +79,7 @@ skills.frame$SOC <- substr(skills.frame$SOC, 4, 7)
 
 skills.top <- df.Skills
 
-write.csv(skills.frame,'skills.csv')
+write.csv(skills.frame,'../csvs/skills.csv')
 
 setwd('..')
 
