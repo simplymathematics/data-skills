@@ -1,6 +1,6 @@
 ---
 title: "data"
-author: "simplymathematics"
+author: "simplymathematics, jemceachern"
 date: "October 27, 2018"
 output: html_document
 ---
