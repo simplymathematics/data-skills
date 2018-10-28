@@ -36,26 +36,15 @@ head(df)
 # Cleaning Data
 ```{r}
 df$O.NET.SOC.Code <- substr(x = df$O.NET.SOC.Code, 4, 7) #drops sub occupation data
-<<<<<<< HEAD
+
 df <- df[grep("Technology", df$T2.Type),] # only cares about technology data
-=======
-df
+
+head(df)
 
 ```
-```{r}
-skills <- unique(df$Element.Name)
-names <- unique(df$O.NET.SOC.Code)
-print("************")
-df$Element.Name
-## TO DO MATch skills with list
-small.data <- data.frame(c(df$O.NET.SOC.Code, df$Element.Name), ncol=2)
-small.data <- data.frame(small.data)
-colnames(small.data) <- c("Code", "Skill")
-small.data
-#test <- spread(small.data, key = "Code", value = "Skill")
-#test
->>>>>>> f97d2060c37513b71336515d24e941c5f5e7a4ec
-```
+
+# Subsetting Data 
+
 ```{r}
 techexample <- data.frame(df$O.NET.SOC.Code, df$T2.Example) %>% #subsets fields for analysis
   rename(SOC = df.O.NET.SOC.Code, Example = df.T2.Example) %>% # Rename columns
@@ -69,7 +58,6 @@ techtype <- data.frame(df$O.NET.SOC.Code, df$Commodity.Title) %>% #subsets field
   group_by(Commodity.Title) %>% # Create variable groupings
   tally() %>%
   arrange(desc(n))
-techexample
 
 techtype
 ```
