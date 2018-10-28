@@ -221,9 +221,11 @@ tail(relational_data)
 
 query_relational_data_ny <- "Select * from relational_data Where State = 'NY'"
 relational_data_NY <- sqldf(query_relational_data_ny, stringsAsFactors = FALSE)
+indeed.ny.frame <- relational_data_NY
 
 query_relational_data_ca <- "Select * from relational_data Where State = 'CA'"
 relational_data_ca <- sqldf(query_relational_data_ca, stringsAsFactors = FALSE)
+indeed.ca.frame <- relational_data_ca
 ```
 
 <p><font face="verdana" color="green">Top 3 Skill sets found in Jobpostings in NY for Senior Level Datascientists.</font></p>

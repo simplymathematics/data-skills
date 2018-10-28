@@ -2,7 +2,7 @@
 title: "data"
 author: "simplymathematics"
 date: "October 27, 2018"
-output: html_docume
+output: html_document
 ---
 
 # Project 2
@@ -11,10 +11,16 @@ We decided to break this problem into pieces, each of which has it's own R file,
 
 ### Dependencies
 TODO: Gather dependencies here so that uninstalled libraries don't break the automation.
+```{r}
+library(corrplot)
+library(Hmisc)
+library(randomForest)
+```
+
 
 ```{r}
 source("outlook/outlook.R")
-source("onet/skills.R")
+suppressWarnings(source("onet/skills.R"))
 suppressWarnings(source("salary/dollars-scrape.R"))
 suppressWarnings(source("indeed/Indeed_Skills.R"))
 ```
@@ -24,8 +30,6 @@ Good, now that's that is done, let's look at each data source.
 ## Overview of Data
 
 TODO: Explain BLS, SOC code, which data sets we used and why
-
-
 
 ## Outlook
 
@@ -43,12 +47,7 @@ We will come back to this data set later, but for now, we'll take a look at some
 ## Salary
 We took the same list of mathematical occupations and found the salary data for each. We had to drop the dollar signs and commas from the numbers to do this analysis.
 ```{r}
-salary.frame
-
-tmp <- substr(salary.frame$Mean.Annual.Wage, 2, 15)
-tmp <- gsub(x = tmp, pattern = ",", replacement ="")
-salary.frame$Mean.Annual.Wage <- tmp
-salary.frame
+head(salary.frame, 5)
 ```
 The mean and standard deviation are given below. As we can see, the average mathematician makes $92,400/year, but there is significant deviation amongst occupations.
 ```{r}
@@ -77,15 +76,53 @@ Finally, we wanted to see a couple more things. In particular, we want to see wh
 
 TODO: do skills vs salary analysis
 TODO: do skills vs outlook analysis
-TODO: do salary vs outlook analysis
 
 ### Merging
 
 ```{r}
-outlook_table <- select(outlook.frame, SOC, `2026EmplChange2016-26`)
-salary_table <- select(salary.frame, SOC, Mean.Annual.Wage)
-salary_table
-outlook_table
+salary.frame <- select(salary.frame, SOC, Mean.Annual.Wage )
+outlook.frame <- select(outlook.frame, SOC, '2016-26_AvgAnnual_OccOpenings')
+skills.vs.salary <- na.omit(merge(skills.frame, salary.frame, by = 'SOC', all = TRUE))
+skills.vs.outlook <- na.omit(merge(skills.frame, outlook.frame, by = 'SOC', all = TRUE))
+skills.vs.salary
+
+```
+
+I don't know what this says.
+# Skills vs salary
+```{r}
+skills.vs.salary$SOC <- NULL
+skills.vs.salary <- data.frame(skills.vs.salary)
+covariance.mtx <- cov(skills.vs.salary)
+covariance.mtx <- round(correlation.mtx, 2)
+
+
+df.rf <- randomForest(Mean.Annual.Wage ~ ., data = skills.vs.salary, ntree = 1000, keep.forest = FALSE, importance =TRUE)
+importance(df.rf)
+
+```
+#### Skills vs. Job Growth Outlook
+This should follow the analysis of above.
+```{r}
+skills.vs.outlook
+```
+
+Now, we'll look at  a scatter plot of salarys and outlooks. 
+```{r}
+salary.vs.outlook <- na.omit(merge(salary.frame, outlook.frame, by = 'SOC', all = TRUE))
+salary.vs.outlook
+dollars <- as.numeric(salary.vs.outlook$Mean.Annual.Wage)
+jobs <- as.numeric(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`)
+df <- data.frame(cbind(dollars,jobs))
+ggplot(df, aes(x=dollars, y=jobs)) + geom_point() 
+```
+What's interesting about this graph is that is shows a weak correlation between salary and job sector growth.
+
+```{r}
+
+salary.frame$SOC
+outlook.frame$SOC
+merge(outlook.frame, salary.frame, by = 'SOC', all = 'TRUE' )
 ```
 
 ## Skills List
@@ -94,20 +131,21 @@ We turned these categorical skills into specific, technical ones using data from
 TODO: JUN and Gracie's Section
 
 ## Indeed.com
-Finally, we scraped Indeed with the above list of skills to see how often each came up for positions called "Data Scientist." Then, we compared New York to California. We chose these two states to get a wide swath of the industry without relying on scraping even more Indeed pages.
+Finally, we scraped Indeed with the above list of skills to see how often each came up for positions called "Data Scientist." Then, we compared New York to California. We chose these two states to get a wide swath of the industry without relying on scraping even more Indeed pages. Below are the top job skills for California.
 
 ```{r}
-indeed.ca.frame
-indeed.ny.frame
-job_listings_keyword_count_ca
-job_listings_keyword_count_ny
+head(job_listings_keyword_count_ca,5)
+bplotCA
+```
+We have the same data here for New York
+```{r}
+head(job_listings_keyword_count_ny,5)
+bplotNY
 ```
 
 # TODO: Turn these into SQL databases
-```{r}
-skills.frame
-outlook.frame
-salary.frame
-indeed.ca.frame
-indeed.ny.frame
-```
+ + skills.frame
+ + outlook.frame
+ + salary.frame
+ + indeed.ca.frame
+ + indeed.ny.frame

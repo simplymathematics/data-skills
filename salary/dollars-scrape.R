@@ -15,8 +15,9 @@ raw.data <- readLines("https://www.bls.gov/oes/current/oes151111.htm")
 
 # From: https://www.bls.gov/oes/current/oes_stru.htm#15-0000
 ##  List of URLS
+# IT was fastest to type these by hand
 
-numbers.list <- c(1111,1121,1122,1131,1132,1133,1134,1141,1142,1143,1151,1152,1199,2011,2031,2041)
+numbers.list <- c(1133, 1134, 1141, 1142, 1143, 1151, 1152, 1199,  2011, 2021, 2031, 2041, 2090)
 urls <- c()
 i = 1
 for (number in numbers.list){
@@ -54,9 +55,15 @@ oes_scrape <- function(URLs){
     big.data <- rbind(big.data, html.data)
   }
   return(big.data)
+  
+  
 }
 salary.frame <- oes_scrape(urls)
 SOC <- numbers.list
 salary.frame <- cbind(SOC, salary.frame)
+tmp <- substr(salary.frame$Mean.Annual.Wage, 2, 15)
+tmp <- gsub(x = tmp, pattern = ",", replacement ="")
+salary.frame$Mean.Annual.Wage <- as.numeric(tmp)
+write.csv(salary.frame, file="salary.csv")
 
 setwd("..")

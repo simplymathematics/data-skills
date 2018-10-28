@@ -14,8 +14,9 @@ try(setwd('onet'))
 # Downloading
 
 #We will use the onet database to generate our list of skills.
-
-curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Skills.txt", "Skills.txt")
+############################################
+# Uncomment the below to download the file
+#curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Skills.txt", "Skills.txt")
 
 # Reading File
 
@@ -40,6 +41,7 @@ wideskills <- skillsdf %>% # Create dataframe
   arrange(SOC, desc(Value)) %>% # Sort elements by Value
   top_n(5, Value) %>% # Includes more than n rows if there are ties
   spread(Element, Value, fill = F) # Create wide dataset and sets NA values to 0
+  as.numeric()
 # Knitr Table to view output
 #w <- knitr::kable(wideskills, caption = 'Wide Skills Output', format = "html") %>%
 #  kable_styling(bootstrap_options = c("condensed"), full_width = F, position = "left") %>%
@@ -63,8 +65,10 @@ df.Skills <- skillsdf %>%  # Create dataframe
   top_n(5, avgvalue)  # select top 5 avg value skills 
 
 skills.frame <- wideskills
+skills.frame <- subset(skills.frame, (str_detect(skills.frame$SOC, '15-')))
 skills.frame$SOC <- substr(skills.frame$SOC, 4, 7)
-#TODO skills.frame <- skills.frame$SOC
+
+
 
 #t <- knitr::kable(df.Skills, caption = 'Output', format = "html") %>%
 # kable_styling(bootstrap_options = c("condensed"), full_width = F, position #= "left") %>%
