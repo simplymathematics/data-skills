@@ -16,14 +16,14 @@ try(setwd('TechSkills'))
 #We will use the onet database to generate our list of skills.
 ############################################
 
-curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Tools%20and%20Technology.txt", "TechTools.txt")
+curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Tools%20and%20Technology.txt", "TechSkills.txt")
 
 # Reading File
 
 # The code below reads the data and discards all of the non mathematics fields.
 
 
-df<- read.table("TechTools.txt", sep = '\t', header = TRUE)
+df<- read.table("TechSkills.txt", sep = '\t', header = TRUE)
 
 df <- df[grep("15-", df$O.NET.SOC.Code),]
 

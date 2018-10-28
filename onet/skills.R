@@ -16,7 +16,8 @@ try(setwd('onet'))
 #We will use the onet database to generate our list of skills.
 ############################################
 # Uncomment the below to download the file
-#curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Skills.txt", "Skills.txt")
+
+curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Skills.txt", "Skills.txt")
 
 # Reading File
 
