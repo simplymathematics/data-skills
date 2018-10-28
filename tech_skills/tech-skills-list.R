@@ -9,7 +9,7 @@ suppressWarnings(library(ggplot2, quietly =TRUE)) #for graphs
 suppressWarnings(library(knitr, quietly =TRUE)) #for table design
 suppressWarnings(library(kableExtra, quietly =TRUE)) #for table design
 
-try(setwd('tech-skills'))
+(setwd('tech_skills'))
 
 
 # Downloading
@@ -54,6 +54,9 @@ techtype <- data.frame(df$O.NET.SOC.Code, df$Commodity.Title) %>% #subsets field
 
 tech.frame <- techtype
 tech.top <- head(tech.frame, 5)
-setwd('..')
 
 write.csv(techtype,'TechSkills.csv')
+
+
+setwd('..')
+

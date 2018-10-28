@@ -10,7 +10,7 @@ suppressWarnings(library(ggplot2, quietly =TRUE)) #for graphs
 suppressWarnings(library(knitr, quietly =TRUE)) #for table design
 suppressWarnings(library(kableExtra, quietly =TRUE)) #for table design
 
-try(setwd('onet'))
+(setwd('onet'))
 # Downloading
 
 #We will use the onet database to generate our list of skills.
@@ -78,8 +78,8 @@ skills.frame$SOC <- substr(skills.frame$SOC, 4, 7)
 #t
 
 skills.top <- df.Skills
-setwd('..')
 
 write.csv(skills.frame,'skills.csv')
 
 setwd('..')
+

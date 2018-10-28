@@ -61,6 +61,6 @@ salary.frame <- cbind(SOC, salary.frame)
 tmp <- substr(salary.frame$Mean.Annual.Wage, 2, 15)
 tmp <- gsub(x = tmp, pattern = ",", replacement ="")
 salary.frame$Mean.Annual.Wage <- as.numeric(tmp)
-write.csv(salary.frame, file="salary.csv")
 
+write.csv(salary.frame, file="salary.csv")
 setwd("..")

@@ -65,10 +65,10 @@ bplotCA<-ggplot(relational_data_ca, aes(x=factor(Keyword, levels=names(sort(tabl
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) + coord_flip() +  xlab("Skills") + ylab("Count") +
   ggtitle("Senior Data Scientist Skills search from Indeed CA")
 bplotCA
-
-setwd("..")
-
 write.csv(job_listings_keyword_count_ny,'indeed_keyword_count_ny.csv')
 write.csv(job_listings_keyword_count_ca,'indeed_keyword_count_ca.csv')
+setwd("..")
+
+
 
 
