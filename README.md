@@ -14,9 +14,9 @@ The skills folder is for skill scraping data.
 
 The salary folder is for salary data from the OES.
 
-## Outlook
+## Characteristics
 
-The outlook folder is for outlook data from ONET.
+The characteristics folder is for outlook data from ONET.
 
 ## ONET
 
