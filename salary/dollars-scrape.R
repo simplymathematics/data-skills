@@ -9,9 +9,6 @@ suppressWarnings(library(XML, quietly =TRUE))
 
 #This section downloads a single page. However, it can be modified to work across similar pages. Notice how that would only require changing the code  in the URL. TODO get a list of pertinent OES codes. 
 try(setwd("salary"))
-raw.data <- curl_download("https://www.bls.gov/oes/current/oes151111.htm", "OES_dollars.txt")
-raw.data <- readLines("https://www.bls.gov/oes/current/oes151111.htm")
-
 
 # From: https://www.bls.gov/oes/current/oes_stru.htm#15-0000
 ##  List of URLS

@@ -59,7 +59,7 @@ df.Skills <- skillsdf %>%  # Create dataframe
   ungroup(SOC) %>% # Remove SOC from grouping
   arrange(Element, desc(Value)) %>% # Sort elements by Value
   mutate(SOC.Count = rowSums(.[3:18])) %>% # Sum SOC codes counts per element
-  filter(Value > 3) %>% # filters for significant values only (3/7 relevance or more) 
+  #filter(Value > 3) %>% # filters for significant values only (3/7 relevance or more) 
   group_by(Element) %>% # new grouping 
   summarise(avgvalue = mean(Value), n = sum(SOC.Count)) %>% # skills summary 
   arrange(desc(avgvalue))%>% # sort
