@@ -51,8 +51,6 @@ characteristics.graphic <- ggplot(Series15, aes(x = PreEmplExperience, y = frequ
   geom_bar(stat="identity") +
   scale_fill_brewer(palette="Set1")+
   labs(title = "Work experience in a related occupation for 15-000 Computer Occupation", x = "Experience", y = "Frequency") 
-outlook.graphic
-
 
 outlook.frame
 write.csv(Series15,'../csvs/characteristics.csv')
