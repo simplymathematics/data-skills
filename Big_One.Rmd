@@ -123,7 +123,7 @@ The ONET and BLS data were able to give us a broad picture of the computational 
 |ONET/BLS Data | Indeed Equivalence |
 |--------------|--------------------|
 |Development environment software	                  | Python, Hadoop, AWS, Spark | 
-|Web platform development software	                |  ???? | 
+|Web platform development software	                |  No equivalent found | 
 |Object or component oriented development software	| R, AI, SAS, Spark, ML |
 |Data base management system software	              | SQL, Tableau |
 |Analytical or scientific software                  | R, Spark, Tableau, SAS, Statistics | 
