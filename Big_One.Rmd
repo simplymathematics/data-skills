@@ -139,26 +139,4 @@ The biggest issues was the steep learning curve associated with git. Version con
 
 For your own further analysis, we've exported each dataset as it's own table using SQL. The results of which are stored in the csvs folder. The Indeed csv data was reloaded into a single dataframe using an inner join command from the `sqldf` package to form one table with all the necessary columns for analyzing. Since these skills don't map directly to SOC codes, we did not bother to save these as sqls. A database is created in memory in the corresponding Indeed.Rmd file.
 
-In addition, we created a local mysql database to examine the BLS data using inner joins. The csv file includes the skills_salary_query.sql file. 
-
-```{r}
-suppressWarnings(library(RMySQL))
-suppressWarnings(library(DBI))
-
-localuserpassword <- "root"
-
-con <- dbConnect(MySQL(), 
-                 user='root', 
-                 password=localuserpassword, 
-                 dbname='data607_proj3', 
-                 host='localhost')
-
-dbReadTable(con, "characteristics")
-dbReadTable(con, "salary")
-
-dbSendQuery(con, MySQLcode)
-  
-```
-
-
-TODO: SQL dbs
+In addition, we created a local mysql database to store the BLS data in relational tables using an inner join on the SOC codes. The csv file includes the skills_salary_query.sql file. 
