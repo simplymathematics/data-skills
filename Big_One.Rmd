@@ -1,6 +1,6 @@
 ---
 title: "Data Skills"
-author: "simplymathematics, jemceachern"
+author: "simplymathematics, jemceachern, ritwar01, ghh2001, and johnpannyc"
 date: "October 27, 2018"
 output: html_document
 ---
