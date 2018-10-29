@@ -129,14 +129,13 @@ $(document).ready(function () {
 </div>
 
 
-<div id="project-2" class="section level1">
-<h1>Project 2</h1>
+<div id="project-3-most-valued-data-science-skills" class="section level1">
+<h1>Project 3: Most Valued Data Science Skills</h1>
 <div id="setup" class="section level2">
 <h2>Setup</h2>
 <p>We decided to break this problem into pieces, each of which has it’s own R file, data source, and folder in this repository. We’re going to start off by loading all of the files so that we can look at the data. Additionally, we decided to use github because of the built-in version controlling system and issue tracking. We also used a slack room we made for this project for real time coordination.</p>
 <div id="dependencies" class="section level3">
 <h3>Dependencies</h3>
-<p>TODO: Gather dependencies here so that uninstalled libraries don’t break the automation.</p>
 <pre class="r"><code>suppressWarnings(source(&quot;salary/dollars-scrape.R&quot;))
 suppressWarnings(source(&quot;characteristics/characteristics.R&quot;))</code></pre>
 <pre><code>## 
@@ -198,20 +197,29 @@ best_pay</code></pre>
 <h2>Skills</h2>
 <p>For this, we used the <a href="https://www.onetcenter.org/database.html?p=3">O*NET Database</a> to examine the skills required by the Computer and Mathematical Occupations. The data is scaled on on a level 0-7, and marks the importance of each skillset. After some scraping and cleaning, the data can be seen below. <span class="citation">@simplymathematics</span> and <span class="citation">@jemceachern</span> did this section.</p>
 <pre class="r"><code>head(skills.frame,5)</code></pre>
-<pre><code>## # A tibble: 5 x 17
+<pre><code>## # A tibble: 5 x 36
 ## # Groups:   SOC [5]
-##   SOC   `Active Learnin~ `Active Listeni~ `Complex Proble~ `Critical Think~
-##   &lt;chr&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-## 1 1111                 0             0                3.88             3.75
-## 2 1121                 0             3.88             0                3.88
-## 3 1122                 0             3.75             3.75             3.88
-## 4 1131                 0             3.75             3.75             3.75
-## 5 1132                 0             0                3.62             3.62
-## # ... with 12 more variables: `Judgment and Decision Making` &lt;dbl&gt;,
-## #   Mathematics &lt;dbl&gt;, Monitoring &lt;dbl&gt;, `Operations Analysis` &lt;dbl&gt;,
+##   SOC   `Active Learnin~ `Active Listeni~ `Complex Proble~ Coordination
+##   &lt;chr&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;        &lt;dbl&gt;
+## 1 1111              3.38             3.5              3.88            3
+## 2 1121              3.5              3.88             3.38            3
+## 3 1122              3.25             3.75             3.75            3
+## 4 1131              3.12             3.75             3.75            3
+## 5 1132              3                3.12             3.62            3
+## # ... with 31 more variables: `Critical Thinking` &lt;dbl&gt;, `Equipment
+## #   Maintenance` &lt;dbl&gt;, `Equipment Selection` &lt;dbl&gt;, Installation &lt;dbl&gt;,
+## #   Instructing &lt;dbl&gt;, `Judgment and Decision Making` &lt;dbl&gt;, `Learning
+## #   Strategies` &lt;dbl&gt;, `Management of Financial Resources` &lt;dbl&gt;,
+## #   `Management of Material Resources` &lt;dbl&gt;, `Management of Personnel
+## #   Resources` &lt;dbl&gt;, Mathematics &lt;dbl&gt;, Monitoring &lt;dbl&gt;,
+## #   Negotiation &lt;dbl&gt;, `Operation and Control` &lt;dbl&gt;, `Operation
+## #   Monitoring` &lt;dbl&gt;, `Operations Analysis` &lt;dbl&gt;, Persuasion &lt;dbl&gt;,
 ## #   Programming &lt;dbl&gt;, `Quality Control Analysis` &lt;dbl&gt;, `Reading
-## #   Comprehension` &lt;dbl&gt;, Speaking &lt;dbl&gt;, `Systems Analysis` &lt;dbl&gt;,
-## #   `Systems Evaluation` &lt;dbl&gt;, Troubleshooting &lt;dbl&gt;, Writing &lt;dbl&gt;</code></pre>
+## #   Comprehension` &lt;dbl&gt;, Repairing &lt;dbl&gt;, Science &lt;dbl&gt;, `Service
+## #   Orientation` &lt;dbl&gt;, `Social Perceptiveness` &lt;dbl&gt;, Speaking &lt;dbl&gt;,
+## #   `Systems Analysis` &lt;dbl&gt;, `Systems Evaluation` &lt;dbl&gt;, `Technology
+## #   Design` &lt;dbl&gt;, `Time Management` &lt;dbl&gt;, Troubleshooting &lt;dbl&gt;,
+## #   Writing &lt;dbl&gt;</code></pre>
 <p>Then, we found the tops skills across occupations by taking the average of each column. Below are the top 5 skills for mathematical and computational occupations</p>
 <pre class="r"><code>skills.top</code></pre>
 <pre><code>## # A tibble: 5 x 3
@@ -293,7 +301,7 @@ ggplot(df, aes(x=dollars, y=jobs)) + geom_point() </code></pre>
 </tr>
 <tr class="even">
 <td>Web platform development software</td>
-<td>????</td>
+<td>No equivalent found</td>
 </tr>
 <tr class="odd">
 <td>Object or component oriented development software</td>
@@ -314,11 +322,11 @@ ggplot(df, aes(x=dollars, y=jobs)) + geom_point() </code></pre>
 <div id="further" class="section level2">
 <h2>Further</h2>
 <p>The biggest issues was the steep learning curve associated with git. Version control and coordination were issues due to this underlying deficiency. Additionally, the BLS and ONET databases are very broad and do little to highlight specific requirements for people in the field. They do, however, offer a picture of my qualifications relative to the general population or even other people who work with computers. However, to get the most from these datasets, we would need to do further regression analysis that maps the skill or technology data to occupational growth or occupational salary. That is unfortunately outside the scope of this analysis. Another big constraint was the limitations we faced in interacting with Indeed. Because of call limits and time-constraints we were limited to only mining two states. A stand-alone daemon that manages api calls would fix this, but is also outside the scope of this project.</p>
-<div id="databases" class="section level3">
-<h3>Databases</h3>
+</div>
+<div id="databases" class="section level2">
+<h2>Databases</h2>
 <p>For your own further analysis, we’ve exported each dataset as it’s own table using SQL. The results of which are stored in the csvs folder. The Indeed csv data was reloaded into a single dataframe using an inner join command from the <code>sqldf</code> package to form one table with all the necessary columns for analyzing. Since these skills don’t map directly to SOC codes, we did not bother to save these as sqls. A database is created in memory in the corresponding Indeed.Rmd file.</p>
 <p>In addition, we created a local mysql database to store the BLS data in relational tables using an inner join on the SOC codes. The csv file includes the skills_salary_query.sql file.</p>
-</div>
 </div>
 </div>
 
