@@ -17,7 +17,7 @@ suppressWarnings(library(kableExtra, quietly =TRUE)) #for table design
 ############################################
 # Uncomment the below to download the file
 
-# curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Skills.txt", "Skills.txt")
+#curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Skills.txt", "Skills.txt")
 
 # Reading File
 
@@ -40,7 +40,7 @@ wideskills <- skillsdf %>% # Create dataframe
   rename(SOC = df.O.NET.SOC.Code, Element = df.Element.Name, Value = df.Data.Value) %>% # Rename columns
   group_by(SOC) %>% # Create variable groupings
   arrange(SOC, desc(Value)) %>% # Sort elements by Value
-  top_n(5, Value) %>% # Includes more than n rows if there are ties
+  #top_n(5, Value) %>% # Includes more than n rows if there are ties. Removed filter for final output. 
   spread(Element, Value, fill = F) # Create wide dataset and sets NA values to 0
   as.numeric()
 # Knitr Table to view output
