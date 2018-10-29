@@ -1,0 +1,267 @@
+---
+title: "Data607_Project3"
+author: "ritwaru"
+date: "October 16, 2018"
+output: html_document
+---
+```{r}
+# load libraries
+require(rvest)
+require(stringr)
+require(dplyr)
+require(wordcloud)
+require(RColorBrewer)
+require(ggplot2)
+require(sqldf)
+```
+
+<p><font face="verdana" color="green" font size="+2">Searching Indeed job postings for specific skill sets related to Data Scientists</font></p>
+
+<p><font face="verdana" color="blue"> Indeed has some great tools to help you narrow down the job postings you are interested in. This came in very handy for this project since we wanted to get a list of job postings that are related to data science and query them for certain keywords like "Python" and "R". These are typical skill sets you'll normally find a Data Scientists to have. Once the keyword data is gathered, it will get processed, stored and analyzed for further review and in this case help us answer a question like: What are some of the most popular skill sets employers are requesting in their job postings?</font></p>
+
+```{r}
+job_posting_site <- 'https://www.indeed.com'
+
+# Test URls
+#job_listings_ny_url <- "https://www.indeed.com/jobs?q=data+science+$55,000&jt=commission&explvl=mid_level"
+#job_listings_ca_url <- "https://www.indeed.com/jobs?q=data+science+$55,000&jt=commission&explvl=mid_level"
+
+# Indeed advance search was used to get a webpages with 50 senior level data sceince job postings per page in  NY and CA. 
+
+job_listings_ny_url <- "https://www.indeed.com/jobs?q=data+scientist&l=new+york&explvl=senior_level&limit=50"
+
+job_listings_ca_url <- "https://www.indeed.com/jobs?q=data+scientist&l=california&explvl=senior_level&limit=50"
+
+```
+
+
+```{r}
+#Here are some basic skill sets that are ussually found in Data Science job postings. These will be used to query our joblistings webpages.
+
+Skills <- c(" AWS ", " Python ", " AI ", " SQL ", " R ", " SAS ", " Tableau ", " AZURE ", " SparkML ", " Shiny ", " Spark ", " Hadoop ", " Machine Learning ", " Probability ", " Statistics ")
+
+Web_scrape_date <- Sys.Date()
+
+```
+
+<p><font face="verdana" color="green">Functions</font></p>
+
+```{r}
+
+# Function to gather the links for the job posts.
+getjoblinks <- function(jburls){
+#Indeed seems to stores it's joblising URLs using different css formats. We will attempt to get these URLs using two different html_nodes search options.
+  
+# Gather job posting URLs under the <h2> tags with <a> tag.
+  try(
+    job_posting_urls1 <- jburls %>%
+      html_nodes("h2 a") %>%
+      html_attr('href')
+  )
+# Gather job posting URLs that are in <a> tags with 'id' that starts with 'sja'.
+  try(
+    job_posting_urls2 <- jburls %>%
+      html_nodes(xpath='//*[starts-with(@id, "sja")]') %>%
+      html_attr('href')
+  )
+a <- data.frame(job_posting_urls1)
+names(a) <- ("Job_Listings_URL")
+b <- data.frame(job_posting_urls2)
+names(b) <- ("Job_Listings_URL")
+c <- rbind(a, b)
+}
+
+# Function to gather the links for the additional result pages.
+getresultlinks <- function(jrpurls){
+  try(
+    job_restult_urls <- jrpurls %>%
+    html_nodes(xpath = '//div[contains(@class,"pagination")]//a') %>%
+    html_attr('href')
+  )
+  
+}
+
+# Function to search for specific key words in a webpage.
+job_posting_skills = data.frame()
+
+getkeywords <- function(urldf, state){
+  
+  for(i in 1:nrow(urldf)){
+    job_post_link <- paste0(job_posting_site,urldf$Job_Listings_URL[i])
+    
+    try(
+      job_post_data <- read_html(job_post_link)
+    )
+    
+    try(
+      job_posting_company1 <- job_post_data %>%
+        html_nodes(xpath='//*[contains(concat( " ", @class, " " ), concat( " ", "icl-u-xs-mr--xs", " " ))]') %>% html_text()
+      
+    )
+    
+    for(i1 in 1:length(Skills)){
+      job_posting_skills1 <- str_match(job_post_data, Skills[i1])
+      job_posting_skills2 <- data.frame(Data_Scientist_Skills_ID = match(job_posting_skills1, Skills), Company = job_posting_company1[1], Web_scrape_date, state,job_post_link)
+      job_posting_skills <- rbind(job_posting_skills2, job_posting_skills)
+      
+    }
+  }
+  na.omit(job_posting_skills)
+
+}
+
+#Function to retrieve the links for the additional result pages.
+getresultlinkslinks <- function(jrpurls){
+  i <- length(jrpurls) - 1
+  job_resultpages_urls = data.frame()
+  for (l in 1:i) {
+    indeed_rs_ds_job_listings2 <- read_html(paste0(job_posting_site,jrpurls[l]))
+    indeed_rs_ds_job_listings3 <- getjoblinks(indeed_rs_ds_job_listings2)
+    indeed_rs_ds_job_listings4 <- data.frame(indeed_rs_ds_job_listings3)
+    job_resultpages_urls <- rbind(indeed_rs_ds_job_listings4, job_resultpages_urls)
+  }
+  job_resultpages_urls
+}
+
+#Function to Create Keyword dataframe and export to csv.
+
+exportkeywords <- function(kw){
+  
+  kwdf = data.frame()
+  for(i1 in 1:length(kw)){
+    kw1 <- kw[i1]
+    kwid <- match(kw1, kw)
+    kwdf1 <- data.frame(ID = kwid, Keyword =kw1 )
+    kwdf <- rbind(kwdf1, kwdf)
+  }
+  kwdf
+}
+
+```
+
+<p><font face="verdana" color="green">The job postings webpage data from the two states will be gathered and cleaned using regex for certain keywords.Here we will also add the Company name, date, state and the URL associated with each keyword result and filterout any rows with incomplete data.</font></p>
+
+```{r}
+# Gather indeed joblisting for NY.
+
+indeed_ds_job_listings_ny <- read_html(job_listings_ny_url)
+job_posting_urls_ny <- getjoblinks(indeed_ds_job_listings_ny)
+indeed_rs_ds_job_listings_ny <- getresultlinks(indeed_ds_job_listings_ny)
+# Get the job posting URLs from the additional result pages
+job_resultpages_urls_ny <- getresultlinkslinks(indeed_rs_ds_job_listings_ny)
+# Change Column name to match the column name of the data frame holding the job posting URLs of 'page 1'
+names(job_resultpages_urls_ny) <- ("Job_Listings_URL")
+# Merge both dataframes containing the job posting URLs for NY 
+indeed_job_postings_URLs_ny <- rbind(job_posting_urls_ny, job_resultpages_urls_ny)
+# count data frame rows
+job_links_count_ny <- nrow(indeed_job_postings_URLs_ny)
+# Skill sets that we found based on our keywords search on Indeed NY job listings are stored in a dataframe
+job_listings_keywords_results_NY <- getkeywords(indeed_job_postings_URLs_ny, "NY")
+row.names(job_listings_keywords_results_NY) <- NULL
+
+cat("The NY Indeed job listing keyword search results was retrieved from ", job_links_count_ny, "joblistings webpages")
+
+knitr::kable(head(job_listings_keywords_results_NY))
+
+```
+
+
+```{r}
+
+#Gather indeed joblisting for CA.
+
+indeed_ds_job_listings_ca <- read_html(job_listings_ca_url)
+job_posting_urls_ca <- getjoblinks(indeed_ds_job_listings_ca)
+indeed_rs_ds_job_listings_ca <- getresultlinks(indeed_ds_job_listings_ca)
+# Get the job posting URLs from the additional result pages
+job_resultpages_urls_ca <- getresultlinkslinks(indeed_rs_ds_job_listings_ca)
+# Change Column name to match the column name of the data frame holding the job posting URLs of 'page 1'
+names(job_resultpages_urls_ca) <- ("Job_Listings_URL")
+# Merge both dataframes containing the job posting URLs for NY 
+indeed_job_postings_URLs_ca <- rbind(job_posting_urls_ca, job_resultpages_urls_ca)
+# count data frame rows
+job_links_count_ca <- nrow(indeed_job_postings_URLs_ca)
+# Skill sets that we found based on our keywords search on Indeed NY job listings are stored in a dataframe
+job_listings_keywords_results_CA <- getkeywords(indeed_job_postings_URLs_ca, "CA")
+row.names(job_listings_keywords_results_CA) <- NULL
+
+cat("The CA Indeed job listing keyword search results was retrieved from ", job_links_count_ca, "joblistings webpages")
+
+knitr::kable(head(job_listings_keywords_results_CA))
+```
+
+<p><font face="verdana" color="green">Export the data into csv files for database uploads or in this case,  it will get pulled back into dataframes for processing.This data is formatted in a manner so that its relational. The Indeed_Keyword_Search_data.csv does not contain the actual keyword name, only the keyword ID so it relies on Indeed_Keyword.csv for the actual keywords. This helps you from placing repetative data into your database which can become vary annoying if you need to make changes to that data.</font></p>
+
+```{r}
+
+# Export Indeed NY and CA Keyword Search data to a csv files.
+Indeed_Keyword_Search_data <- rbind(job_listings_keywords_results_NY, job_listings_keywords_results_CA)
+# This file does not contain the actual keyword, only its ID
+write.csv(Indeed_Keyword_Search_data, file = "Indeed_Keyword_Search_data.csv")
+# This file contain the keyword and its ID
+write.csv(exportkeywords(Skills), file = "Indeed_Keyword.csv")
+
+```
+
+
+<p><font face="verdana" color="green">Both csv data are reloaded into a single dataframe using the inner join command from sqldf to form one table with all the necessary columns for analyzing.</font></p>
+
+```{r}
+Keyword_Search_csv_df <- read.csv("Indeed_Keyword_Search_data.csv")
+keywords_csv_df <- read.csv("Indeed_Keyword.csv")
+
+
+join_tb1 <- "select keywords_csv_df.Keyword, Keyword_Search_csv_df.Company, Keyword_Search_csv_df.Web_scrape_date, Keyword_Search_csv_df.State from Keyword_Search_csv_df inner join keywords_csv_df on keywords_csv_df.ID = Keyword_Search_csv_df.Data_Scientist_Skills_ID"
+
+relational_data <- sqldf(join_tb1, stringsAsFactors = FALSE)
+head(relational_data)
+tail(relational_data)
+
+# Seperate the NY and CA data for easier processing
+
+query_relational_data_ny <- "Select * from relational_data Where State = 'NY'"
+relational_data_NY <- sqldf(query_relational_data_ny, stringsAsFactors = FALSE)
+indeed.ny.frame <- relational_data_NY
+
+query_relational_data_ca <- "Select * from relational_data Where State = 'CA'"
+relational_data_ca <- sqldf(query_relational_data_ca, stringsAsFactors = FALSE)
+indeed.ca.frame <- relational_data_ca
+```
+
+<p><font face="verdana" color="green">Top 3 Skill sets found in Jobpostings in NY for Senior Level Datascientists.</font></p>
+
+```{r}
+job_listings_keyword_count_ny <- relational_data_NY %>%
+  group_by(Keyword) %>% count(Keyword) %>% arrange(desc(n))
+knitr::kable(head(job_listings_keyword_count_ny, 3))
+```
+
+<p><font face="verdana" color="green">Top 3 Skill sets found in Jobpostings in CA for Senior Level Datascientists.</font></p>
+
+```{r}
+job_listings_keyword_count_ca <- relational_data_ca %>%
+  group_by(Keyword) %>% count(Keyword) %>% arrange(desc(n))
+knitr::kable(head(job_listings_keyword_count_ca, 3))
+```
+
+
+<p><font face="verdana" color="green">Visually compare the barlots for NY and CA to learn which requested skill sets are more popular.</font></p>
+```{r}
+bplotNY<-ggplot(relational_data_NY, aes(x=factor(Keyword, levels=names(sort(table(Keyword),decreasing=FALSE))), y=1, fill = Keyword)) +
+  geom_bar(stat="identity")+theme_minimal() + geom_text(aes(label = ..count.., y= ..prop..), stat= "count", vjust = -.5, colour = "black") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + coord_flip() +  xlab("Skills") + ylab("Count") +
+  ggtitle("Senior Level Data Scientist Skills search from Indeed NY")
+bplotNY
+
+bplotCA<-ggplot(relational_data_ca, aes(x=factor(Keyword, levels=names(sort(table(Keyword),decreasing=FALSE))), y=1, fill = Keyword)) +
+  geom_bar(stat="identity")+theme_minimal() + geom_text(aes(label = ..count.., y= ..prop..), stat= "count", vjust = -.5, colour = "black") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + coord_flip() +  xlab("Skills") + ylab("Count") +
+  ggtitle("Senior Data Scientist Skills search from Indeed CA")
+bplotCA
+```
+
+```{r}
+write.csv(job_listings_keyword_count_ca,'job_listing_ca.csv')
+write.csv(job_listings_keyword_count_ny,'job_listing_ny.csv')
+```
+

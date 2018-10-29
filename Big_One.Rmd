@@ -1,0 +1,141 @@
+---
+title: "Data Skills"
+author: "simplymathematics, jemceachern, ritwar01, ghh2001, and johnpannyc"
+date: "October 27, 2018"
+output: html_document
+---
+
+# Project 3: Most Valued Data Science Skills 
+
+## Setup
+We decided to break this problem into pieces, each of which has it's own R file, data source, and folder in this repository. We're going to start off by loading all of the files so that we can look at the data. Additionally, we decided to use github because of the built-in version controlling system and issue tracking. We also used a slack room we made for this project for real time coordination. 
+
+### Dependencies
+
+```{r}
+suppressWarnings(source("salary/dollars-scrape.R"))
+suppressWarnings(source("characteristics/characteristics.R"))
+suppressWarnings(source("indeed/Indeed_Skills.R"))
+suppressWarnings(source("onet/skills.R"))
+suppressWarnings(source("tech_skills/tech-skills-list.R"))
+```
+
+Good, now that's that is done, let's look at each data source. 
+
+## Overview of Data
+
+
+For our project, we choose to analyze data from the U.S. Department of Labor (DOL), Bureau of Labor Statistics (BLS). We used the BLS Occupational Employment Survey (OES) to obtain 2017 wage data and the 2016 Employment Projection (EP) to obtain worker characteristics of Computer and Mathematical Occupations. 
+  
+Federal statistical agencies, like the BLS, rely on the [STANDARD OCCUPATIONAL CLASSIFICATION MANUAL](https://www.bls.gov/soc/2018/soc_2018_manual.pdf) to classify occupations based on their specific duties performed. The manual is updated periodically to capture changes in type of work performed in the broader U.S. economy. In 2018. the SOC manual added the occupation 15-2051 Data Scientists. However, this SOC code has not yet been made available in published BLS data we used for our project. Prior to 2018, BLS classified Data Scientist jobs in codes designated for statistician and computer programmers, among other occupations in the 15 series, based on the primary task of the analyzed job. For this reason, we choose to broadly examine skills and characteristics at the 6 digit level of the entire 15 series for Computer and Mathematical Occupations.  
+
+Additionally, we used a DOL sponsered program, Occupational Information Network (O`*`NET), to obtain occupational skills data from the online repository known as the [O*NET Resource Center](https://www.onetcenter.org/). The data relies on the same SOC code, which we later used to create a relational database of our data.
+
+Lastly, we wanted to examine which skills are currently being sought after in today's labor market using Indeed.com. Indeed has some great tools to help you narrow down the job postings you are interested in. This came in very handy for this project since we wanted to get a list of job postings that are related to data science and query them for certain keywords like "Python" and "R". These are typical skill sets you'll normally find a Data Scientists to have. Once the keyword data is gathered, it will get processed, stored and analyzed for further review and in this case help us answer a question like, "What are some of the most popular skill sets employers are requesting in their job postings"?
+
+
+## Worker Characteristics  
+
+First, we consulted with the BLS Employment Projections to obtain data related to the 2016-26 [Occupational Projections and Worker Characteristics](https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm). After scraping and cleaning the data (as seen in the .r file in the corresponding folder), we were able to look at some long-term job characteristics across the mathematical and computational sectors. For now, suffice it to say that the vast majority of these jobs appear to be entry level as shown by the graph below. @simplymathematics and @jemceachern did this section.
+
+```{r}
+characteristics.graphic
+```  
+Additionally, we saw that the vast majority of these jobs require at least some kind of four-year degree, with considerably opportunities for those with higher educations.
+```{r}
+characteristics.graphic2
+```  
+We will come back to this data set later, but for now, we'll take a look at some numbers.
+
+## Salary  
+
+We took the same list of mathematical occupations and used [Occupational Employment Statistics](https://www.bls.gov/oes/current/oes150000.htm) data to find the salary data for each.  We had to drop the dollar signs and commas from the numbers to do this analysis after selecting the 15- occupations. @simplymathematics and @jemceachern did this section.
+
+```{r}
+head(salary.frame, 5)
+```
+
+The mean and standard deviation are given below. As we can see, the average mathematician makes $88k/year, but there is significant deviation amongst occupations.
+
+```{r}
+mean(as.numeric(salary.frame$Mean.Annual.Wage))
+sd(as.numeric(salary.frame$Mean.Annual.Wage))
+```
+Additionally, there is considerable room for advancement as Computer and Research Scientists make $1`5k a year on average! 
+```{r}
+best_pay <-  max(as.numeric(salary.frame$Mean.Annual.Wage))
+best_pay
+```
+Naturally, our next question was centered on which skills we would need to get those top-paying positions.
+
+## Skills  
+
+For this, we used the [O*NET Database](https://www.onetcenter.org/database.html?p=3) to examine the skills required by the Computer and Mathematical Occupations. The data is scaled on on a level 0-7, and marks the importance of each skillset. After some scraping and cleaning, the data can be seen below. @simplymathematics and @jemceachern did this section.
+```{r}
+head(skills.frame,5)
+```
+Then, we found the tops skills across occupations by taking the average of each column. Below are the top 5 skills for mathematical and computational occupations
+
+```{r}
+skills.top
+```
+Finally, we wanted to see a couple more things. In particular, we want to see what skills are required for the highest paying data science jobs.
+
+## Salary vs. Outlook
+
+Now, we'll look at  a scatter plot of salarys and outlooks. 
+```{r}
+salary.vs.outlook <- na.omit(merge(salary.frame, outlook.frame, by = 'SOC', all = TRUE))
+dollars <- as.numeric(salary.vs.outlook$Mean.Annual.Wage)
+jobs <- as.numeric(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`)
+df <- data.frame(cbind(dollars,jobs))
+ggplot(df, aes(x=dollars, y=jobs)) + geom_point() 
+```  
+What's interesting about this graph is that is shows a weak correlation between salary and job sector growth. @simplymathematics and @jemceachern did this section.
+
+
+## Skills List
+We turned these categorical skills into specific, technical ones using data from ONET. We downloaded a text file from ONET, cleaned it up, grabbed the relevant data, and stored it the skills folder. Further documentation can be found there. @ghh2001 and @johnpannyc did this section.
+
+```{r}
+tech.top
+```
+From this data, we can see that delopment environments are twice as likely to be a job requirement in these occupations as analytical software. That is, data science involves many fields that won't necessarily have that title. People with a strong background in math and computers are qualified for all kinds of positions. However, we still wanted to be more specific. In order to target positions with on the title, "Data Scientist," we searched indeed with that title as a keyword.
+
+## Indeed.com
+Finally, we scraped Indeed for the highest paying position, called "Data Scientist" in the industry. It is possible that a different keyword search would yield different results (e.g. 'Data Analytics'). The csv data was reloaded into a single dataframe using an inner join command from the `sqldf` package to form one table with all the necessary columns for analyzing. The job postings webpage data from the two states were gathered and cleaned using regex for certain keywords. Here we added the Company name, date, state and the URL associated with each keyword result before filtering out any rows with incomplete data. Then, we compared New York to California. We chose these two states to get a wide swath of the industry without relying on scraping even more Indeed pages. A national survey would have been far too time-intensive. @ritwar01 did this section. Below are the top job skills for California. 
+
+```{r}
+head(job_listings_keyword_count_ca,5)
+bplotCA
+```
+We have the same data here for New York
+```{r}
+head(job_listings_keyword_count_ny,5)
+bplotNY
+```
+
+## Conclusion
+
+The ONET and BLS data were able to give us a broad picture of the computational and mathematical field, while Indeed revealed specific technical skills required for "Data Scientists." These are essentially disjoint sets as the ONET/BLS data does not have specific technologies listed--they only use general categories. However, we can still draw parallels between the datasets. 
+
+|ONET/BLS Data | Indeed Equivalence |
+|--------------|--------------------|
+|Development environment software	                  | Python, Hadoop, AWS, Spark | 
+|Web platform development software	                |  No equivalent found | 
+|Object or component oriented development software	| R, AI, SAS, Spark, ML |
+|Data base management system software	              | SQL, Tableau |
+|Analytical or scientific software                  | R, Spark, Tableau, SAS, Statistics | 
+
+We cannot draw any conlusions about which skills are in growing fields or which skills pay the best without further statistical analysis.
+
+
+## Further
+
+The biggest issues was the steep learning curve associated with git. Version control and coordination were issues due to this underlying deficiency. Additionally, the BLS and ONET databases are very broad and do little to highlight specific requirements for people in the field. They do, however, offer a picture of my qualifications relative to the general population or even other people who work with computers. However, to get the most from these datasets, we would need to do further regression analysis that maps the skill or technology data to occupational growth or occupational salary. That is unfortunately outside the scope of this analysis. Another big constraint was the limitations we faced in interacting with Indeed. Because of call limits and time-constraints we were limited to only mining two states. A stand-alone daemon that manages api calls would fix this, but is also outside the scope of this project.
+
+## Databases
+
+For your own further analysis, we've exported each dataset as it's own table using SQL. The results of which are stored in the csvs folder. The Indeed csv data was reloaded into a single dataframe using an inner join command from the `sqldf` package to form one table with all the necessary columns for analyzing. Since these skills don't map directly to SOC codes, we did not bother to save these as sqls. A database is created in memory in the corresponding Indeed.Rmd file.
+
+In addition, we created a local mysql database to store the BLS data in relational tables using an inner join on the SOC codes. The csv file includes the skills_salary_query.sql file. 
