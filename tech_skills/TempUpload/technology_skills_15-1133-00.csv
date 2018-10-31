@@ -1,0 +1,111 @@
+Section,Category,Example
+Technology,Access software,Citrix
+Technology,Administration software,Software distribution management software
+Technology,Analytical or scientific software,Minitab
+Technology,Analytical or scientific software,SAS
+Technology,Analytical or scientific software,Simulation program with integrated circuit emphasis SPICE
+Technology,Analytical or scientific software,The MathWorks MATLAB
+Technology,Application server software,Oracle Application Server
+Technology,Application server software,Oracle WebLogic Server
+Technology,Application server software,Red Hat WildFly
+Technology,Backup or archival software,Backup and archival software
+Technology,Backup or archival software,Veritas NetBackup
+Technology,Business intelligence and data analysis software,IBM Cognos Impromptu
+Technology,Business intelligence and data analysis software,Oracle Business Intelligence Enterprise Edition
+Technology,Communications server software,IBM Domino
+Technology,Computer aided design CAD software,Autodesk AutoCAD
+Technology,Computer aided design CAD software,Computer assisted software engineering CASE software
+Technology,Computer aided design CAD software,Dassault Systemes CATIA
+Technology,Computer aided design CAD software,PTC Creo Parametric
+Technology,Configuration management software,Patch management software
+Technology,Configuration management software,Perforce Helix software
+Technology,Configuration management software,Puppet
+Technology,Configuration management software,Visible Razor
+Technology,Content workflow software,Emerald Software Group Emerald Green Office
+Technology,Data base management system software,Apache Hadoop
+Technology,Data base management system software,MongoDB
+Technology,Data base management system software,NoSQL
+Technology,Data base management system software,Oracle PL/SQL
+Technology,Data base reporting software,DataVision
+Technology,Data base reporting software,Microsoft SQL Server Reporting Services
+Technology,Data base reporting software,Oracle Hyperion
+Technology,Data base reporting software,SAP Crystal Reports
+Technology,Data base user interface and query software,IEA Software Emerald
+Technology,Data base user interface and query software,Microsoft Access
+Technology,Data base user interface and query software,Oracle JDBC
+Technology,Data base user interface and query software,Structured query language SQL
+Technology,Development environment software,Adobe Systems Adobe ActionScript
+Technology,Development environment software,Apache Maven
+Technology,Development environment software,Microsoft PowerShell
+Technology,Development environment software,Verilog
+Technology,Device drivers or system software,Microsoft DirectX
+Technology,Document management software,Document management system software
+Technology,Electronic mail software,IBM Notes
+Technology,Electronic mail software,Microsoft Exchange Server
+Technology,Enterprise application integration software,Enterprise application integration EAI software
+Technology,Enterprise application integration software,Extensible markup language XML
+Technology,Enterprise application integration software,IBM WebSphere
+Technology,Enterprise application integration software,SAP Netweaver
+Technology,Enterprise resource planning ERP software,Microsoft Dynamics
+Technology,Enterprise resource planning ERP software,Oracle Fusion Applications
+Technology,Enterprise resource planning ERP software,SAP
+Technology,Enterprise resource planning ERP software,SAP Business Objects
+Technology,Enterprise system management software,IBM Power Systems software
+Technology,Enterprise system management software,Splunk Enterprise
+Technology,File versioning software,Apache Subversion SVN
+Technology,File versioning software,Version control software
+Technology,Filesystem software,File server software
+Technology,Financial analysis software,Delphi Technology
+Technology,Financial analysis software,Oracle E-Business Suite Financials
+Technology,Graphical user interface development software,Graphical user interface GUI design software
+Technology,Graphics or photo imaging software,Adobe Systems Adobe Flash
+Technology,Graphics or photo imaging software,Microsoft Visio
+Technology,Graphics or photo imaging software,Open Graphics Library OpenGL
+Technology,Human resources software,Human resource management software HRMS
+Technology,Industrial control software,Process control system
+Technology,Information retrieval or search software,LexisNexis
+Technology,Map creation software,ESRI ArcGIS software
+Technology,Medical software,Epic Systems
+Technology,Metadata management software,CA Erwin Data Modeler
+Technology,Network monitoring software,Nagios
+Technology,Network monitoring software,Wireshark
+Technology,Network operation system software,IBM z/OS operating systems
+Technology,Network security and virtual private network VPN equipment software,Virtual private networking VPN software
+Technology,Object or component oriented development software,C++
+Technology,Object or component oriented development software,jQuery
+Technology,Object or component oriented development software,Microsoft ActiveX
+Technology,Object or component oriented development software,Python
+Technology,Object oriented data base management software,Hibernate ORM
+Technology,Object oriented data base management software,PostgreSQL
+Technology,Office suite software,Microsoft Office
+Technology,Operating system software,KornShell
+Technology,Operating system software,Linux
+Technology,Operating system software,Oracle Solaris
+Technology,Operating system software,Ubuntu
+Technology,Platform interconnectivity software,Migration software
+Technology,Portal server software,Apache HTTP Server
+Technology,Presentation software,Microsoft PowerPoint
+Technology,Program testing software,Defect tracking software
+Technology,Program testing software,Fault testing software
+Technology,Program testing software,Hewlett Packard LoadRunner
+Technology,Program testing software,Unit testing software
+Technology,Project management software,Microsoft Project
+Technology,Project management software,Microsoft SharePoint
+Technology,Project management software,Oracle Primavera Enterprise Project Portfolio Management
+Technology,Requirements analysis and system architecture software,IBM Rational Requisite Pro
+Technology,Requirements analysis and system architecture software,Requirements management software
+Technology,Requirements analysis and system architecture software,Unified modeling language UML
+Technology,Spreadsheet software,Microsoft Excel
+Technology,Storage networking software,Storage area network SAN software
+Technology,Transaction security and virus protection software,Encryption software
+Technology,Transaction security and virus protection software,McAfee
+Technology,Transaction security and virus protection software,Symantec
+Technology,Transaction server software,Customer information control system CICS
+Technology,Transaction server software,IBM Middleware
+Technology,Transaction server software,Microsoft Internet Information Service IIS
+Technology,Transaction server software,Object Management Group Object Request Broker
+Technology,Web platform development software,Apache Tomcat
+Technology,Web platform development software,JavaScript
+Technology,Web platform development software,LAMP Stack
+Technology,Web platform development software,Ruby on Rails
+Technology,Word processing software,Microsoft Word
