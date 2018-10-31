@@ -1,14 +1,16 @@
 "","Keyword","n"
-"1"," Machine Learning ",177
-"2"," Python ",134
-"3"," SQL ",122
-"4"," AI ",96
-"5"," Spark ",78
-"6"," R ",76
-"7"," Hadoop ",61
-"8"," AWS ",56
+"1"," Machine Learning ",173
+"2"," SQL ",146
+"3"," Python ",142
+"4"," AI ",115
+"5"," AWS ",75
+"6"," R ",58
+"7"," Spark ",57
+"8"," Hadoop ",51
 "9"," Statistics ",46
-"10"," SAS ",38
-"11"," Tableau ",17
-"12"," SparkML ",2
-"13"," AZURE ",1
+"10"," SAS ",39
+"11"," Tableau ",21
+"12"," Ruby ",10
+"13"," JS ",2
+"14"," SparkML ",2
+"15"," AZURE ",1

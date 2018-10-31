@@ -16,7 +16,7 @@ The salary folder is for salary data from the OES.
 
 ## Characteristics
 
-The characteristics folder is for outlook data from ONET.
+The characteristicss folder is for outlook data from ONET.
 
 ## ONET
 

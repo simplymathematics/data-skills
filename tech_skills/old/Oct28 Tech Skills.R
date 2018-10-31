@@ -7,7 +7,7 @@ library (ggplot2)
 library (dplyr)
 library (tidyr)
 
-setwd ('E:/8-607 Proj3 Week8 607 GH TO Do Scraping WebPage/Oct28 FInal Charlie Folder/skills/TEMP10282018' )
+try(setwd ('/skills/TEMP10282018' ))
 
 
 filenames <- list.files(full.names=TRUE)
@@ -40,5 +40,5 @@ df %>%
 as.factor(df$Techskills)
 
 pl <- ggplot(df, aes(x = Techskills, color = Techskills, fill = Techskills)) + geom_bar()
-print(pl)
+
 

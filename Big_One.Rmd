@@ -24,7 +24,6 @@ Good, now that's that is done, let's look at each data source.
 
 ## Overview of Data
 
-
 For our project, we choose to analyze data from the U.S. Department of Labor (DOL), Bureau of Labor Statistics (BLS). We used the BLS Occupational Employment Survey (OES) to obtain 2017 wage data and the 2016 Employment Projection (EP) to obtain worker characteristics of Computer and Mathematical Occupations. 
   
 Federal statistical agencies, like the BLS, rely on the [STANDARD OCCUPATIONAL CLASSIFICATION MANUAL](https://www.bls.gov/soc/2018/soc_2018_manual.pdf) to classify occupations based on their specific duties performed. The manual is updated periodically to capture changes in type of work performed in the broader U.S. economy. In 2018. the SOC manual added the occupation 15-2051 Data Scientists. However, this SOC code has not yet been made available in published BLS data we used for our project. Prior to 2018, BLS classified Data Scientist jobs in codes designated for statistician and computer programmers, among other occupations in the 15 series, based on the primary task of the analyzed job. For this reason, we choose to broadly examine skills and characteristics at the 6 digit level of the entire 15 series for Computer and Mathematical Occupations.  
@@ -122,10 +121,10 @@ The ONET and BLS data were able to give us a broad picture of the computational 
 |ONET/BLS Data | Indeed Equivalence |
 |--------------|--------------------|
 |Development environment software	                  | Python, Hadoop, AWS, Spark | 
-|Web platform development software	                |  No equivalent found | 
+|Web platform development software	                | Ruby, PHP, JS | 
 |Object or component oriented development software	| R, AI, SAS, Spark, ML |
 |Data base management system software	              | SQL, Tableau |
-|Analytical or scientific software                  | R, Spark, Tableau, SAS, Statistics | 
+|Analytical or scientific software                  | R, Spark, Tableau, SAS, Statistics |
 
 We cannot draw any conlusions about which skills are in growing fields or which skills pay the best without further statistical analysis.
 
@@ -138,4 +137,3 @@ The biggest issues was the steep learning curve associated with git. Version con
 
 For your own further analysis, we've exported each dataset as it's own table using SQL. The results of which are stored in the csvs folder. The Indeed csv data was reloaded into a single dataframe using an inner join command from the `sqldf` package to form one table with all the necessary columns for analyzing. Since these skills don't map directly to SOC codes, we did not bother to save these as sqls. A database is created in memory in the corresponding Indeed.Rmd file.
 
-In addition, we created a local mysql database to store the BLS data in relational tables using an inner join on the SOC codes. The csv file includes the skills_salary_query.sql file. 
