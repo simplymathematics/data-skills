@@ -12,65 +12,79 @@ autosize: true
 - Ravi Itwaru
 
 Question: Which skills are required to be a data scientist?  
+
+========================================================
+
+**Overview**
+
+- Sources 
+- Roles 
+- Tools
+- Characteristics
+
 ========================================================
 **Sources**  
 - [Bureau of Labor Statistics](https://www.bls.gov/oes/current/oes150000.htm#nat)  
-- [Indeed](Indeed.com) 
 - [ONET](https://www.onetonline.org/)
+- [Indeed](Indeed.com) 
 
-**Datasets**
+
+# Datasets
+
 - OES Skills data, Occupational Characteristics data
 - ONET Salary data, Skills data
 - Indeed.com Crawl
 
 ========================================================
 
-Federal statistical agencies, like the BLS, rely on the STANDARD OCCUPATIONAL CLASSIFICATION MANUAL to classify occupations based on their specific duties performed. The manual is updated periodically to capture changes in type of work performed in the broader U.S. economy. In 2018. the SOC manual added the occupation 15-2051 Data Scientists. However, this SOC code has not yet been made available in published BLS data we used for our project. Instead, we looked at all 15-
-========================================================
+# Roles 
 
-#### Additionally, we used a DOL sponsered program, Occupational Information Network (O*NET), to obtain occupational skills data from the online repository known as the O*NET Resource Center. The data relies on the same SOC code, which we later used to create a relational database of our data.
-
-========================================================
-
-#### Lastly, we wanted to examine which skills are currently being sought after in today's labor market using Indeed.com. Indeed has some great tools to help you narrow down the job postings you are interested in. This came in very handy for this project since we wanted to get a list of job postings that are related to data science and query them for certain keywords like "Python" and "R". These are typical skill sets you'll normally find a Data Scientists to have. Once the keyword data is gathered, it will get processed, stored and analyzed for further review and in this case help us answer a question like, "What are some of the most popular skill sets employers are requesting in their job postings"?
-
-========================================================
-
-**Worker Characteristics**
-
-#### First, we consulted with the BLS Employment Projections to obtain data related to the 2016-26 Occupational Projections and Worker Characteristics. After scraping and cleaning the data (as seen in the .r file in the corresponding folder), we were able to look at some long-term job characteristics across the mathematical and computational sectors. For now, suffice it to say that the vast majority of these jobs appear to be entry level as shown by the graph below. @simplymathematics and @jemceachern did this section.
+Characteristics: @simplymathmatics & @jemceachern
+Salary @simplymathmatics & @jemceachern
+Skills @simplymathmatics & @jemceachern
+Technical Skills  @ghh2001 & @johnpannyc 
+Indeed Skills @ritwar01
+SQL @jemceachern, @ghh2001, & @johnpannyc 
+Presentation and analysis everyone!
 
 ========================================================
 
-```{r}
+#Tools
+
+- Google Drive
+- Github
+- Email 
+- Slack
+- Studio 
+- Rpres
+
+========================================================
+
+# Worker Characteristics
+
+```{r, eval = TRUE}
 characteristics.graphic
 ```
 
-========================================================
-
-#### Majority of these jobs require at least some kind of four-year degree, with considerably opportunities for those with higher educations.
-
-```{r}
+```{r, eval = TRUE}
 characteristics.graphic2
 ``` 
 
 ========================================================
 
-**Salary**
+# Salary
 
-#### We took the same list of mathematical occupations and used [Occupational Employment Statistics](https://www.bls.gov/oes/current/oes150000.htm) data to find the salary data for each.  We had to drop the dollar signs and commas from the numbers to do this analysis after selecting the 15- occupations. @simplymathematics and @jemceachern did this section.
-
-========================================================
-
-```{r}
+```{r, eval = TRUE}
 head(salary.frame, 5)
 ```
 
 ========================================================
 
-#### The mean and standard deviation are given below. As we can see, the average mathematician makes $88k/year, but there is significant deviation amongst occupations.
+# Salary (cont.)
 
-```{r}
+ - Mean and standard deviation calculations: 
+
+```{r, eval = TRUE}
 mean(as.numeric(salary.frame$Mean.Annual.Wage))
 sd(as.numeric(salary.frame$Mean.Annual.Wage))
 ```
@@ -79,7 +93,7 @@ sd(as.numeric(salary.frame$Mean.Annual.Wage))
 
 #### Additionally, there is considerable room for advancement as Computer and Research Scientists make $1`5k a year on average! 
 
-```{r}
+```{r, eval = TRUE}
 best_pay <-  max(as.numeric(salary.frame$Mean.Annual.Wage))
 best_pay
 ```
@@ -105,7 +119,7 @@ For this, we used the [O*NET Database](https://www.onetcenter.org/database.html?
 
 ========================================================
 
-```{r}
+```{r, eval = TRUE}
 skills.top
 ```
 
@@ -120,7 +134,7 @@ skills.top
 
 #### Now, we'll look at  a scatter plot of salarys and outlooks. 
 
-```{r}
+```{r, eval = TRUE}
 salary.vs.outlook <- na.omit(merge(salary.frame, outlook.frame, by = 'SOC', all = TRUE))
 dollars <- as.numeric(salary.vs.outlook$Mean.Annual.Wage)
 jobs <- as.numeric(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`)
@@ -129,7 +143,7 @@ df <- data.frame(cbind(dollars,jobs))
 
 ========================================================
 
-```{r}
+```{r, eval = TRUE}
 ggplot(df, aes(x=dollars, y=jobs)) + geom_point()
 ```
 #### What's interesting about this graph is that is shows a weak correlation between salary and job sector growth. @simplymathematics and @jemceachern did this section.
@@ -142,7 +156,7 @@ We turned these categorical skills into specific, technical ones using data from
 ========================================================
 
 
-```{r}
+```{r, eval = TRUE}
 tech.top
 ```
 
@@ -159,26 +173,26 @@ tech.top
 
 ========================================================
 
-```{r}
+```{r, eval = TRUE}
 head(job_listings_keyword_count_ca,5)
 ```
 
 ========================================================
 
-```{r}
+```{r, eval = TRUE}
 bplotCA
 ```s
 
 ========================================================
 
 #### We have the same data here for New York
-```{r}
+```{r, eval = TRUE}
 head(job_listings_keyword_count_ny,5)
 ```
 
 ========================================================
 
-```{r}
+```{r, eval = TRUE}
 bplotNY
 ```
 
