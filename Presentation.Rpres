@@ -23,33 +23,9 @@ Question: Which skills are required to be a data scientist?
 - ONET Salary data, Skills data
 - Indeed.com Crawl
 
-
-
-
 ========================================================
 
-**Setup**
-
-#### We decided to break this problem into pieces, each of which has it's own R file, data source, and folder in this repository. We're going to start off by loading all of the files so that we can look at the data. Additionally, we decided to use github because of the built-in version controlling system and issue tracking. We also used a slack room we made for this project for real time coordination.
-
-```{r, include=FALSE}
-suppressWarnings(source("salary/dollars-scrape.R"))
-suppressWarnings(source("characteristics/characteristics.R"))
-suppressWarnings(source("indeed/Indeed_Skills.R"))
-suppressWarnings(source("onet/skills.R"))
-suppressWarnings(source("tech_skills/tech-skills-list.R"))
-```
-
-========================================================
-
-**Overview of Data**
-
-#### For our project, we choose to analyze data from the U.S. Department of Labor (DOL), Bureau of Labor Statistics (BLS). We used the BLS Occupational Employment Survey (OES) to obtain 2017 wage data and the 2016 Employment Projection (EP) to obtain worker characteristics of Computer and Mathematical Occupations.
-
-========================================================
-
-#### Federal statistical agencies, like the BLS, rely on the STANDARD OCCUPATIONAL CLASSIFICATION MANUAL to classify occupations based on their specific duties performed. The manual is updated periodically to capture changes in type of work performed in the broader U.S. economy. In 2018. the SOC manual added the occupation 15-2051 Data Scientists. However, this SOC code has not yet been made available in published BLS data we used for our project. Prior to 2018, BLS classified Data Scientist jobs in codes designated for statistician and computer programmers, among other occupations in the 15 series, based on the primary task of the analyzed job. For this reason, we choose to broadly examine skills and characteristics at the 6 digit level of the entire 15 series for Computer and Mathematical Occupations.
-
+Federal statistical agencies, like the BLS, rely on the STANDARD OCCUPATIONAL CLASSIFICATION MANUAL to classify occupations based on their specific duties performed. The manual is updated periodically to capture changes in type of work performed in the broader U.S. economy. In 2018. the SOC manual added the occupation 15-2051 Data Scientists. However, this SOC code has not yet been made available in published BLS data we used for our project. Instead, we looked at all 15-
 ========================================================
 
 #### Additionally, we used a DOL sponsered program, Occupational Information Network (O*NET), to obtain occupational skills data from the online repository known as the O*NET Resource Center. The data relies on the same SOC code, which we later used to create a relational database of our data.
@@ -109,9 +85,7 @@ best_pay
 ```
 
 ========================================================
-
-#### Naturally, our next question was centered on which skills we would need to get those top-paying positions.
-
+**But which skills?**
 
 ========================================================
 
@@ -181,7 +155,7 @@ tech.top
 
 **Indeed.com**
 
-#### Finally, we <a href="http://rpubs.com/ritwar01/D607Project3v1"> scrapped </a> Indeed for the highest paying position, called "Data Scientist" in the industry. It is possible that a different keyword search would yield different results (e.g. 'Data Analytics'). The csv data was reloaded into a single dataframe using an inner join command from the `sqldf` package to form one table with all the necessary columns for analyzing. The job postings webpage data from the two states were gathered and cleaned using regex for certain keywords. Here we added the Company name, date, state and the URL associated with each keyword result before filtering out any rows with incomplete data. Then, we compared New York to California. We chose these two states to get a wide swath of the industry without relying on scraping even more Indeed pages. A national survey would have been far too time-intensive. @ritwar01 did this section. Below are the top job skills for California.
+#### Finally, we <a href="http://rpubs.com/ritwar01/D607Project3v1"> scrapped </a> Indeed for the highest paying position, called "Data Scientist" in the industry. It is possible that a different keyword search would yield different results (e.g. 'Data Analytics'). The csv data was reloaded into a single dataframe using an inner join command from the `sqldf` package to form one tassble with all the necessary columns for analyzing. The job postings webpage data from the two states were gathered and cleaned using regex for certain keywords. Here we added the Company name, date, state and the URL associated with each keyword result before filtering out any rows with incomplete data. Then, we compared New York to California. We chose these two states to get a wide swath of the industry without relying on scraping even more Indeed pages. A national survey would have been far too time-intensive. @ritwar01 did this section. Below are the top job skills for California.
 
 ========================================================
 
@@ -193,7 +167,7 @@ head(job_listings_keyword_count_ca,5)
 
 ```{r}
 bplotCA
-```
+```s
 
 ========================================================
 
