@@ -4,7 +4,7 @@ author: "ritwaru"
 date: "October 16, 2018"
 output: html_document
 ---
-```{r}
+```{r, include=FALSE}
 # load libraries
 library(rvest)
 library(stringr)
@@ -22,10 +22,6 @@ library(sqldf)
 ```{r}
 job_posting_site <- 'https://www.indeed.com'
 
-# Test URls
-#job_listings_ny_url <- "https://www.indeed.com/jobs?q=data+science+$55,000&jt=commission&explvl=mid_level"
-#job_listings_ca_url <- "https://www.indeed.com/jobs?q=data+science+$55,000&jt=commission&explvl=mid_level"
-
 # Indeed advance search was used to get a webpages with 50 senior level data sceince job postings per page in  NY and CA. 
 
 job_listings_ny_url <- "https://www.indeed.com/jobs?q=data+scientist&l=new+york&explvl=senior_level&limit=50"
@@ -36,9 +32,11 @@ job_listings_ca_url <- "https://www.indeed.com/jobs?q=data+scientist&l=californi
 
 
 ```{r}
-#Here are some basic skill sets that are ussually found in Data Science job postings. These will be used to query our joblistings webpages.
+#Here are some basic skill sets that are ussually found in Data Science job postings. These will be used to query our joblistings webpages. Some of the skills sets were referenced in https://www.onetonline.org/link/summary/15-1134.00#ToolsUsed
 
-Skills <- c(" AWS ", " Python ", " AI ", " SQL ", " R ", " SAS ", " Tableau ", " AZURE ", " SparkML ", " Shiny ", " Spark ", " Hadoop ", " Machine Learning ", " Probability ", " Statistics ")
+
+
+Skills <- c(" AWS ", " Python ", " AI ", " SQL ", " R ", " SAS ", " Tableau ", " AZURE ", " SparkML ", " Shiny ", " Spark ", " Hadoop ", " Machine Learning ", " Probability ", " Statistics ", " Ruby ", " JS ", " PHP ")
 
 Web_scrape_date <- Sys.Date()
 
