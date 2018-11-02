@@ -62,7 +62,7 @@ Presentation and analysis everyone!
 
 # Worker Characteristics
 
-```{r, eval = TRUE}
+```{reveal }
 characteristics.graphic
 ```
 
@@ -73,14 +73,6 @@ characteristics.graphic2
 ========================================================
 
 # Salary
-
-```{r, eval = TRUE}
-head(salary.frame, 5)
-```
-
-========================================================
-
-# Salary (cont.)
 
  - Mean and standard deviation calculations: 
 
@@ -160,16 +152,12 @@ We turned these categorical skills into specific, technical ones using data from
 tech.top
 ```
 
++ From this data we see that development environments are twice as likely to be a job require ment as analytical software.
++ Data science is a broad field that encompasses many parts of the software stack.
 ========================================================
-
-#### From this data, we can see that delopment environments are twice as likely to be a job requirement in these occupations as analytical software. That is, data science involves many fields that won't necessarily have that title. People with a strong background in math and computers are qualified for all kinds of positions. However, we still wanted to be more specific. In order to target positions with on the title, "Data Scientist," we searched indeed with that title as a keyword.
-
-========================================================
-
-
 **Indeed.com**
 
-#### Finally, we <a href="http://rpubs.com/ritwar01/D607Project3v1"> scrapped </a> Indeed for the highest paying position, called "Data Scientist" in the industry. It is possible that a different keyword search would yield different results (e.g. 'Data Analytics'). The csv data was reloaded into a single dataframe using an inner join command from the `sqldf` package to form one tassble with all the necessary columns for analyzing. The job postings webpage data from the two states were gathered and cleaned using regex for certain keywords. Here we added the Company name, date, state and the URL associated with each keyword result before filtering out any rows with incomplete data. Then, we compared New York to California. We chose these two states to get a wide swath of the industry without relying on scraping even more Indeed pages. A national survey would have been far too time-intensive. @ritwar01 did this section. Below are the top job skills for California.
+We weren't satisified with the granularity of this data, so we decided to consult Indeed.
 
 ========================================================
 
@@ -181,7 +169,7 @@ head(job_listings_keyword_count_ca,5)
 
 ```{r, eval = TRUE}
 bplotCA
-```s
+```
 
 ========================================================
 
@@ -219,9 +207,12 @@ bplotNY
 
 ========================================================
 
-**Further**
+**Concerns**
 
-#### The biggest issues was the steep learning curve associated with git. Version control and coordination were issues due to this underlying deficiency. Additionally, the BLS and ONET databases are very broad and do little to highlight specific requirements for people in the field. They do, however, offer a picture of my qualifications relative to the general population or even other people who work with computers. However, to get the most from these datasets, we would need to do further regression analysis that maps the skill or technology data to occupational growth or occupational salary. That is unfortunately outside the scope of this analysis. Another big constraint was the limitations we faced in interacting with Indeed. Because of call limits and time-constraints we were limited to only mining two states. A stand-alone daemon that manages api calls would fix this, but is also outside the scope of this project.
+- Git has a steep learning curve
+- asynchronous work is hard
+- Limited SQL knowledge
+- Little to no experience with command line.
 
 ========================================================
 

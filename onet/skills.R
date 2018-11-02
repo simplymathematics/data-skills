@@ -1,6 +1,5 @@
 
 # Dependencies
-
 suppressWarnings(library(XML, quietly =TRUE)) #for reading xml, html
 suppressWarnings(library(stringr, quietly =TRUE)) #for regex
 suppressWarnings(library(curl, quietly =TRUE)) #for downloading url file
