@@ -1,154 +1,235 @@
+
 Data Skills
 ========================================================
 author: Team Profound Specialists
 date: 10/28/2018
 autosize: true
 
-**Team Members**  
-- simplymathematics
-- Juliann McEachern
-- Gracie Han
-- Jun Pan
-- Ravi Itwaru
 
-Question: Which skills are required to be a data scientist?  
+**Question:** Which skills are required to be a data scientist?
 
+**Team Members:** Simplymathematics, Jemceachern, Ritwar01,
+Ghh2001, & Johnpannyc
+
+Overview
 ========================================================
-
-**Overview**
-
 - Sources 
 - Roles 
 - Tools
 - Characteristics
+- test
 
-========================================================
-**Sources**  
-- [Bureau of Labor Statistics](https://www.bls.gov/oes/current/oes150000.htm#nat)  
-- [ONET](https://www.onetonline.org/)
-- [Indeed](Indeed.com) 
-
-
-# Datasets
-
-- OES Skills data, Occupational Characteristics data
-- ONET Salary data, Skills data
-- Indeed.com Crawl
-
+Sources
 ========================================================
 
-# Roles 
+- U.S. Bureau of Labor Statistics:
+     - [Occupational Employment Statistics (OES)](https://www.bls.gov/oes/current/oes150000.htm#nat) 
+     - [Occupational Projections (EP)](https://data.bls.gov/projections/occupationProj) 
+     
+- [Occupational Information Network (O*NET)](https://www.onetonline.org/): 
+     - Soft Skills 
+     - Technology and Tools
+  
+- [Indeed](Indeed.com)
 
-Characteristics: @simplymathmatics & @jemceachern
-Salary @simplymathmatics & @jemceachern
-Skills @simplymathmatics & @jemceachern
-Technical Skills  @ghh2001 & @johnpannyc 
-Indeed Skills @ritwar01
-SQL @jemceachern, @ghh2001, & @johnpannyc 
-Presentation and analysis everyone!
-
+Roles
 ========================================================
 
-#Tools
+- **Characteristics:** @simplymathmatics & @jemceachern  
+- **Salary:** @simplymathmatics & @jemceachern  
+- **Skills:** @simplymathmatics & @jemceachern  
+- **Technical Skills:**  @ghh2001 & @johnpannyc  
+- **Indeed Skills:** @ritwar01  
+- **SQL:** @jemceachern, @ghh2001, & @johnpannyc   
+- **Presentation and analysis:** Team effort
 
-- Google Drive
-- Github
-- Email 
+Tools
+========================================================
+
+ **Communication:**
+- Email
 - Slack
-- Studio 
+
+**Production**
+- Github
+- RStudio 
 - Rpres
 
-========================================================
+***
 
-# Worker Characteristics
+*Github Issues Tool*
+![GitHub \caption{Github: Issues Tool}](issues.PNG) 
 
 ```{reveal }
+
+Characteristics
+========================================================
+```{r, eval = TRUE, echo = FALSE, cache = TRUE, fig.width=9, fig.height=6, fig.show='hold', fig.align='center'}
 characteristics.graphic
 ```
 
-```{r, eval = TRUE}
+Characteristics (Cont.)
+========================================================
+right: 50%
+```{r, eval = TRUE, echo = FALSE, cache = TRUE, fig.width=9, fig.height=6, fig.show='hold', fig.align='center'}
 characteristics.graphic2
 ``` 
 
+Salary 
 ========================================================
+```{r, eval = TRUE, echo = FALSE, cache = TRUE}
+suppressWarnings(source("salary/dollars-scrape.R"))
+require(knitr)
+require(kableExtra)
+require(dplyr)
+```
 
-# Salary
+```{r, eval = TRUE,  out.width="100%", echo = FALSE, cache = TRUE}
+BLS <- na.omit(merge(salary.frame, outlook.frame, by = 'SOC', all = TRUE)) %>%
+  select(SOC, Title, Mean.Annual.Wage)
+
+
+BLS1 <- BLS %>% slice(1:7) 
+
+
+BLS1 <- knitr::kable(BLS1, caption = 'Scraped Salary Data from BLS', format = "html") %>%
+  kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
+  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  column_spec(column = 1, bold = T) 
+
+BLS1
 
  - Mean and standard deviation calculations: 
+=======
+```
 
-```{r, eval = TRUE}
+
+Salary (cont.)
+========================================================
+
+```{r, eval = TRUE,  out.width="100%", echo = FALSE, cache = TRUE}
+BLS2 <- BLS %>% slice(8:13) 
+
+BLS2 <- knitr::kable(BLS2, caption = 'Scraped Salary Data from BLS', format = "html") %>%
+  kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
+  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  column_spec(column = 1, bold = T) 
+
+BLS2
+``` 
+  
+Evaluation of Annual Wage Data
+========================================================
+Right: 75%
+
+Mean 
+```{r, eval = TRUE, , echo = FALSE, cache = TRUE}
 mean(as.numeric(salary.frame$Mean.Annual.Wage))
+```
+
+Standard Deviation: 
+```{r, eval = TRUE, , echo = FALSE, cache = TRUE}
 sd(as.numeric(salary.frame$Mean.Annual.Wage))
 ```
 
-========================================================
+***
 
-#### Additionally, there is considerable room for advancement as Computer and Research Scientists make $1`5k a year on average! 
-
-```{r, eval = TRUE}
-best_pay <-  max(as.numeric(salary.frame$Mean.Annual.Wage))
-best_pay
+```{r, eval = TRUE, echo = FALSE, cache = TRUE, fig.width=7, fig.height=5, fig.show='hold'}
+boxplot(as.numeric(salary.frame$Mean.Annual.Wage), horizontal = TRUE)
 ```
 
+Salary Analysis
 ========================================================
-**But which skills?**
+Right: 50%
 
-========================================================
+**Findings:** 
+- Significant deviation in pay amongst occupations.
+- Considerable room for advancement!
 
-**Skills**  
+  
+```{r, eval = FALSE, echo = FALSE}
+Avg.Annual.Wage <- as.numeric(salary.frame$Mean.Annual.Wage)
+max(Avg.Annual.Wage)
 
-For this, we used the [O*NET Database](https://www.onetcenter.org/database.html?p=3) to examine the skills required by the Computer and Mathematical Occupations. The data is scaled on on a level 0-7, and marks the importance of each skillset. After some scraping and cleaning, the data can be seen below. @simplymathematics and @jemceachern did this section.
-
-========================================================
-
-<div id="bg">
-  <img src="Presentation-figure/Skills1.PNG" alt="">
-</div>
-
-========================================================
-
-#### Then, we found the tops skills across occupations by taking the average of each column. Below are the top 5 skills for mathematical and computational occupations.
-
-========================================================
-
-```{r, eval = TRUE}
-skills.top
 ```
 
+
+```{r, eval = TRUE, echo = FALSE}
+require(dplyr)
+require(knitr)
+require(kableExtra)
+
+
+EP <- na.omit(merge(salary.frame, outlook.frame, by = 'SOC', all = TRUE)) %>%
+  select(SOC, Title, Mean.Annual.Wage, `2026EmplChange2016-26`) %>%
+  mutate(`2016Wage` = as.numeric(Mean.Annual.Wage), `2016-26.EmplChange` = as.numeric(`2026EmplChange2016-26`))
+
+
+EP <- EP %>% top_n(4, `2016-26.EmplChange`) %>% select(Title, `2016Wage`, `2016-26.EmplChange`) %>% arrange(desc(`2016-26.EmplChange`))
+
+knitr::kable(EP, format = "html") %>%
+  kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
+  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  column_spec(column = 1, bold = T) 
+
+
+```
+
+Skills
+========================================================
+- Scraped and cleaned data from O*NET
+- Evaluted data on scale of importance (0-7).
+- Findings: Top 5 Skills for Math and Computer Science Jobs:
+
+```{r, eval = TRUE, echo = FALSE, cache = TRUE, fig.width=7, fig.height=5}
+suppressWarnings(source("onet/skills.R"))
+```
+
+```{r, eval = TRUE, echo = FALSE, cache = TRUE}
+top <- knitr::kable(skills.top, format = "html") %>%
+  kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
+  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  column_spec(column = 1, bold = T) 
+
+top
+```
+
+
+Salary vs. Outlook
 ========================================================
 
-#### Finally, we wanted to see a couple more things. In particular, we want to see what skills are required for the highest paying data science jobs.
-
-========================================================
-
-
-**Salary vs. Outlook**
-
-#### Now, we'll look at  a scatter plot of salarys and outlooks. 
-
-```{r, eval = TRUE}
+```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 salary.vs.outlook <- na.omit(merge(salary.frame, outlook.frame, by = 'SOC', all = TRUE))
-dollars <- as.numeric(salary.vs.outlook$Mean.Annual.Wage)
-jobs <- as.numeric(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`)
-df <- data.frame(cbind(dollars,jobs))
+Dollars <- as.numeric(salary.vs.outlook$Mean.Annual.Wage)
+Jobs <- as.numeric(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`)
+Title <- as.character(outlook.frame$Title)
+df <- data.frame(cbind(Title, SOC, Dollars, Jobs))
+
+knitr::kable(df, format = "html") %>%
+  kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
+  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  column_spec(column = 1, bold = T) 
 ``` 
 
 ========================================================
 
+
 ```{r, eval = TRUE}
-ggplot(df, aes(x=dollars, y=jobs)) + geom_point()
+ggplot(df, aes(x=Dollars, y=Jobs)) + geom_point()
 ```
-#### What's interesting about this graph is that is shows a weak correlation between salary and job sector growth. @simplymathematics and @jemceachern did this section.
+
+
+Findings: Weak Correlation between salary and job sector growth.
 
 ========================================================
 
-**Skills List**
-We turned these categorical skills into specific, technical ones using data from ONET. We downloaded a text file from ONET, cleaned it up, grabbed the relevant data, and stored it the skills folder. Further documentation can be found there. @ghh2001 and @johnpannyc did this section.
-
-========================================================
-
+**Technical Skills List**
+- Scraped and cleaned data from O*NET
+- Evaluted the frequency technical skills. 
+- Findings: Top 5 technical skills for mathematical and computational occupations:
 
 ```{r, eval = TRUE}
+suppressWarnings(source("tech_skills/tech-skills-list.R"))
 tech.top
 ```
 
@@ -162,6 +243,7 @@ We weren't satisified with the granularity of this data, so we decided to consul
 ========================================================
 
 ```{r, eval = TRUE}
+suppressWarnings(source("indeed/Indeed_Skills.R"))
 head(job_listings_keyword_count_ca,5)
 ```
 
