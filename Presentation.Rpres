@@ -58,13 +58,24 @@ Tools
 ***
 
 *Github Issues Tool*
-![GitHub \caption{Github: Issues Tool}](issues.PNG) 
+![GitHub \caption{Github: Issues Tool}](issues.PNG)
 
-```{reveal }
+
+### Dependencies
+
+```{r, echo = FALSE}
+suppressWarnings(source("salary/dollars-scrape.R"))
+suppressWarnings(source("characteristics/characteristics.R"))
+suppressWarnings(source("indeed/Indeed_Skills.R"))
+suppressWarnings(source("onet/skills.R"))
+suppressWarnings(source("tech_skills/tech-skills-list.R"))
+```
+
 
 Characteristics
 ========================================================
 ```{r, eval = TRUE, echo = FALSE, cache = TRUE, fig.width=9, fig.height=6, fig.show='hold', fig.align='center'}
+suppressWarnings(source("characteristics/characteristics.R"))
 characteristics.graphic
 ```
 
@@ -99,8 +110,6 @@ BLS1 <- knitr::kable(BLS1, caption = 'Scraped Salary Data from BLS', format = "h
 
 BLS1
 
- - Mean and standard deviation calculations: 
-=======
 ```
 
 
@@ -204,23 +213,37 @@ Dollars <- as.numeric(salary.vs.outlook$Mean.Annual.Wage)
 Jobs <- as.numeric(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`)
 Title <- as.character(outlook.frame$Title)
 df <- data.frame(cbind(Title, SOC, Dollars, Jobs))
+df1 <- df %>% slice(1:13)
+df2 <- df %>% slice(14:27)
 
-knitr::kable(df, format = "html") %>%
+knitr::kable(df1, format = "html") %>%
   kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
   row_spec(row = 0:0, background = "#D4E0F7") %>%
   column_spec(column = 1, bold = T) 
 ``` 
 
+
+Salary vs. Outlook (cont.)
 ========================================================
+```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 
+knitr::kable(df2, format = "html") %>%
+  kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
+  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  column_spec(column = 1, bold = T) 
 
-```{r, eval = TRUE}
-ggplot(df, aes(x=Dollars, y=Jobs)) + geom_point()
+```
+
+Salary vs. Outlook (cont.)
+========================================================
+###### What's interesting about this graph is that is shows a weak correlation between salary and job sector growth. @simplymathematics and @jemceachern did this section.
+
+```{r, eval = TRUE, echo = FALSE, cache = TRUE}
+ggplot(df, aes(x=Dollars, y=Jobs)) + geom_point() + geom_point(colour = "red", size = 3) 
 ```
 
 
 Findings: Weak Correlation between salary and job sector growth.
-
 ========================================================
 
 **Technical Skills List**
@@ -228,41 +251,56 @@ Findings: Weak Correlation between salary and job sector growth.
 - Evaluted the frequency technical skills. 
 - Findings: Top 5 technical skills for mathematical and computational occupations:
 
-```{r, eval = TRUE}
-suppressWarnings(source("tech_skills/tech-skills-list.R"))
-tech.top
+========================================================
+
+```{r, eval = TRUE, echo = FALSE, cache = TRUE}
+knitr::kable(tech.top, format = "html") %>%
+  kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
+  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  column_spec(column = 1, bold = T) 
 ```
 
-+ From this data we see that development environments are twice as likely to be a job require ment as analytical software.
-+ Data science is a broad field that encompasses many parts of the software stack.
+###### From this data, we can see that delopment environments are twice as likely to be a job requirement in these occupations as analytical software. That is, data science involves many fields that won't necessarily have that title. People with a strong background in math and computers are qualified for all kinds of positions. However, we still wanted to be more specific. In order to target positions with on the title, "Data Scientist," we searched indeed with that title as a keyword.
+
+
 ========================================================
+
+
 **Indeed.com**
 
-We weren't satisified with the granularity of this data, so we decided to consult Indeed.
+###### Finally, we <a href="http://rpubs.com/ritwar01/D607Project3v1"> scrapped </a> Indeed for the highest paying position, called "Data Scientist" in the industry. It is possible that a different keyword search would yield different results (e.g. 'Data Analytics'). The csv data was reloaded into a single dataframe using an inner join command from the `sqldf` package to form one tassble with all the necessary columns for analyzing. The job postings webpage data from the two states were gathered and cleaned using regex for certain keywords. Here we added the Company name, date, state and the URL associated with each keyword result before filtering out any rows with incomplete data. Then, we compared New York to California. We chose these two states to get a wide swath of the industry without relying on scraping even more Indeed pages. A national survey would have been far too time-intensive. @ritwar01 did this section. Below are the top job skills for California.
 
+Skills pulled from Indeed CA Data Scientist joblistings
 ========================================================
 
-```{r, eval = TRUE}
-suppressWarnings(source("indeed/Indeed_Skills.R"))
-head(job_listings_keyword_count_ca,5)
+```{r, eval = TRUE, echo = FALSE, cache = TRUE}
+
+knitr::kable(head(job_listings_keyword_count_ca,5), format = "html") %>%
+  kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
+  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  column_spec(column = 1, bold = T) 
 ```
 
 ========================================================
 
-```{r, eval = TRUE}
+```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 bplotCA
 ```
 
+Skills pulled from Indeed NY Data Scientist joblistings
 ========================================================
+```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 
-#### We have the same data here for New York
-```{r, eval = TRUE}
-head(job_listings_keyword_count_ny,5)
+knitr::kable(head(job_listings_keyword_count_ny,5), format = "html") %>%
+  kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
+  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  column_spec(column = 1, bold = T)
+
 ```
 
 ========================================================
 
-```{r, eval = TRUE}
+```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 bplotNY
 ```
 
@@ -271,7 +309,7 @@ bplotNY
 
 **Conclusion**
 
-#### The ONET and BLS data were able to give us a broad picture of the computational and mathematical field, while Indeed revealed specific technical skills required for "Data Scientists." These are essentially disjoint sets as the ONET/BLS data does not have specific technologies listed--they only use general categories. However, we can still draw parallels between the datasets. 
+###### The ONET and BLS data were able to give us a broad picture of the computational and mathematical field, while Indeed revealed specific technical skills required for "Data Scientists." These are essentially disjoint sets as the ONET/BLS data does not have specific technologies listed--they only use general categories. However, we can still draw parallels between the datasets. 
 
 ========================================================
 
@@ -285,21 +323,18 @@ bplotNY
 
 ========================================================
 
-#### We cannot draw any conlusions about which skills are in growing fields or which skills pay the best without further statistical analysis.
+###### We cannot draw any conlusions about which skills are in growing fields or which skills pay the best without further statistical analysis.
 
 ========================================================
 
-**Concerns**
+**Further**
 
-- Git has a steep learning curve
-- asynchronous work is hard
-- Limited SQL knowledge
-- Little to no experience with command line.
+###### The biggest issues was the steep learning curve associated with git. Version control and coordination were issues due to this underlying deficiency. Additionally, the BLS and ONET databases are very broad and do little to highlight specific requirements for people in the field. They do, however, offer a picture of my qualifications relative to the general population or even other people who work with computers. However, to get the most from these datasets, we would need to do further regression analysis that maps the skill or technology data to occupational growth or occupational salary. That is unfortunately outside the scope of this analysis. Another big constraint was the limitations we faced in interacting with Indeed. Because of call limits and time-constraints we were limited to only mining two states. A stand-alone daemon that manages api calls would fix this, but is also outside the scope of this project.
 
 ========================================================
 
 **Databases**
 
-#### For your own further analysis, we've exported each dataset as it's own table using SQL. The results of which are stored in the csvs folder. The Indeed csv data was reloaded into a single dataframe using an inner join command from the `sqldf` package to form one table with all the necessary columns for analyzing. Since these skills don't map directly to SOC codes, we did not bother to save these as sqls. A database is created in memory in the corresponding Indeed.Rmd file.
+###### For your own further analysis, we've exported each dataset as it's own table using SQL. The results of which are stored in the csvs folder. The Indeed csv data was reloaded into a single dataframe using an inner join command from the `sqldf` package to form one table with all the necessary columns for analyzing. Since these skills don't map directly to SOC codes, we did not bother to save these as sqls. A database is created in memory in the corresponding Indeed.Rmd file.
 
-#### In addition, we created a local mysql database to store the BLS data in relational tables using an inner join on the SOC codes. The csv file includes the skills_salary_query.sql file. 
+###### In addition, we created a local mysql database to store the BLS data in relational tables using an inner join on the SOC codes. The csv file includes the skills_salary_query.sql file. 
