@@ -251,8 +251,6 @@ Findings: Weak Correlation between salary and job sector growth.
 - Evaluted the frequency technical skills. 
 - Findings: Top 5 technical skills for mathematical and computational occupations:
 
-========================================================
-
 ```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 knitr::kable(tech.top, format = "html") %>%
   kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
@@ -260,18 +258,12 @@ knitr::kable(tech.top, format = "html") %>%
   column_spec(column = 1, bold = T) 
 ```
 
-###### From this data, we can see that delopment environments are twice as likely to be a job requirement in these occupations as analytical software. That is, data science involves many fields that won't necessarily have that title. People with a strong background in math and computers are qualified for all kinds of positions. However, we still wanted to be more specific. In order to target positions with on the title, "Data Scientist," we searched indeed with that title as a keyword.
-
-
+Webscrape indeed CA for specific data scientist skill sets
 ========================================================
-
-
 **Indeed.com**
-
-###### Finally, we <a href="http://rpubs.com/ritwar01/D607Project3v1"> scrapped </a> Indeed for the highest paying position, called "Data Scientist" in the industry. It is possible that a different keyword search would yield different results (e.g. 'Data Analytics'). The csv data was reloaded into a single dataframe using an inner join command from the `sqldf` package to form one tassble with all the necessary columns for analyzing. The job postings webpage data from the two states were gathered and cleaned using regex for certain keywords. Here we added the Company name, date, state and the URL associated with each keyword result before filtering out any rows with incomplete data. Then, we compared New York to California. We chose these two states to get a wide swath of the industry without relying on scraping even more Indeed pages. A national survey would have been far too time-intensive. @ritwar01 did this section. Below are the top job skills for California.
-
-Skills pulled from Indeed CA Data Scientist joblistings
-========================================================
+- <a href="http://rpubs.com/ritwar01/D607Project3v1"> Scraped </a>  and cleaned data from Indeed.
+- Total the count of each skill set. 
+- Findings: Top 5 CA Data Scientist Skill sets listed on indeed:
 
 ```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 
@@ -281,14 +273,20 @@ knitr::kable(head(job_listings_keyword_count_ca,5), format = "html") %>%
   column_spec(column = 1, bold = T) 
 ```
 
+Skills requested on indeed CA joblistings
 ========================================================
 
 ```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 bplotCA
 ```
 
-Skills pulled from Indeed NY Data Scientist joblistings
+Webscrape indeed NY for specific data scientist skill sets
 ========================================================
+**Indeed.com**
+- <a href="http://rpubs.com/ritwar01/D607Project3v1"> Scraped </a>  and cleaned data from Indeed.
+- Total the count of each skill set. 
+- Findings: Top 5 NY Data Scientist Skill sets listed on indeed:
+
 ```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 
 knitr::kable(head(job_listings_keyword_count_ny,5), format = "html") %>%
@@ -298,6 +296,7 @@ knitr::kable(head(job_listings_keyword_count_ny,5), format = "html") %>%
 
 ```
 
+Skills requested on indeed NY joblistings
 ========================================================
 
 ```{r, eval = TRUE, echo = FALSE, cache = TRUE}
