@@ -1,6 +1,6 @@
 ---
 title: "Data Skills"
-author: "simplymathematics, jemceachern, ritwar01, ghh2001, and johnpannyc"
+author: "simplymathematics, jemceach, ritwar01, ghh2001, and johnpannyc"
 date: "October 27, 2018"
 output: html_document
 ---
@@ -35,7 +35,7 @@ Lastly, we wanted to examine which skills are currently being sought after in to
 
 ## Worker Characteristics  
 
-First, we consulted with the BLS Employment Projections to obtain data related to the 2016-26 [Occupational Projections and Worker Characteristics](https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm). After scraping and cleaning the data (as seen in the .r file in the corresponding folder), we were able to look at some long-term job characteristics across the mathematical and computational sectors. For now, suffice it to say that the vast majority of these jobs appear to be entry level as shown by the graph below. @simplymathematics and @jemceachern did this section.
+First, we consulted with the BLS Employment Projections to obtain data related to the 2016-26 [Occupational Projections and Worker Characteristics](https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm). After scraping and cleaning the data (as seen in the .r file in the corresponding folder), we were able to look at some long-term job characteristics across the mathematical and computational sectors. For now, suffice it to say that the vast majority of these jobs appear to be entry level as shown by the graph below. @simplymathematics and @jemceach did this section.
 
 ```{r}
 characteristics.graphic
@@ -48,7 +48,7 @@ We will come back to this data set later, but for now, we'll take a look at some
 
 ## Salary  
 
-We took the same list of mathematical occupations and used [Occupational Employment Statistics](https://www.bls.gov/oes/current/oes150000.htm) data to find the salary data for each.  We had to drop the dollar signs and commas from the numbers to do this analysis after selecting the 15- occupations. @simplymathematics and @jemceachern did this section.
+We took the same list of mathematical occupations and used [Occupational Employment Statistics](https://www.bls.gov/oes/current/oes150000.htm) data to find the salary data for each.  We had to drop the dollar signs and commas from the numbers to do this analysis after selecting the 15- occupations. @simplymathematics and @jemceach did this section.
 
 ```{r}
 head(salary.frame, 5)
@@ -69,7 +69,7 @@ Naturally, our next question was centered on which skills we would need to get t
 
 ## Skills  
 
-For this, we used the [O*NET Database](https://www.onetcenter.org/database.html?p=3) to examine the skills required by the Computer and Mathematical Occupations. The data is scaled on on a level 0-7, and marks the importance of each skillset. After some scraping and cleaning, the data can be seen below. @simplymathematics and @jemceachern did this section.
+For this, we used the [O*NET Database](https://www.onetcenter.org/database.html?p=3) to examine the skills required by the Computer and Mathematical Occupations. The data is scaled on on a level 0-7, and marks the importance of each skillset. After some scraping and cleaning, the data can be seen below. @simplymathematics and @jemceach did this section.
 ```{r}
 head(skills.frame,5)
 ```
@@ -90,7 +90,7 @@ jobs <- as.numeric(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`)
 df <- data.frame(cbind(dollars,jobs))
 ggplot(df, aes(x=dollars, y=jobs)) + geom_point() 
 ```  
-What's interesting about this graph is that is shows a weak correlation between salary and job sector growth. @simplymathematics and @jemceachern did this section.
+What's interesting about this graph is that is shows a weak correlation between salary and job sector growth. @simplymathematics and @jemceach did this section.
 
 
 ## Skills List
