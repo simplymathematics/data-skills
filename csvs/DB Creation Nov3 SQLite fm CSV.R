@@ -3,7 +3,7 @@
 
 
 suppresswarnings (library(RSQLite))# need to add this library first
-suppresswarnings (library(sqldb))
+suppresswarnings (library(sqldf))
 library(dplyr)
 
 #setwd ('E:/Proj3 Nov3 Charlie FolderGithub/csvs')
