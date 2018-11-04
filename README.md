@@ -25,3 +25,6 @@ This is the folder for justifying the skills list
 ## Big_One.Rmd
 
 Is the file you want to run
+
+## Final relational Database in SQLite
+Now in CSVS folder, not in the Relational Database folder
