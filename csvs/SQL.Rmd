@@ -1,0 +1,150 @@
+---
+title: "DB Creation SQLite fm CSV-Version2"
+output: html_document
+---
+
+# Dependencies
+
+```{r}
+library(RSQLite)
+  # need to add this library first
+library(sqldf)
+library(dplyr)
+library (tidyverse)
+```
+
+```{r}
+try(setwd(dir = "csvs/"))
+```
+
+# Connect to the database
+This section creates a database and calls it Proj3_607.db.
+```{r}
+mydb <- dbConnect(RSQLite::SQLite(), "Proj3_607.db")
+# List out how many tables are in this object
+ dbListTables(mydb)
+# TEST, to get query from this database (ONET Characteristic table only for now)
+dbGetQuery  (mydb,"Select* FROM C") 
+```
+
+Here, we load the indeed data into indeed dataframes.
+ 
+```{r}
+# Load csv file containing foreign key into a dataframe
+indeed.ca <- read.csv("indeed_keyword_count_ca.csv")
+indeed.ny <- read.csv("indeed_keyword_count_ny.csv")
+
+## TODO: Innter Join and store as a db
+
+
+```
+
+Here, we load the variosu ONET/BLS data into various objects.
+```{r}
+characteristics <- read.csv ("characteristics.csv")
+salary <- read.csv ("salary.csv")
+skills <- read.csv ('skills.csv')
+tech.skills <- read.csv('TechSkills.csv')
+```
+
+
+```{r}
+# Create/Populate tables with data from the dataframes
+dbWriteTable(mydb, "webscrapes", Keyword_Search_csv_df, overwrite = TRUE)
+dbWriteTable(mydb, "keywords", keywords_csv_df, overwrite = TRUE)
+```
+
+
+```{r}
+
+dbWriteTable(mydb,"characteristics", characteristics, overwrite = TRUE)  
+dbWriteTable(mydb,"salary", salary, overwrite = TRUE)
+dbWriteTable(mydb,"skills", skills, overwrite = TRUE)
+dbWriteTable(mydb,"tech.skills", tech.skills, overwrite = TRUE)
+```
+
+Join the ONET SKILLS (soft Skills) with ONET Characteristics TABLES
+
+```{r}
+
+dbWriteTable(mydb,"C", characteristics, overwrite = TRUE)
+dbWriteTable(mydb, "TechSkl", TechSkillswOccupation, overwrite = TRUE)
+join_tb_onetTechSkl <- 
+  "select C.title, C.SOC, 	C.OccupationType, 	C.TypicalEntryLvlEduc,	
+           C.PreEmplExperience,	C.PostEmplTraining,
+            TechSkl.job, TechSkl.jobcode,TechSkl.Example
+from C
+inner join  TechSkl
+on C.Title = TechSkl.job"
+
+head (dbGetQuery(mydb,join_tb_onetTechSkl))
+
+```
+
+ Relational Database 3rd set: Link INDEED web scraping and Labor Dept ONET webscraping
+```{r}
+# Linkage between those two sets: using the Technical Skills 
+# Tech Skills linked with ONET Database
+join_tb_ONETTechSkl <- 
+  "select C.title, C.SOC, 	C.OccupationType, 	C.TypicalEntryLvlEduc,	
+           C.PreEmplExperience,	C.PostEmplTraining,
+            TechSkl.job, TechSkl.jobcode,TechSkl.Example
+from C
+inner join  TechSkl
+on C.Title = TechSkl.job"
+head (dbGetQuery(mydb,join_tb_ONETTechSkl))
+
+```
+
+Tech Skills linked with Indeed Database
+```{r}
+join_tb_IndeedTechSkl <- "select keywords.Keyword, 
+ TechSkl.job, TechSkl.jobcode,TechSkl.Example
+from TechSkl
+inner join keywords
+on keywords.Keyword = TechSkl.Example"
+head (dbGetQuery(mydb,join_tb_IndeedTechSkl))
+
+```
+List all the relational tables within the SQlite database
+```{r}
+dbListTables(mydb)
+# all tables are displayed here, 6 tables (all relational in total)
+```
+
+List the column fields within each individual tables within the SQLite Database
+```{r}
+dbListFields(mydb,"C")
+```
+
+```{r}
+dbListFields(mydb,"SftSkl")
+```
+
+```{r}
+dbListFields(mydb,"TechSkillswOccupation")
+```
+
+```{r}
+dbListFields(mydb,"salary")
+
+```
+
+```{r}
+dbListFields(mydb,"TechSkl")
+
+```
+
+```{r}
+dbListFields(mydb,"keywords")
+
+```
+
+```{r}
+dbListFields(mydb,"webscrapes")
+```
+
+```{r}
+setwd('..')
+```
+

@@ -90,6 +90,7 @@ jobs <- as.numeric(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`)
 df <- data.frame(cbind(dollars,jobs))
 ggplot(df, aes(x=dollars, y=jobs)) + geom_point() 
 ```  
+
 What's interesting about this graph is that is shows a weak correlation between salary and job sector growth. @simplymathematics and @jemceach did this section.
 
 
@@ -99,6 +100,7 @@ We turned these categorical skills into specific, technical ones using data from
 ```{r}
 tech.top
 ```
+
 From this data, we can see that delopment environments are twice as likely to be a job requirement in these occupations as analytical software. That is, data science involves many fields that won't necessarily have that title. People with a strong background in math and computers are qualified for all kinds of positions. However, we still wanted to be more specific. In order to target positions with on the title, "Data Scientist," we searched indeed with that title as a keyword.
 
 ## Indeed.com
@@ -108,6 +110,7 @@ Finally, we scraped Indeed for the highest paying position, called "Data Scienti
 head(job_listings_keyword_count_ca,5)
 bplotCA
 ```
+
 We have the same data here for New York
 ```{r}
 head(job_listings_keyword_count_ny,5)

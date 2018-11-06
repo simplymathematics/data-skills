@@ -10,3 +10,9 @@ curl
 bindrcpp
 XML
 kableExtra
+RColorBrewer
+wordcloud
+proto
+gsubfn
+RSQLite
+sqldf
