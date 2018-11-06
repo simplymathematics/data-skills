@@ -95,7 +95,7 @@ What's interesting about this graph is that is shows a weak correlation between 
 
 
 ## Skills List
-We turned these categorical skills into specific, technical ones using data from ONET. We downloaded a text file from ONET, cleaned it up, grabbed the relevant data, and stored it the skills folder. Further documentation can be found there. @ghh2001 and @johnpannyc did this section.
+We turned these categorical skills into specific, technical ones using data from ONET. We downloaded a text file from ONET, cleaned it up, grabbed the relevant data, and stored it the skills folder. Further documentation can be found there. @simplymathematics and @jemceach did this section.
 
 ```{r}
 tech.top
@@ -138,5 +138,5 @@ The biggest issues was the steep learning curve associated with git. Version con
 
 ## Databases
 
-For your own further analysis, we've exported each dataset as it's own table using SQL. The results of which are stored in the csvs folder. The Indeed csv data was reloaded into a single dataframe using an inner join command from the `sqldf` package to form one table with all the necessary columns for analyzing. Since these skills don't map directly to SOC codes, we did not bother to save these as sqls. A database is created in memory in the corresponding Indeed.Rmd file.
+For your own further analysis, we've exported each dataset as it's own table using SQLite. The database file is stored in the csv folder with the .sqlite file with the corresponding SQL.Rmd file that explains each step.
 

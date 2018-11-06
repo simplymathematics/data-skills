@@ -6,11 +6,9 @@ output: html_document
 # Dependencies
 
 ```{r}
-library(RSQLite)
-  # need to add this library first
-library(sqldf)
-library(dplyr)
 library (tidyverse)
+library(RSQLite)
+library(DBI)
 ```
 
 ```{r}
@@ -18,28 +16,20 @@ try(setwd(dir = "csvs/"))
 ```
 
 # Connect to the database
-This section creates a database and calls it Proj3_607.db.
 ```{r}
-mydb <- dbConnect(RSQLite::SQLite(), "Proj3_607.db")
-# List out how many tables are in this object
- dbListTables(mydb)
-# TEST, to get query from this database (ONET Characteristic table only for now)
-dbGetQuery  (mydb,"Select* FROM C") 
+data.skills.db <- dbConnect(SQLite(), "db.sqlite")
+dbListTables(data.skills.db)
 ```
 
-Here, we load the indeed data into indeed dataframes.
+# Load Data: Here, we load the indeed data into indeed dataframes.
  
 ```{r}
 # Load csv file containing foreign key into a dataframe
 indeed.ca <- read.csv("indeed_keyword_count_ca.csv")
 indeed.ny <- read.csv("indeed_keyword_count_ny.csv")
-
-## TODO: Innter Join and store as a db
-
-
 ```
 
-Here, we load the variosu ONET/BLS data into various objects.
+# Here, we load the variosu ONET/BLS data into various objects.
 ```{r}
 characteristics <- read.csv ("characteristics.csv")
 salary <- read.csv ("salary.csv")
@@ -47,104 +37,30 @@ skills <- read.csv ('skills.csv')
 tech.skills <- read.csv('TechSkills.csv')
 ```
 
-
+# Here we write the Indeed data as two se
 ```{r}
 # Create/Populate tables with data from the dataframes
-dbWriteTable(mydb, "webscrapes", Keyword_Search_csv_df, overwrite = TRUE)
-dbWriteTable(mydb, "keywords", keywords_csv_df, overwrite = TRUE)
+dbWriteTable(data.skills.db,"indeed.ca", indeed.ca, overwrite = TRUE)
+dbWriteTable(data.skills.db,"indeed.ny", indeed.ny, overwrite = TRUE)
 ```
-
+# Write Data
 
 ```{r}
-
-dbWriteTable(mydb,"characteristics", characteristics, overwrite = TRUE)  
-dbWriteTable(mydb,"salary", salary, overwrite = TRUE)
-dbWriteTable(mydb,"skills", skills, overwrite = TRUE)
-dbWriteTable(mydb,"tech.skills", tech.skills, overwrite = TRUE)
+dbWriteTable(data.skills.db,"characteristics", characteristics, overwrite = TRUE)  
+dbWriteTable(data.skills.db,"salary", salary, overwrite = TRUE)
+dbWriteTable(data.skills.db,"skills", skills, overwrite = TRUE)
+dbWriteTable(data.skills.db,"tech.skills", tech.skills, overwrite = TRUE)
 ```
 
-Join the ONET SKILLS (soft Skills) with ONET Characteristics TABLES
-
+# Check in on the database
+ 
 ```{r}
-
-dbWriteTable(mydb,"C", characteristics, overwrite = TRUE)
-dbWriteTable(mydb, "TechSkl", TechSkillswOccupation, overwrite = TRUE)
-join_tb_onetTechSkl <- 
-  "select C.title, C.SOC, 	C.OccupationType, 	C.TypicalEntryLvlEduc,	
-           C.PreEmplExperience,	C.PostEmplTraining,
-            TechSkl.job, TechSkl.jobcode,TechSkl.Example
-from C
-inner join  TechSkl
-on C.Title = TechSkl.job"
-
-head (dbGetQuery(mydb,join_tb_onetTechSkl))
-
+dbListTables(data.skills.db)
 ```
 
- Relational Database 3rd set: Link INDEED web scraping and Labor Dept ONET webscraping
-```{r}
-# Linkage between those two sets: using the Technical Skills 
-# Tech Skills linked with ONET Database
-join_tb_ONETTechSkl <- 
-  "select C.title, C.SOC, 	C.OccupationType, 	C.TypicalEntryLvlEduc,	
-           C.PreEmplExperience,	C.PostEmplTraining,
-            TechSkl.job, TechSkl.jobcode,TechSkl.Example
-from C
-inner join  TechSkl
-on C.Title = TechSkl.job"
-head (dbGetQuery(mydb,join_tb_ONETTechSkl))
+The SQLite documentation says that, 
 
-```
+> It is not possible to use the "ALTER TABLE ... ADD COLUMN" syntax to add a column that includes a REFERENCES clause, unless the default value of the new column is NULL. Attempting to do so returns an error. 
 
-Tech Skills linked with Indeed Database
-```{r}
-join_tb_IndeedTechSkl <- "select keywords.Keyword, 
- TechSkl.job, TechSkl.jobcode,TechSkl.Example
-from TechSkl
-inner join keywords
-on keywords.Keyword = TechSkl.Example"
-head (dbGetQuery(mydb,join_tb_IndeedTechSkl))
-
-```
-List all the relational tables within the SQlite database
-```{r}
-dbListTables(mydb)
-# all tables are displayed here, 6 tables (all relational in total)
-```
-
-List the column fields within each individual tables within the SQLite Database
-```{r}
-dbListFields(mydb,"C")
-```
-
-```{r}
-dbListFields(mydb,"SftSkl")
-```
-
-```{r}
-dbListFields(mydb,"TechSkillswOccupation")
-```
-
-```{r}
-dbListFields(mydb,"salary")
-
-```
-
-```{r}
-dbListFields(mydb,"TechSkl")
-
-```
-
-```{r}
-dbListFields(mydb,"keywords")
-
-```
-
-```{r}
-dbListFields(mydb,"webscrapes")
-```
-
-```{r}
-setwd('..')
-```
+This means that we would need to relate these through another means. Given time restrictions and the fact that our related data is all binned by a 4 digit SOC code, it would be trivial to import into MySQL Workbench and add the foreign keys.
 

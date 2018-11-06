@@ -17,7 +17,7 @@ suppressWarnings(library(kableExtra, quietly =TRUE)) #for table design
 
 #################################################################
 #Uncomment the below line to download the file again
-#curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Tools%20and%20Technology.txt", "TechSkills.txt")
+curl_download("https://www.onetcenter.org/dl_files/database/db_23_0_text/Tools%20and%20Technology.txt", "TechSkills.txt")
 
 # Reading File
 # The code below reads the data and discards all of the non mathematics fields.
