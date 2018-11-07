@@ -200,27 +200,6 @@ knitr::kable(EP, format = "html") %>%
 
 ```
 
-
-Salary vs. Outlook
-========================================================
-
-An example of occupational outlook for a few selected occupations: 
-
-```{r, eval = TRUE, echo = FALSE, cache = TRUE,  fig.width=7, fig.height=5, fig.show='hold'}
-salary.vs.outlook <- na.omit(merge(salary.frame, outlook.frame, by = 'SOC', all = TRUE))
-dollars <- as.numeric(salary.vs.outlook$Mean.Annual.Wage)
-jobs <- as.numeric(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`)
-title <- as.character(outlook.frame$Title)
-df <- data.frame(cbind(title, SOC, dollars, jobs))
-df1 <- df %>% slice(1:4)
-  
-knitr::kable(df1, format = "html") %>%
-  kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
-  row_spec(row = 0:0, background = "lightgrey") %>%
-  column_spec(column = 1, bold = T) 
-``` 
-
-
 Salary vs. Outlook (cont.)
 ========================================================
 
@@ -230,9 +209,9 @@ Findings: Weak correlation between salary and job sector growth.
 ggplot(df, aes(x=dollars, y=jobs)) + geom_point() + geom_point(colour = "red", size = 3) 
 ```
 
+Technical Skills
 ========================================================
 
-**Technical Skills List**
 - Scraped and cleaned data from O*NET
 - Evaluted the frequency technical skills. 
 - Findings: Top 5 technical skills for mathematical and computational occupations:
@@ -240,7 +219,7 @@ ggplot(df, aes(x=dollars, y=jobs)) + geom_point() + geom_point(colour = "red", s
 ```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 knitr::kable(tech.top, format = "html") %>%
   kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
-  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  row_spec(row = 0:0, background = "lightgrey) %>%
   column_spec(column = 1, bold = T) 
 ```
 
@@ -250,15 +229,15 @@ BLS/ONET Findings
 - Developed a broad picture of the computational and mathematical field.
 - Unable draw any conlusions further statistical analysis about:
     - Which skills are in growing fields 
-    - Which skills pay the best without 
+    - Salary variations within skillsets  
 
 
 #### We next consulted Indeed next to compare the DOL datasets 
 #### to current job postings in the NY/CA area. 
 
-Webscrape indeed CA for specific data scientist skill sets
+Indeed (CA)
 ========================================================
-**Indeed.com**
+- Webscrape indeed CA for specific data scientist skill sets
 - <a href="http://rpubs.com/ritwar01/D607Project3v1"> Scraped </a>  and cleaned data from Indeed.
 - Total the count of each skill set. 
 - Findings: Top 5 CA Data Scientist Skill sets listed on indeed.
@@ -273,14 +252,14 @@ knitr::kable(head(job_listings_keyword_count_ca,5), format = "html") %>%
   column_spec(column = 1, bold = T) 
 ```
 
-Skills requested on indeed CA joblistings
+Indeed (CA)
 ========================================================
 
 ```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 bplotCA
 ```
 
-Webscrape indeed NY for specific data scientist skill sets
+Indeed (NY)
 ========================================================
 **Indeed.com**
 - <a href="http://rpubs.com/ritwar01/D607Project3v1"> Scraped </a>  and cleaned data from Indeed.
@@ -298,7 +277,7 @@ knitr::kable(head(job_listings_keyword_count_ny,5), format = "html") %>%
 
 ```
 
-Skills requested on indeed NY joblistings
+Indeed (NY)
 ========================================================
 
 ```{r, eval = TRUE, echo = FALSE, cache = TRUE,  fig.width=7, fig.height=5, fig.show='hold'}
@@ -325,19 +304,10 @@ Conclusion
 - Python is a far more popular data science tool than R. However, that is likely due to the applications outside of data science.
 - Statistics is rarely listed as a required skill for Data Science
 - Machine learning/AI is a huge growth field but seemingly lacks mathematical rigor (see above point)
-- There appears to be no correlation between available jobs and average salary for a given occupation
+- There appears to be no correlation between number of available jobs and average salary for a given occupation
 - Group work is hard
 
-
-
-SQL Database
-========================================================
-
-- SQL database stored in github repository: "csvs/db.sqlite"
-- Loaded csv files into corresponding tables 
-- Further documentation stored in "csvs/SQL.Rmd"
-
-Conclusion: Challenges
+Conclusion (cont.)
 ========================================================
 Data Challenges
 - BLS and ONET databases are very broad and do little to highlight specific requirements
@@ -351,7 +321,14 @@ Group Challenges
 - Version control 
 - Coordination and management of work
 
- Further Research
+SQL Database
+========================================================
+
+- SQL database stored in github repository: "csvs/db.sqlite"
+- Loaded csv files into corresponding tables 
+- Further documentation stored in "csvs/SQL.Rmd"
+
+Further Research
 =======================================================
 
 - ANOVA test that maps skills to pay
