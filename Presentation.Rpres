@@ -1,4 +1,5 @@
 
+
 Data Skills
 ========================================================
 author: Team Profound Specialists
@@ -16,8 +17,16 @@ Overview
 - Sources 
 - Roles 
 - Tools
+- Skills 
 - Characteristics
-- test
+
+***
+
+- Salary
+- Outlook
+- Technical skills
+- Indeed
+- Conclusion
 
 Sources
 ========================================================
@@ -35,13 +44,14 @@ Sources
 Roles
 ========================================================
 
-- **Characteristics:** @simplymathmatics & @jemceachern  
-- **Salary:** @simplymathmatics & @jemceachern  
-- **Skills:** @simplymathmatics & @jemceachern  
+- **Characteristics:** @simplymathmatics & @jemceach  
+- **Salary:** @simplymathmatics & @jemceach
+- **Skills:** @simplymathmatics & @jemceach
 - **Technical Skills:**  @simplymathematics & @jemceach
 - **Indeed Skills:** @ritwar01  
 - **SQL:** @simplymathematics
-- **Presentation and analysis:** @jemceach, @ritwar01, @simplymathematics
+- **Write up and analysis:** @simplymathematics & @jemceach
+- **Presentation:** @ritwar01, @simplymathematics, @jemceach
 
 Tools
 ========================================================
@@ -63,12 +73,31 @@ Tools
 
 ### Dependencies
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = TRUE, echo = FALSE, cache = TRUE}
 suppressWarnings(source("salary/dollars-scrape.R"))
 suppressWarnings(source("characteristics/characteristics.R"))
 suppressWarnings(source("indeed/Indeed_Skills.R"))
 suppressWarnings(source("onet/skills.R"))
 suppressWarnings(source("tech_skills/tech-skills-list.R"))
+```
+
+Skills
+========================================================
+- Scraped and cleaned data from O*NET
+- Evaluted data on scale of importance (0-7).
+- Findings: Top 5 Skills for Math and Computer Science Jobs:
+
+```{r, eval = TRUE, echo = FALSE, cache = TRUE, fig.width=7, fig.height=5}
+suppressWarnings(source("onet/skills.R"))
+```
+
+```{r, eval = TRUE, echo = FALSE, cache = TRUE}
+top <- knitr::kable(skills.top, format = "html") %>%
+  kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
+  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  column_spec(column = 1, bold = T) 
+
+top
 ```
 
 
@@ -82,18 +111,12 @@ characteristics.graphic
 Characteristics (Cont.)
 ========================================================
 right: 50%
-```{r, eval = TRUE, echo = FALSE, cache = TRUE, fig.width=9, fig.height=6, fig.show='hold', fig.align='center'}
+```{r, eval = TRUE, echo = FALSE, cache = TRUE, fig.width=9, fig.height=6, fig.show='hold', fig.align='center'} 
 characteristics.graphic2
 ``` 
 
 Salary 
 ========================================================
-```{r, eval = TRUE, echo = FALSE, cache = TRUE}
-suppressWarnings(source("salary/dollars-scrape.R"))
-require(knitr)
-require(kableExtra)
-require(dplyr)
-```
 
 ```{r, eval = TRUE,  out.width="100%", echo = FALSE, cache = TRUE}
 BLS <- na.omit(merge(salary.frame, outlook.frame, by = 'SOC', all = TRUE)) %>%
@@ -105,7 +128,7 @@ BLS1 <- BLS %>% slice(1:7)
 
 BLS1 <- knitr::kable(BLS1, caption = 'Scraped Salary Data from BLS', format = "html") %>%
   kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
-  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  row_spec(row = 0:0, background = "lightgrey") %>%
   column_spec(column = 1, bold = T) 
 
 BLS1
@@ -121,7 +144,7 @@ BLS2 <- BLS %>% slice(8:13)
 
 BLS2 <- knitr::kable(BLS2, caption = 'Scraped Salary Data from BLS', format = "html") %>%
   kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
-  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  row_spec(row = 0:0, background = "lightgrey") %>%
   column_spec(column = 1, bold = T) 
 
 BLS2
@@ -156,19 +179,14 @@ Right: 50%
 - Considerable room for advancement!
 
   
-```{r, eval = FALSE, echo = FALSE}
+```{r, eval = FALSE, echo = FALSE, cache = TRUE}
 Avg.Annual.Wage <- as.numeric(salary.frame$Mean.Annual.Wage)
 max(Avg.Annual.Wage)
 
 ```
 
 
-```{r, eval = TRUE, echo = FALSE}
-require(dplyr)
-require(knitr)
-require(kableExtra)
-
-
+```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 EP <- na.omit(merge(salary.frame, outlook.frame, by = 'SOC', all = TRUE)) %>%
   select(SOC, Title, Mean.Annual.Wage, `2026EmplChange2016-26`) %>%
   mutate(`2016Wage` = as.numeric(Mean.Annual.Wage), `2016-26.EmplChange` = as.numeric(`2026EmplChange2016-26`))
@@ -178,72 +196,42 @@ EP <- EP %>% top_n(4, `2016-26.EmplChange`) %>% select(Title, `2016Wage`, `2016-
 
 knitr::kable(EP, format = "html") %>%
   kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
-  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  row_spec(row = 0:0, background = "lightgrey") %>%
   column_spec(column = 1, bold = T) 
 
 
-```
-
-Skills
-========================================================
-- Scraped and cleaned data from O*NET
-- Evaluted data on scale of importance (0-7).
-- Findings: Top 5 Skills for Math and Computer Science Jobs:
-
-```{r, eval = TRUE, echo = FALSE, cache = TRUE, fig.width=7, fig.height=5}
-suppressWarnings(source("onet/skills.R"))
-```
-
-```{r, eval = TRUE, echo = FALSE, cache = TRUE}
-top <- knitr::kable(skills.top, format = "html") %>%
-  kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
-  row_spec(row = 0:0, background = "#D4E0F7") %>%
-  column_spec(column = 1, bold = T) 
-
-top
 ```
 
 
 Salary vs. Outlook
 ========================================================
 
-```{r, eval = TRUE, echo = FALSE, cache = TRUE}
-salary.vs.outlook <- na.omit(merge(salary.frame, outlook.frame, by = 'SOC', all = TRUE))
-Dollars <- as.numeric(salary.vs.outlook$Mean.Annual.Wage)
-Jobs <- as.numeric(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`)
-Title <- as.character(outlook.frame$Title)
-df <- data.frame(cbind(Title, SOC, Dollars, Jobs))
-df1 <- df %>% slice(1:13)
-df2 <- df %>% slice(14:27)
+An example of occupational outlook for a few selected occupations: 
 
+```{r, eval = TRUE, echo = FALSE, cache = TRUE,  fig.width=7, fig.height=5, fig.show='hold'}
+salary.vs.outlook <- na.omit(merge(salary.frame, outlook.frame, by = 'SOC', all = TRUE))
+dollars <- as.numeric(salary.vs.outlook$Mean.Annual.Wage)
+jobs <- as.numeric(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`)
+title <- as.character(outlook.frame$Title)
+df <- data.frame(cbind(title, SOC, dollars, jobs))
+df1 <- df %>% slice(1:4)
+  
 knitr::kable(df1, format = "html") %>%
   kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
-  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  row_spec(row = 0:0, background = "lightgrey") %>%
   column_spec(column = 1, bold = T) 
 ``` 
 
 
 Salary vs. Outlook (cont.)
 ========================================================
-```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 
-knitr::kable(df2, format = "html") %>%
-  kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
-  row_spec(row = 0:0, background = "#D4E0F7") %>%
-  column_spec(column = 1, bold = T) 
+Findings: Weak correlation between salary and job sector growth. 
 
+```{r, eval = TRUE, echo = FALSE, cache = TRUE,  fig.width=7, fig.height=5, fig.show='hold'}
+ggplot(df, aes(x=dollars, y=jobs)) + geom_point() + geom_point(colour = "red", size = 3) 
 ```
 
-Salary vs. Outlook (cont.)
-========================================================
-###### What's interesting about this graph is that is shows a weak correlation between salary and job sector growth. @simplymathematics and @jemceachern did this section.
-
-```{r, eval = TRUE, echo = FALSE, cache = TRUE}
-ggplot(df, aes(x=Dollars, y=Jobs)) + geom_point() + geom_point(colour = "red", size = 3) 
-```
-
-
-Findings: Weak Correlation between salary and job sector growth.
 ========================================================
 
 **Technical Skills List**
@@ -258,18 +246,32 @@ knitr::kable(tech.top, format = "html") %>%
   column_spec(column = 1, bold = T) 
 ```
 
+BLS/ONET Findings
+========================================================
+
+- Developed a broad picture of the computational and mathematical field.
+- Unable draw any conlusions further statistical analysis about:
+    - Which skills are in growing fields 
+    - Which skills pay the best without 
+
+
+#### We next consulted Indeed next to compare the DOL datasets 
+#### to current job postings in the NY/CA area. 
+
 Webscrape indeed CA for specific data scientist skill sets
 ========================================================
 **Indeed.com**
 - <a href="http://rpubs.com/ritwar01/D607Project3v1"> Scraped </a>  and cleaned data from Indeed.
 - Total the count of each skill set. 
-- Findings: Top 5 CA Data Scientist Skill sets listed on indeed:
+- Findings: Top 5 CA Data Scientist Skill sets listed on indeed.
 
-```{r, eval = TRUE, echo = FALSE, cache = TRUE}
+***
+
+```{r, eval = TRUE, echo = FALSE, cache = TRUE,  fig.width=7, fig.height=5, fig.show='hold'}
 
 knitr::kable(head(job_listings_keyword_count_ca,5), format = "html") %>%
   kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
-  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  row_spec(row = 0:0, background = "lightgrey") %>%
   column_spec(column = 1, bold = T) 
 ```
 
@@ -287,11 +289,13 @@ Webscrape indeed NY for specific data scientist skill sets
 - Total the count of each skill set. 
 - Findings: Top 5 NY Data Scientist Skill sets listed on indeed:
 
+***
+
 ```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 
 knitr::kable(head(job_listings_keyword_count_ny,5), format = "html") %>%
   kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
-  row_spec(row = 0:0, background = "#D4E0F7") %>%
+  row_spec(row = 0:0, background = "lightgrey") %>%
   column_spec(column = 1, bold = T)
 
 ```
@@ -299,41 +303,59 @@ knitr::kable(head(job_listings_keyword_count_ny,5), format = "html") %>%
 Skills requested on indeed NY joblistings
 ========================================================
 
-```{r, eval = TRUE, echo = FALSE, cache = TRUE}
+```{r, eval = TRUE, echo = FALSE, cache = TRUE,  fig.width=7, fig.height=5, fig.show='hold'}
 bplotNY
 ```
 
+Data Comparisons
 ========================================================
 
-
-**Conclusion**
-
-###### The ONET and BLS data were able to give us a broad picture of the computational and mathematical field, while Indeed revealed specific technical skills required for "Data Scientists." These are essentially disjoint sets as the ONET/BLS data does not have specific technologies listed--they only use general categories. However, we can still draw parallels between the datasets. 
-
-========================================================
+- Specific technical skills required for "Data Scientists." 
+- Unable to make direct comparison to ONET/BLS data.
+- We were still able to draw parallels between the datasets:
 
 |ONET/BLS Data | Indeed Equivalence |
 |--------------|--------------------|
 |Development environment software	                  | Python, Hadoop, AWS, Spark | 
-|Web platform development software	                |  No equivalent found | 
+|Web platform development software	                | Ruby, PHP, JS  | 
 |Object or component oriented development software	| R, AI, SAS, Spark, ML |
 |Data base management system software	              | SQL, Tableau |
 |Analytical or scientific software                  | R, Spark, Tableau, SAS, Statistics | 
 
+Conclusion
+========================================================
+- Python is a far more popular data science tool than R. However, that is likely due to the applications outside of data science.
+- Statistics is rarely listed as a required skill for Data Science
+- Machine learning/AI is a huge growth field but seemingly lacks mathematical rigor (see above point)
+- There appears to be no correlation between available jobs and average salary for a given occupation
+- Group work is hard
+
+
+
+SQL Database
 ========================================================
 
-###### We cannot draw any conlusions about which skills are in growing fields or which skills pay the best without further statistical analysis.
+- SQL database stored in github repository: "csvs/db.sqlite"
+- Loaded csv files into corresponding tables 
+- Further documentation stored in "csvs/SQL.Rmd"
 
+Conclusion: Challenges
 ========================================================
+Data Challenges
+- BLS and ONET databases are very broad and do little to highlight specific requirements
+- Project required further rurther regression analysis to map skills with occupational growth/salary
+- Time constraints with scraping data from Indeed.
 
-**Further**
+***
 
-###### The biggest issues was the steep learning curve associated with git. Version control and coordination were issues due to this underlying deficiency. Additionally, the BLS and ONET databases are very broad and do little to highlight specific requirements for people in the field. They do, however, offer a picture of my qualifications relative to the general population or even other people who work with computers. However, to get the most from these datasets, we would need to do further regression analysis that maps the skill or technology data to occupational growth or occupational salary. That is unfortunately outside the scope of this analysis. Another big constraint was the limitations we faced in interacting with Indeed. Because of call limits and time-constraints we were limited to only mining two states. A stand-alone daemon that manages api calls would fix this, but is also outside the scope of this project.
+Group Challenges
+- Steep learning curve associated with git
+- Version control 
+- Coordination and management of work
 
-========================================================
+ Further Research
+=======================================================
 
-**Databases**
-
-###### For your own further analysis, we've exported each dataset as it's own table using SQL. The results of which are stored in the csvs folder. The Indeed csv data was reloaded into a single dataframe using an inner join command from the `sqldf` package to form one table with all the necessary columns for analyzing. Since these skills don't map directly to SOC codes, we did not bother to save these as sqls. A database is created in memory in the corresponding Indeed.Rmd file.
-
-###### In addition, we created a local mysql database to store the BLS data in relational tables using an inner join on the SOC codes. The csv file includes the skills_salary_query.sql file. 
+- ANOVA test that maps skills to pay
+- Redo analysis with new SOC data that includes a specific 'data science' category
+- Include other job websites in our scraping and weight the results from each.
