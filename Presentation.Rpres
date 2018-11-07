@@ -71,16 +71,6 @@ Tools
 ![GitHub \caption{Github: Issues Tool}](issues.PNG)
 
 
-### Dependencies
-
-```{r, echo = FALSE, eval = TRUE, echo = FALSE, cache = TRUE}
-suppressWarnings(source("salary/dollars-scrape.R"))
-suppressWarnings(source("characteristics/characteristics.R"))
-suppressWarnings(source("indeed/Indeed_Skills.R"))
-suppressWarnings(source("onet/skills.R"))
-suppressWarnings(source("tech_skills/tech-skills-list.R"))
-```
-
 Skills
 ========================================================
 - Scraped and cleaned data from O*NET
