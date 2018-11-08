@@ -58,6 +58,7 @@ oes_scrape <- function(URLs){
 salary.frame <- oes_scrape(urls)
 SOC <- numbers.list
 salary.frame <- cbind(SOC, salary.frame)
+
 tmp <- substr(salary.frame$Mean.Annual.Wage, 2, 15)
 tmp <- gsub(x = tmp, pattern = ",", replacement ="")
 salary.frame$Mean.Annual.Wage <- as.numeric(tmp)

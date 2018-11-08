@@ -168,14 +168,22 @@ sd(as.numeric(salary.frame$Mean.Annual.Wage))
 boxplot(as.numeric(salary.frame$Mean.Annual.Wage), horizontal = TRUE)
 ```
 
-Salary Analysis
+Outlook Analysis
 ========================================================
-Right: 50%
 
-**Findings:** 
 - Significant deviation in pay amongst occupations.
 - Considerable room for advancement!
+```{r, eval = TRUE, echo = FALSE, cache = TRUE}
+salary.vs.outlook <- na.omit(merge(salary.frame, outlook.frame, by = 'SOC', all = TRUE))
+dollars <- as.numeric(as.character(salary.vs.outlook$Mean.Annual.Wage))
+jobs <- as.numeric(as.character(salary.vs.outlook$`2016-26_AvgAnnual_OccOpenings`))
+title <- as.character(outlook.frame$Title)
+df <- data.frame(cbind(title, SOC, dollars, jobs))
+df1 <- df %>% slice(1:13)
+df2 <- df %>% slice(14:27)
 
+
+```
   
 ```{r, eval = FALSE, echo = FALSE, cache = TRUE}
 Avg.Annual.Wage <- as.numeric(salary.frame$Mean.Annual.Wage)
@@ -203,10 +211,22 @@ knitr::kable(EP, format = "html") %>%
 Salary vs. Outlook (cont.)
 ========================================================
 
-Findings: Weak correlation between salary and job sector growth. 
+Findings: Weak , negative correlation between salary and job sector growth. 
+Correlation = -.42  
+Linear Model: 
+$$ 
+\text{jobs}(\text{dollars}) = -.003 * \text{dollars} + 48 
+$$
+
 
 ```{r, eval = TRUE, echo = FALSE, cache = TRUE,  fig.width=7, fig.height=5, fig.show='hold'}
-ggplot(df, aes(x=dollars, y=jobs)) + geom_point() + geom_point(colour = "red", size = 3) 
+
+correlation = cor(dollars,jobs)
+linear.model = lm(jobs~dollars)
+plot(dollars, jobs) 
+abline(linear.model, col="blue", lwd=2)
+
+
 ```
 
 Technical Skills
@@ -219,7 +239,7 @@ Technical Skills
 ```{r, eval = TRUE, echo = FALSE, cache = TRUE}
 knitr::kable(tech.top, format = "html") %>%
   kable_styling(bootstrap_options = "condensed", full_width = F, position = "center") %>%
-  row_spec(row = 0:0, background = "lightgrey) %>%
+  row_spec(row = 0:0, background = "lightgrey") %>%
   column_spec(column = 1, bold = T) 
 ```
 
@@ -252,13 +272,6 @@ knitr::kable(head(job_listings_keyword_count_ca,5), format = "html") %>%
   column_spec(column = 1, bold = T) 
 ```
 
-Indeed (CA)
-========================================================
-
-```{r, eval = TRUE, echo = FALSE, cache = TRUE}
-bplotCA
-```
-
 Indeed (NY)
 ========================================================
 **Indeed.com**
@@ -277,8 +290,14 @@ knitr::kable(head(job_listings_keyword_count_ny,5), format = "html") %>%
 
 ```
 
-Indeed (NY)
+Indeed State Comparisons
 ========================================================
+
+```{r, eval = TRUE, echo = FALSE, cache = TRUE}
+bplotCA
+```
+
+***
 
 ```{r, eval = TRUE, echo = FALSE, cache = TRUE,  fig.width=7, fig.height=5, fig.show='hold'}
 bplotNY
